@@ -1,0 +1,16 @@
+{
+  "name": "progen-apollo-gql-server",
+  "version": "1.0.0",
+  "description": "Middlelayer for the Progen application built with graphql and apollo.",
+  "main": "server.ts",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Apollo",
+    "GraphQl"
+  ],
+  "author": "Daniel Persson",
+  "license": "ISC"
+}
