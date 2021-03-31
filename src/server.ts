@@ -30,6 +30,13 @@ const app = express();
 
 server.applyMiddleware({ app, cors: true, path: "/api/graphql"})
 
-console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
+const PORT = process.env.PORT || 4000;
+
+// The `listen` method launches a web server.
+app
+  .listen(PORT, () => {
+    console.log(`🚀  Server ready at http://localhost:${PORT}`);
+  })
+  .setTimeout(10 * 60 * 1000);
 
 

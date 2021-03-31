@@ -5,7 +5,7 @@
   "main": "server.ts",
   "private": true,
   "scripts": {
-    "start": "env-cmd ts-node-dev ./src/server.ts",
+    "start": "env-cmd ts-node-dev --debounce=1000 ./src/server.ts",
     "types": "ts-node ./scripts/generate-types-from-schema.ts && prettier --no-config --write \"src/types/TypesGraphQL.ts\" --ignore-path .gitignore"
   },
   "keywords": [
