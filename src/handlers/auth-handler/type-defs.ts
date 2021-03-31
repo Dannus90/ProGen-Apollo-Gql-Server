@@ -7,7 +7,7 @@ export const articleTypeTypeDefs = gql`
   }
 
   extend type AuthenticationMutationRoot {
-    authentication: ArticleTypeSearchRoot!
+    authentication: AuthMutations!
   }
 
   extend type AuthenticationRoot {
