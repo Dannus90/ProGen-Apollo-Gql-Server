@@ -5,23 +5,23 @@ import { rootTypeDefs } from "../src/root-type-defs";
 
 const generateToPath = (path: string) => {
   let schema: GraphQLSchema | undefined = undefined;
-
+  
   try {
     console.log("Creating schema from source files.");
 
     schema = makeExecutableSchema({
       typeDefs: rootTypeDefs,
     });
-  } catch (e) {
+  } catch (err) {
     console.log("Unable to make schema from source files.");
-    console.log(e);
+    console.log(err);
     console.trace();
   }
 
   if (!schema) {
     return;
   }
-
+  
   console.log("Creating Typescript types from schema.");
 
   generateTypeScriptTypes(schema, path, {
@@ -33,6 +33,7 @@ const generateToPath = (path: string) => {
       console.log("Successfully generated TS types.");
     })
     .catch((err) => {
+      console.log("hello")
       console.error(err);
     });
 };
