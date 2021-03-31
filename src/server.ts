@@ -15,7 +15,6 @@ import { rootMutation } from "./root-mutation-resolvers"
 import { rootResolver } from "./root-resolvers"
 
 // Initiate apollo server. 
-
 const server = new ApolloServer({
   typeDefs: rootTypeDefs,
   resolvers: merge(rootResolver, rootMutation),

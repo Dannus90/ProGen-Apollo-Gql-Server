@@ -6,7 +6,7 @@ interface MutationResolvers {
 
 const mutationResolver: MutationResolvers = {
   Mutation: {
-    productPrice: async () => true,
+    authentication: async () => true,
   },
 };
 

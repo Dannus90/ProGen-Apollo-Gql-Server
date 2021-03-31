@@ -12,7 +12,7 @@ interface QueryResolvers {
 
 const queryResolver: QueryResolvers = {
   Query: {
-    Authentication: async () => true,
+    authentication: async () => true,
   },
 };
 
