@@ -6,7 +6,7 @@
  */
 
 import { gql } from 'apollo-server';
-import { articleTypeTypeDefs } from "./handlers/auth-handler/type-defs"
+import { authenticationTypeDefs } from "./handlers/auth-handler/type-defs"
 
  // A schema is a collection of type definitions (hence "typeDefs")
  // that together define the "shape" of queries that are executed against
@@ -26,5 +26,5 @@ const entryTypeDefs = gql`
 
 export const rootTypeDefs = [
   entryTypeDefs,
-  articleTypeTypeDefs
+  authenticationTypeDefs
 ]

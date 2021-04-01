@@ -1,6 +1,14 @@
+/**
+ * Authentication type defs.
+ *
+ * @author Daniel Persson
+ * @version 1.0.0
+ */
+
+
 import { gql } from "apollo-server";
 
-export const articleTypeTypeDefs = gql`
+export const authenticationTypeDefs = gql`
   type TokenResponse {
     accessToken: String!
     refreshToken: String!
