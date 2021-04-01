@@ -1,7 +1,7 @@
 import { merge } from "lodash";
 
 interface MutationResolvers {
-
+  
 }
 
 const mutationResolver: MutationResolvers = {
