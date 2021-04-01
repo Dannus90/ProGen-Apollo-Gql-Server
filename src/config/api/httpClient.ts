@@ -1,7 +1,8 @@
-import fetch, { Response } from "node-fetch";
+import fetch from "node-fetch";
 
 type HttpMethods = "POST" | "PUT" | "DELETE" | "PATCH";
 
+// HEADER OPTIONS
 const headerOptionsNoAuth = {
   headers: {
     "content-type": "application/json",
@@ -15,31 +16,32 @@ const headerOptionsAuth = (authorization: string) => {
   }
 }
 
-export const fetchPostNoAuth = async <TPayload>(
+// API CALLS
+export const fetchPostNoAuth = async <TPayload, TResponse>(
   url: string,
   method: HttpMethods = "POST",
   body: TPayload
-) => {
+): Promise<TResponse> => {
   const response = await fetch(url, {
     method,
     ...headerOptionsNoAuth,
     body: JSON.stringify(body),
   });
 
-  return response;
+  return response.json();
 };
 
-export const fetchPostAuth = async <TPayload>(
+export const fetchPostAuth = async <TPayload, TResponse>(
   url: string,
   method: HttpMethods = "POST",
   authorization: string,
   body: TPayload
-) => {
+): Promise<TResponse> => {
   const response = await fetch(url, {
     method,
     ...headerOptionsAuth(authorization),
     body: JSON.stringify(body),
   });
 
-  return response;
+  return response.json();
 };
