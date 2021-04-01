@@ -15,18 +15,14 @@ export const authenticationTypeDefs = gql`
   }
 
   extend type AuthenticationMutationRoot {
-    authentication: AuthMutations!
-  }
-
-  extend type AuthenticationRoot {
-    authentication: String!
-  }
-
-  type AuthMutations {
     getRefreshToken(input: RefreshTokenInput): TokenResponse!
     registerUser(input: RegisterLoginInput): Boolean
     loginUser(input: RegisterLoginInput): TokenResponse!
     logoutUser: Boolean
+  }
+
+  extend type AuthenticationRoot {
+    authentication: String!
   }
 
   input RegisterLoginInput {

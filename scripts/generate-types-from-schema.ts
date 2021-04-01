@@ -24,6 +24,8 @@ const generateToPath = (path: string) => {
   
   console.log("Creating Typescript types from schema.");
 
+  console.log(schema, path)
+
   generateTypeScriptTypes(schema, path, {
     smartTParent: true,
     smartTResult: true,
@@ -33,7 +35,6 @@ const generateToPath = (path: string) => {
       console.log("Successfully generated TS types.");
     })
     .catch((err) => {
-      console.log("hello")
       console.error(err);
     });
 };
