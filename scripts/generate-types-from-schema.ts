@@ -3,12 +3,11 @@ import { generateTypeScriptTypes } from "graphql-schema-typescript";
 import { makeExecutableSchema } from "graphql-tools";
 import { rootTypeDefs } from "../src/root-type-defs";
 
-const generateToPath = (path: string) => {
+const generateToPath = async (path: string) => {
   let schema: GraphQLSchema | undefined = undefined;
   
   try {
     console.log("Creating schema from source files.");
-
     schema = makeExecutableSchema({
       typeDefs: rootTypeDefs,
     });
@@ -23,20 +22,17 @@ const generateToPath = (path: string) => {
   }
   
   console.log("Creating Typescript types from schema.");
-
-  console.log(schema, path)
-
-  generateTypeScriptTypes(schema, path, {
-    smartTParent: true,
-    smartTResult: true,
-    asyncResult: "always",
-  })
-    .then(() => {
-      console.log("Successfully generated TS types.");
+  try {
+    generateTypeScriptTypes(schema, path, {
+      smartTParent: true,
+      smartTResult: true,
+      asyncResult: "always",
     })
-    .catch((err) => {
-      console.error(err);
-    });
+
+    console.log("Successfully generated TS types.");
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 generateToPath("./src/types/TypesGraphQL.ts");
