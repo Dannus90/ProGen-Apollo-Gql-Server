@@ -15,6 +15,11 @@ export interface AuthenticationMutations {
   };
 }
 
+export interface GqlRegisterResponse {
+  statusCode: number;
+  message: string;
+}
+
 export const authMutations: AuthenticationMutations = {
   AuthenticationMutationRoot: {
     registerUser: async (_, body, { api }: Context) => {
@@ -22,19 +27,15 @@ export const authMutations: AuthenticationMutations = {
 
       if (response.status !== 201) {
         const error = await response.json();
-        throw new HttpResponseError(
-          error.type,
-          error.statusCode,
-          error.message
-        );
+        throw new HttpResponseError(error.type, error.statusCode, error.message);
       }
 
-      const gqlResponse = {
+      const gqlResponse: GqlRegisterResponse = {
         statusCode: response.status,
-        message: "Successful registration",
+        message: "Successful registration"
       };
 
       return gqlResponse;
-    },
-  },
+    }
+  }
 };

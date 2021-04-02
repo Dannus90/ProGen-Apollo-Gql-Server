@@ -4,14 +4,14 @@ import { authMutations } from "./handlers/auth-handler/mutations";
 
 interface MutationResolvers {
   Mutation: {
-    authentication: QueryToAuthenticationResolver<unknown, {}>;
+    authentication: QueryToAuthenticationResolver<unknown, unknown>;
   };
 }
 
 const mutationResolver: MutationResolvers = {
   Mutation: {
-    authentication: async () => true,
-  },
+    authentication: async () => true
+  }
 };
 
 export const rootMutation = merge(mutationResolver, authMutations);

@@ -29,7 +29,7 @@ const server = new ApolloServer({
 
     return err;
   },
-  context: ({ req }) => createContext(getAuthorization(req)),
+  context: ({ req }) => createContext(getAuthorization(req))
 });
 
 const app = express();

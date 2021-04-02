@@ -7,8 +7,6 @@
 
 export interface ContextDataLoaders {}
 
-export const createDataLoaders = (
-  authorization: string
-): ContextDataLoaders => {
+export const createDataLoaders = (authorization: string): ContextDataLoaders => {
   return "Temporary";
 };

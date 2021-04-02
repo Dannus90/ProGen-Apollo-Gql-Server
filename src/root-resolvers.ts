@@ -10,8 +10,8 @@ interface QueryResolvers {}
 
 const queryResolver: QueryResolvers = {
   Query: {
-    authentication: async () => true,
-  },
+    authentication: async () => true
+  }
 };
 
 export const rootResolver = merge(queryResolver);

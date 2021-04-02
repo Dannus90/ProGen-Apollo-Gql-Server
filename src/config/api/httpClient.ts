@@ -5,18 +5,19 @@ type HttpMethods = "POST" | "PUT" | "DELETE" | "PATCH";
 // HEADER OPTIONS
 const headerOptionsNoAuth = {
   headers: {
-    "content-type": "application/json",
-  },
+    "content-type": "application/json"
+  }
 };
 
 const headerOptionsAuth = (authorization: string) => {
   return {
     authorization,
-    "content-type": "application/json",
+    "content-type": "application/json"
   };
 };
 
 // API CALLS
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const fetchPostNoAuth = async <TPayload>(
   url: string,
   method: HttpMethods = "POST",
@@ -25,23 +26,24 @@ export const fetchPostNoAuth = async <TPayload>(
   const response = await fetch(url, {
     method,
     ...headerOptionsNoAuth,
-    body: JSON.stringify(body),
+    body: JSON.stringify(body)
   });
 
   return response;
 };
 
-export const fetchPostAuth = async <TPayload, TResponse>(
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const fetchPostAuth = async <TPayload>(
   url: string,
   method: HttpMethods = "POST",
   authorization: string,
   body: TPayload
-): Promise<TResponse> => {
+) => {
   const response = await fetch(url, {
     method,
     ...headerOptionsAuth(authorization),
-    body: JSON.stringify(body),
+    body: JSON.stringify(body)
   });
 
-  return response.json();
+  return response;
 };

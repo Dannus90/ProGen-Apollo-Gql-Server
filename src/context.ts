@@ -17,5 +17,5 @@ export interface Context {
 export const createContext = (authorization: string): Context => ({
   authorization,
   loaders: createDataLoaders(authorization),
-  api: getApiMethods(),
+  api: getApiMethods()
 });
