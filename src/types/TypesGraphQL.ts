@@ -25,7 +25,7 @@ export interface GQLMutation {
 
 export interface GQLAuthenticationMutationRoot {
   getRefreshToken: GQLTokenResponse;
-  registerUser?: boolean;
+  registerUser?: GQLRegisterResponse;
   loginUser: GQLTokenResponse;
   logoutUser?: boolean;
 }
@@ -45,6 +45,11 @@ export interface GQLRegisterLoginInput {
   password: string;
 }
 
+export interface GQLRegisterResponse {
+  statusCode?: number;
+  message?: string;
+}
+
 /*********************************
  *                               *
  *         TYPE RESOLVERS        *
@@ -61,6 +66,7 @@ export interface GQLResolver {
   Mutation?: GQLMutationTypeResolver;
   AuthenticationMutationRoot?: GQLAuthenticationMutationRootTypeResolver;
   TokenResponse?: GQLTokenResponseTypeResolver;
+  RegisterResponse?: GQLRegisterResponseTypeResolver;
 }
 export interface GQLQueryTypeResolver<TParent = undefined> {
   authentication?: QueryToAuthenticationResolver<TParent>;
@@ -141,7 +147,7 @@ export interface AuthenticationMutationRootToRegisterUserArgs {
 }
 export interface AuthenticationMutationRootToRegisterUserResolver<
   TParent = GQLAuthenticationMutationRoot,
-  TResult = boolean | null
+  TResult = GQLRegisterResponse | null
 > {
   (
     parent: TParent,
@@ -198,6 +204,37 @@ export interface TokenResponseToAccessTokenResolver<
 export interface TokenResponseToRefreshTokenResolver<
   TParent = GQLTokenResponse,
   TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLRegisterResponseTypeResolver<
+  TParent = GQLRegisterResponse
+> {
+  statusCode?: RegisterResponseToStatusCodeResolver<TParent>;
+  message?: RegisterResponseToMessageResolver<TParent>;
+}
+
+export interface RegisterResponseToStatusCodeResolver<
+  TParent = GQLRegisterResponse,
+  TResult = number | null
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface RegisterResponseToMessageResolver<
+  TParent = GQLRegisterResponse,
+  TResult = string | null
 > {
   (
     parent: TParent,

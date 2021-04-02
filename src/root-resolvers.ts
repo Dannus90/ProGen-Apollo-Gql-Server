@@ -6,9 +6,7 @@
  */
 import { merge } from "lodash";
 
-interface QueryResolvers {
-
-}
+interface QueryResolvers {}
 
 const queryResolver: QueryResolvers = {
   Query: {
@@ -16,6 +14,4 @@ const queryResolver: QueryResolvers = {
   },
 };
 
- export const rootResolver = merge(
-  queryResolver
- )
+export const rootResolver = merge(queryResolver);

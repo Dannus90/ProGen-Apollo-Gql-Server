@@ -7,14 +7,14 @@ const headerOptionsNoAuth = {
   headers: {
     "content-type": "application/json",
   },
-}
+};
 
 const headerOptionsAuth = (authorization: string) => {
   return {
     authorization,
     "content-type": "application/json",
-  }
-}
+  };
+};
 
 // API CALLS
 export const fetchPostNoAuth = async <TPayload>(
@@ -22,7 +22,6 @@ export const fetchPostNoAuth = async <TPayload>(
   method: HttpMethods = "POST",
   body: TPayload
 ) => {
-  console.log(body)
   const response = await fetch(url, {
     method,
     ...headerOptionsNoAuth,

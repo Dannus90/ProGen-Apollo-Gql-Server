@@ -1,11 +1,11 @@
 import { merge } from "lodash";
 import { QueryToAuthenticationResolver } from "./types/TypesGraphQL";
-import { authMutations } from "./handlers/auth-handler/mutations"
+import { authMutations } from "./handlers/auth-handler/mutations";
 
 interface MutationResolvers {
   Mutation: {
-    authentication: QueryToAuthenticationResolver<unknown, {}>
-  }
+    authentication: QueryToAuthenticationResolver<unknown, {}>;
+  };
 }
 
 const mutationResolver: MutationResolvers = {
@@ -14,7 +14,4 @@ const mutationResolver: MutationResolvers = {
   },
 };
 
-export const rootMutation = merge(
-  mutationResolver,
-  authMutations
-);
+export const rootMutation = merge(mutationResolver, authMutations);

@@ -1,4 +1,4 @@
-import { registerUser } from "./handlers/auth-handler/api-calls"
+import { registerUser } from "./handlers/auth-handler/api-calls";
 
 export interface GetApiMethods {
   registerUser: Function;
@@ -6,6 +6,6 @@ export interface GetApiMethods {
 
 export const getApiMethods = (): GetApiMethods => {
   return {
-    registerUser
-  }
-}
+    registerUser,
+  };
+};

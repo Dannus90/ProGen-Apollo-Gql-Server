@@ -5,7 +5,6 @@
  * @version 1.0.0
  */
 
-
 import { gql } from "apollo-server";
 
 export const authenticationTypeDefs = gql`
@@ -14,9 +13,14 @@ export const authenticationTypeDefs = gql`
     refreshToken: String!
   }
 
+  type RegisterResponse {
+    statusCode: Int
+    message: String
+  }
+
   extend type AuthenticationMutationRoot {
     getRefreshToken(input: RefreshTokenInput): TokenResponse!
-    registerUser(input: RegisterLoginInput): Boolean
+    registerUser(input: RegisterLoginInput): RegisterResponse
     loginUser(input: RegisterLoginInput): TokenResponse!
     logoutUser: Boolean
   }
