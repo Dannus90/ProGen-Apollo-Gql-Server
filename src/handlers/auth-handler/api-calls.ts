@@ -8,5 +8,16 @@ export const registerUser = async (input: GQLRegisterLoginInput | undefined): Pr
     email: input?.email,
     password: input?.password
   };
+
   return await fetchPostNoAuth(`${PROGEN_BASE_URL}/user/auth/register`, "POST", payload);
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const loginUser = async (input: GQLRegisterLoginInput | undefined): Promise<any> => {
+  const payload = {
+    email: input?.email,
+    password: input?.password
+  };
+
+  return await fetchPostNoAuth(`${PROGEN_BASE_URL}/user/auth/login`, "POST", payload);
 };
