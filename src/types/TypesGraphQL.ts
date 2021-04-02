@@ -25,7 +25,7 @@ export interface GQLMutation {
 
 export interface GQLAuthenticationMutationRoot {
   getRefreshToken: GQLTokenResponse;
-  registerUser?: GQLRegisterResponse;
+  registerUser: GQLRegisterResponse;
   loginUser: GQLTokenResponse;
   logoutUser?: boolean;
 }
@@ -36,6 +36,7 @@ export interface GQLRefreshTokenInput {
 }
 
 export interface GQLTokenResponse {
+  statusCode: number;
   accessToken: string;
   refreshToken: string;
 }
@@ -46,8 +47,8 @@ export interface GQLRegisterLoginInput {
 }
 
 export interface GQLRegisterResponse {
-  statusCode?: number;
-  message?: string;
+  statusCode: number;
+  message: string;
 }
 
 /*********************************
@@ -147,7 +148,7 @@ export interface AuthenticationMutationRootToRegisterUserArgs {
 }
 export interface AuthenticationMutationRootToRegisterUserResolver<
   TParent = GQLAuthenticationMutationRoot,
-  TResult = GQLRegisterResponse | null
+  TResult = GQLRegisterResponse
 > {
   (
     parent: TParent,
@@ -185,8 +186,21 @@ export interface AuthenticationMutationRootToLogoutUserResolver<
 }
 
 export interface GQLTokenResponseTypeResolver<TParent = GQLTokenResponse> {
+  statusCode?: TokenResponseToStatusCodeResolver<TParent>;
   accessToken?: TokenResponseToAccessTokenResolver<TParent>;
   refreshToken?: TokenResponseToRefreshTokenResolver<TParent>;
+}
+
+export interface TokenResponseToStatusCodeResolver<
+  TParent = GQLTokenResponse,
+  TResult = number
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface TokenResponseToAccessTokenResolver<
@@ -222,7 +236,7 @@ export interface GQLRegisterResponseTypeResolver<
 
 export interface RegisterResponseToStatusCodeResolver<
   TParent = GQLRegisterResponse,
-  TResult = number | null
+  TResult = number
 > {
   (
     parent: TParent,
@@ -234,7 +248,7 @@ export interface RegisterResponseToStatusCodeResolver<
 
 export interface RegisterResponseToMessageResolver<
   TParent = GQLRegisterResponse,
-  TResult = string | null
+  TResult = string
 > {
   (
     parent: TParent,

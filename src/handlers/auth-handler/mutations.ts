@@ -25,6 +25,7 @@ export interface GqlRegisterResponse {
 }
 
 export interface GqlLoginResponse {
+  statusCode: number;
   accessToken: string;
   refreshToken: string;
 }
@@ -57,6 +58,7 @@ export const authMutations: AuthenticationMutations = {
       const { tokenResponse } = await response.json();
 
       const gqlResponse: GqlLoginResponse = {
+        statusCode: response.status,
         accessToken: tokenResponse.accessToken,
         refreshToken: tokenResponse.refreshToken
       };
