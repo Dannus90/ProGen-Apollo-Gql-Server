@@ -18,6 +18,7 @@ import { rootResolver } from "./root-resolvers"
 const server = new ApolloServer({
   typeDefs: rootTypeDefs,
   resolvers: merge(rootResolver, rootMutation),
+  tracing: false,
   formatError: (err) => {
     console.log(err.message)
     console.error(err.originalError)

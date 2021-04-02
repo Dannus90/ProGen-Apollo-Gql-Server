@@ -5,6 +5,7 @@
  * @version 1.0.0
  */
 
+ import { HttpResponseError } from "../../config/api/error-management/http-response-error";
  import { Context } from "../../context";
  import { AuthenticationMutationRootToRegisterUserResolver } from "../../types/TypesGraphQL";
  
@@ -17,7 +18,14 @@
  export const authMutations: AuthenticationMutations = {
   AuthenticationMutationRoot: {
    registerUser: async(_, body, { api }: Context) => {
-     return await api.registerUser(body.input?.email, body.input?.password)
+     const response = await api.registerUser(body.input)
+     
+     if(response.status !== 201) {
+      const error = await response.json();
+      throw new HttpResponseError (error.type, error.statusCode, error.message)
+     }
+
+     return await response.json()
    }
   }
  }

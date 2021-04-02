@@ -17,18 +17,19 @@ const headerOptionsAuth = (authorization: string) => {
 }
 
 // API CALLS
-export const fetchPostNoAuth = async <TPayload, TResponse>(
+export const fetchPostNoAuth = async <TPayload>(
   url: string,
   method: HttpMethods = "POST",
   body: TPayload
-): Promise<TResponse> => {
+) => {
+  console.log(body)
   const response = await fetch(url, {
     method,
     ...headerOptionsNoAuth,
     body: JSON.stringify(body),
   });
 
-  return response.json();
+  return response;
 };
 
 export const fetchPostAuth = async <TPayload, TResponse>(
