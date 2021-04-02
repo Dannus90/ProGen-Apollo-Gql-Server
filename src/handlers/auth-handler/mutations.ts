@@ -40,8 +40,8 @@ export const authMutations: AuthenticationMutations = {
       const response = await api.registerUser(body.input);
 
       if (response.status !== 201) {
-        const error = await response.json();
-        throw new HttpResponseError(error.type, error.statusCode, error.message);
+        const { type, statusCode, message }= await response.json();
+        throw new HttpResponseError(type, statusCode, message);
       }
 
       const gqlResponse: GqlRegisterLogoutResponse = {
@@ -55,8 +55,8 @@ export const authMutations: AuthenticationMutations = {
       const response = await api.loginUser(body.input);
 
       if (response.status !== 200) {
-        const error = await response.json();
-        throw new HttpResponseError(error.type, error.statusCode, error.message);
+        const { type, statusCode, message } = await response.json();
+        throw new HttpResponseError(type, statusCode, message);
       }
 
       const { tokenResponse } = await response.json();
@@ -83,11 +83,14 @@ export const authMutations: AuthenticationMutations = {
 
       return gqlResponse;
     },
-    refreshToken: async (_, body, { api }: Context) => {
-      const response = await api.refreshToken(body.input);
+    refreshToken: async (_, body, { api, authorization }: Context) => {
+      const response = await api.refreshToken(authorization, body.input);
+
+      console.log()
 
       if (response.status !== 200) {
-        throw new HttpResponseError(response.statusText, response.status, response.statusText);
+        const { statusCode, message, type } = await response.json()
+        throw new HttpResponseError(type, statusCode, message);
       }
 
       const { tokenResponse } = await response.json();

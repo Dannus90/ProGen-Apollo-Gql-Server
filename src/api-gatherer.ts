@@ -9,7 +9,7 @@ export interface GetApiMethods {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   logoutUser: (authorization: string) => Promise<any>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  refreshToken: (input: GQLRefreshTokenInput | undefined) => Promise<any>;
+  refreshToken: (uthorization: string, input: GQLRefreshTokenInput | undefined) => Promise<any>;
 }
 
 export const getApiMethods = (): GetApiMethods => {

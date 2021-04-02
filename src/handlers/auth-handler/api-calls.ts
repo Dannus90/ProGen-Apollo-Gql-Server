@@ -1,6 +1,6 @@
 import { GQLRefreshTokenInput, GQLRegisterLoginInput } from "../../types/TypesGraphQL";
 import { PROGEN_BASE_URL } from "../../config/api/base";
-import { fetchPostNoAuth, fetchPostNoBody } from "../../config/api/httpClient";
+import { fetchPostAuth, fetchPostNoAuth, fetchPostNoBody } from "../../config/api/httpClient";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const registerUser = async (input: GQLRegisterLoginInput | undefined): Promise<any> => {
@@ -28,6 +28,6 @@ export const logoutUser = async (authorization: string): Promise<any> => {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const refreshToken = async (input: GQLRefreshTokenInput  | undefined): Promise<any> => {
-  return await fetchPostNoAuth(`${PROGEN_BASE_URL}/user/auth/logout`, "POST", input);
+export const refreshToken = async (authorization: string, input: GQLRefreshTokenInput  | undefined): Promise<any> => {
+  return await fetchPostAuth(`${PROGEN_BASE_URL}/user/auth/refresh`, "POST", authorization, input);
 };
