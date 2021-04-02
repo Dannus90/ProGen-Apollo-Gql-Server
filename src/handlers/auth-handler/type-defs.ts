@@ -14,16 +14,16 @@ export const authenticationTypeDefs = gql`
     refreshToken: String!
   }
 
-  type RegisterResponse {
+  type RegisterLogoutResponse {
     statusCode: Int!
     message: String!
   }
 
   extend type AuthenticationMutationRoot {
     getRefreshToken(input: RefreshTokenInput): TokenResponse!
-    registerUser(input: RegisterLoginInput): RegisterResponse!
+    registerUser(input: RegisterLoginInput): RegisterLogoutResponse!
     loginUser(input: RegisterLoginInput): TokenResponse!
-    logoutUser: Boolean
+    logoutUser: RegisterLogoutResponse!
   }
 
   extend type AuthenticationRoot {

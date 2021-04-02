@@ -33,6 +33,21 @@ export const fetchPostNoAuth = async <TPayload>(
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const fetchPostNoBody = async (
+  url: string,
+  method: HttpMethods = "POST",
+  authorization: string,
+) => {
+  const response = await fetch(url, {
+    method,
+    ...headerOptionsAuth(authorization),
+    ...headerOptionsNoAuth,
+  });
+
+  return response;
+};
+
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const fetchPostAuth = async <TPayload>(
   url: string,
   method: HttpMethods = "POST",

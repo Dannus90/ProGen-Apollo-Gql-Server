@@ -21,3 +21,8 @@ export const loginUser = async (input: GQLRegisterLoginInput | undefined): Promi
 
   return await fetchPostNoAuth(`${PROGEN_BASE_URL}/user/auth/login`, "POST", payload);
 };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const logoutUser = async (authorization: string): Promise<any> => {
+  return await fetchPostNoAuth(`${PROGEN_BASE_URL}/user/auth/logout`, "POST", authorization);
+};

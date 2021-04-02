@@ -9,6 +9,7 @@ import { HttpResponseError } from "../../config/api/error-management/http-respon
 import { Context } from "../../context";
 import {
   AuthenticationMutationRootToLoginUserResolver,
+  AuthenticationMutationRootToLogoutUserResolver,
   AuthenticationMutationRootToRegisterUserResolver
 } from "../../types/TypesGraphQL";
 
@@ -16,10 +17,11 @@ export interface AuthenticationMutations {
   AuthenticationMutationRoot: {
     registerUser: AuthenticationMutationRootToRegisterUserResolver;
     loginUser: AuthenticationMutationRootToLoginUserResolver;
+    logoutUser: AuthenticationMutationRootToLogoutUserResolver;
   };
 }
 
-export interface GqlRegisterResponse {
+export interface GqlRegisterLogoutResponse {
   statusCode: number;
   message: string;
 }
@@ -40,7 +42,7 @@ export const authMutations: AuthenticationMutations = {
         throw new HttpResponseError(error.type, error.statusCode, error.message);
       }
 
-      const gqlResponse: GqlRegisterResponse = {
+      const gqlResponse: GqlRegisterLogoutResponse = {
         statusCode: response.status,
         message: "Successful registration"
       };
@@ -64,6 +66,21 @@ export const authMutations: AuthenticationMutations = {
       };
 
       return gqlResponse;
-    }
+    },
+    logoutUser: async (_, body, { api, authorization }: Context) => {
+      const response = await api.logoutUser(authorization);
+
+      if (response.status !== 200) {
+        const error = await response.json();
+        throw new HttpResponseError(error.type, error.statusCode, error.message);
+      }
+
+      const gqlResponse: GqlRegisterLogoutResponse = {
+        statusCode: response.status,
+        message: "Successful logout"
+      };
+
+      return gqlResponse;
+    },
   }
 };

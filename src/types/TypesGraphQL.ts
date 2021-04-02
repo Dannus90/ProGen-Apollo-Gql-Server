@@ -25,9 +25,9 @@ export interface GQLMutation {
 
 export interface GQLAuthenticationMutationRoot {
   getRefreshToken: GQLTokenResponse;
-  registerUser: GQLRegisterResponse;
+  registerUser: GQLRegisterLogoutResponse;
   loginUser: GQLTokenResponse;
-  logoutUser?: boolean;
+  logoutUser: GQLRegisterLogoutResponse;
 }
 
 export interface GQLRefreshTokenInput {
@@ -46,7 +46,7 @@ export interface GQLRegisterLoginInput {
   password: string;
 }
 
-export interface GQLRegisterResponse {
+export interface GQLRegisterLogoutResponse {
   statusCode: number;
   message: string;
 }
@@ -67,7 +67,7 @@ export interface GQLResolver {
   Mutation?: GQLMutationTypeResolver;
   AuthenticationMutationRoot?: GQLAuthenticationMutationRootTypeResolver;
   TokenResponse?: GQLTokenResponseTypeResolver;
-  RegisterResponse?: GQLRegisterResponseTypeResolver;
+  RegisterLogoutResponse?: GQLRegisterLogoutResponseTypeResolver;
 }
 export interface GQLQueryTypeResolver<TParent = undefined> {
   authentication?: QueryToAuthenticationResolver<TParent>;
@@ -148,7 +148,7 @@ export interface AuthenticationMutationRootToRegisterUserArgs {
 }
 export interface AuthenticationMutationRootToRegisterUserResolver<
   TParent = GQLAuthenticationMutationRoot,
-  TResult = GQLRegisterResponse
+  TResult = GQLRegisterLogoutResponse
 > {
   (
     parent: TParent,
@@ -175,7 +175,7 @@ export interface AuthenticationMutationRootToLoginUserResolver<
 
 export interface AuthenticationMutationRootToLogoutUserResolver<
   TParent = GQLAuthenticationMutationRoot,
-  TResult = boolean | null
+  TResult = GQLRegisterLogoutResponse
 > {
   (
     parent: TParent,
@@ -227,15 +227,15 @@ export interface TokenResponseToRefreshTokenResolver<
   ): Promise<TResult>;
 }
 
-export interface GQLRegisterResponseTypeResolver<
-  TParent = GQLRegisterResponse
+export interface GQLRegisterLogoutResponseTypeResolver<
+  TParent = GQLRegisterLogoutResponse
 > {
-  statusCode?: RegisterResponseToStatusCodeResolver<TParent>;
-  message?: RegisterResponseToMessageResolver<TParent>;
+  statusCode?: RegisterLogoutResponseToStatusCodeResolver<TParent>;
+  message?: RegisterLogoutResponseToMessageResolver<TParent>;
 }
 
-export interface RegisterResponseToStatusCodeResolver<
-  TParent = GQLRegisterResponse,
+export interface RegisterLogoutResponseToStatusCodeResolver<
+  TParent = GQLRegisterLogoutResponse,
   TResult = number
 > {
   (
@@ -246,8 +246,8 @@ export interface RegisterResponseToStatusCodeResolver<
   ): Promise<TResult>;
 }
 
-export interface RegisterResponseToMessageResolver<
-  TParent = GQLRegisterResponse,
+export interface RegisterLogoutResponseToMessageResolver<
+  TParent = GQLRegisterLogoutResponse,
   TResult = string
 > {
   (
