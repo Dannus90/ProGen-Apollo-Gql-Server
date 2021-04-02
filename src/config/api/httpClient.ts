@@ -11,8 +11,10 @@ const headerOptionsNoAuth = {
 
 const headerOptionsAuth = (authorization: string) => {
   return {
-    authorization,
-    "content-type": "application/json"
+    headers: {
+      authorization,
+      "content-type": "application/json"
+    }
   };
 };
 
@@ -40,8 +42,7 @@ export const fetchPostNoBody = async (
 ) => {
   const response = await fetch(url, {
     method,
-    ...headerOptionsAuth(authorization),
-    ...headerOptionsNoAuth,
+    ...headerOptionsAuth(authorization)
   });
 
   return response;

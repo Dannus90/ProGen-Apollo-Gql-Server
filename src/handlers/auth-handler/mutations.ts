@@ -70,9 +70,8 @@ export const authMutations: AuthenticationMutations = {
     logoutUser: async (_, body, { api, authorization }: Context) => {
       const response = await api.logoutUser(authorization);
 
-      if (response.status !== 200) {
-        const error = await response.json();
-        throw new HttpResponseError(error.type, error.statusCode, error.message);
+      if (response.status !== 204) {
+        throw new HttpResponseError(response.statusText, response.status, response.statusText);
       }
 
       const gqlResponse: GqlRegisterLogoutResponse = {
