@@ -24,10 +24,10 @@ export interface GQLMutation {
 }
 
 export interface GQLAuthenticationMutationRoot {
-  getRefreshToken: GQLTokenResponse;
-  registerUser?: boolean;
+  refreshToken: GQLTokenResponse;
+  registerUser: GQLRegisterLogoutResponse;
   loginUser: GQLTokenResponse;
-  logoutUser?: boolean;
+  logoutUser: GQLRegisterLogoutResponse;
 }
 
 export interface GQLRefreshTokenInput {
@@ -36,6 +36,7 @@ export interface GQLRefreshTokenInput {
 }
 
 export interface GQLTokenResponse {
+  statusCode: number;
   accessToken: string;
   refreshToken: string;
 }
@@ -43,6 +44,11 @@ export interface GQLTokenResponse {
 export interface GQLRegisterLoginInput {
   email: string;
   password: string;
+}
+
+export interface GQLRegisterLogoutResponse {
+  statusCode: number;
+  message: string;
 }
 
 /*********************************
@@ -61,6 +67,7 @@ export interface GQLResolver {
   Mutation?: GQLMutationTypeResolver;
   AuthenticationMutationRoot?: GQLAuthenticationMutationRootTypeResolver;
   TokenResponse?: GQLTokenResponseTypeResolver;
+  RegisterLogoutResponse?: GQLRegisterLogoutResponseTypeResolver;
 }
 export interface GQLQueryTypeResolver<TParent = undefined> {
   authentication?: QueryToAuthenticationResolver<TParent>;
@@ -115,22 +122,22 @@ export interface MutationToAuthenticationResolver<
 export interface GQLAuthenticationMutationRootTypeResolver<
   TParent = GQLAuthenticationMutationRoot
 > {
-  getRefreshToken?: AuthenticationMutationRootToGetRefreshTokenResolver<TParent>;
+  refreshToken?: AuthenticationMutationRootToRefreshTokenResolver<TParent>;
   registerUser?: AuthenticationMutationRootToRegisterUserResolver<TParent>;
   loginUser?: AuthenticationMutationRootToLoginUserResolver<TParent>;
   logoutUser?: AuthenticationMutationRootToLogoutUserResolver<TParent>;
 }
 
-export interface AuthenticationMutationRootToGetRefreshTokenArgs {
+export interface AuthenticationMutationRootToRefreshTokenArgs {
   input?: GQLRefreshTokenInput;
 }
-export interface AuthenticationMutationRootToGetRefreshTokenResolver<
+export interface AuthenticationMutationRootToRefreshTokenResolver<
   TParent = GQLAuthenticationMutationRoot,
   TResult = GQLTokenResponse
 > {
   (
     parent: TParent,
-    args: AuthenticationMutationRootToGetRefreshTokenArgs,
+    args: AuthenticationMutationRootToRefreshTokenArgs,
     context: any,
     info: GraphQLResolveInfo
   ): Promise<TResult>;
@@ -141,7 +148,7 @@ export interface AuthenticationMutationRootToRegisterUserArgs {
 }
 export interface AuthenticationMutationRootToRegisterUserResolver<
   TParent = GQLAuthenticationMutationRoot,
-  TResult = boolean | null
+  TResult = GQLRegisterLogoutResponse
 > {
   (
     parent: TParent,
@@ -168,7 +175,7 @@ export interface AuthenticationMutationRootToLoginUserResolver<
 
 export interface AuthenticationMutationRootToLogoutUserResolver<
   TParent = GQLAuthenticationMutationRoot,
-  TResult = boolean | null
+  TResult = GQLRegisterLogoutResponse
 > {
   (
     parent: TParent,
@@ -179,8 +186,21 @@ export interface AuthenticationMutationRootToLogoutUserResolver<
 }
 
 export interface GQLTokenResponseTypeResolver<TParent = GQLTokenResponse> {
+  statusCode?: TokenResponseToStatusCodeResolver<TParent>;
   accessToken?: TokenResponseToAccessTokenResolver<TParent>;
   refreshToken?: TokenResponseToRefreshTokenResolver<TParent>;
+}
+
+export interface TokenResponseToStatusCodeResolver<
+  TParent = GQLTokenResponse,
+  TResult = number
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface TokenResponseToAccessTokenResolver<
@@ -197,6 +217,37 @@ export interface TokenResponseToAccessTokenResolver<
 
 export interface TokenResponseToRefreshTokenResolver<
   TParent = GQLTokenResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLRegisterLogoutResponseTypeResolver<
+  TParent = GQLRegisterLogoutResponse
+> {
+  statusCode?: RegisterLogoutResponseToStatusCodeResolver<TParent>;
+  message?: RegisterLogoutResponseToMessageResolver<TParent>;
+}
+
+export interface RegisterLogoutResponseToStatusCodeResolver<
+  TParent = GQLRegisterLogoutResponse,
+  TResult = number
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface RegisterLogoutResponseToMessageResolver<
+  TParent = GQLRegisterLogoutResponse,
   TResult = string
 > {
   (

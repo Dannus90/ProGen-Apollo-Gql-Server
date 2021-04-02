@@ -46,7 +46,11 @@ export const authMutations: AuthenticationMutations = {
 
       const gqlResponse: GqlRegisterLogoutResponse = {
         statusCode: response.status,
+<<<<<<< HEAD
         message: "Successful registration"git
+=======
+        message: "Successful registration"
+>>>>>>> feature2/Implement-auth-through-gql-apollo
       };
 
       return gqlResponse;

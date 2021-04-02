@@ -6,16 +6,12 @@
  */
 import { merge } from "lodash";
 
-interface QueryResolvers {
-
-}
+interface QueryResolvers {}
 
 const queryResolver: QueryResolvers = {
   Query: {
-    authentication: async () => true,
-  },
+    authentication: async () => true
+  }
 };
 
- export const rootResolver = merge(
-  queryResolver
- )
+export const rootResolver = merge(queryResolver);
