@@ -10,6 +10,7 @@ import { Context } from "../../context";
 import {
   AuthenticationMutationRootToLoginUserResolver,
   AuthenticationMutationRootToLogoutUserResolver,
+  AuthenticationMutationRootToRefreshTokenResolver,
   AuthenticationMutationRootToRegisterUserResolver
 } from "../../types/TypesGraphQL";
 
@@ -18,6 +19,7 @@ export interface AuthenticationMutations {
     registerUser: AuthenticationMutationRootToRegisterUserResolver;
     loginUser: AuthenticationMutationRootToLoginUserResolver;
     logoutUser: AuthenticationMutationRootToLogoutUserResolver;
+    refreshToken: AuthenticationMutationRootToRefreshTokenResolver;
   };
 }
 
@@ -26,7 +28,7 @@ export interface GqlRegisterLogoutResponse {
   message: string;
 }
 
-export interface GqlLoginResponse {
+export interface GqlLoginRefreshResponse {
   statusCode: number;
   accessToken: string;
   refreshToken: string;
@@ -59,7 +61,7 @@ export const authMutations: AuthenticationMutations = {
 
       const { tokenResponse } = await response.json();
 
-      const gqlResponse: GqlLoginResponse = {
+      const gqlResponse: GqlLoginRefreshResponse = {
         statusCode: response.status,
         accessToken: tokenResponse.accessToken,
         refreshToken: tokenResponse.refreshToken
@@ -77,6 +79,23 @@ export const authMutations: AuthenticationMutations = {
       const gqlResponse: GqlRegisterLogoutResponse = {
         statusCode: response.status,
         message: "Successful logout"
+      };
+
+      return gqlResponse;
+    },
+    refreshToken: async (_, body, { api }: Context) => {
+      const response = await api.refreshToken(body.input);
+
+      if (response.status !== 200) {
+        throw new HttpResponseError(response.statusText, response.status, response.statusText);
+      }
+
+      const { tokenResponse } = await response.json();
+
+      const gqlResponse: GqlLoginRefreshResponse = {
+        statusCode: response.status,
+        accessToken: tokenResponse.accessToken,
+        refreshToken: tokenResponse.refreshToken
       };
 
       return gqlResponse;

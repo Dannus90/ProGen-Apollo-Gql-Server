@@ -24,7 +24,7 @@ export interface GQLMutation {
 }
 
 export interface GQLAuthenticationMutationRoot {
-  getRefreshToken: GQLTokenResponse;
+  refreshToken: GQLTokenResponse;
   registerUser: GQLRegisterLogoutResponse;
   loginUser: GQLTokenResponse;
   logoutUser: GQLRegisterLogoutResponse;
@@ -122,22 +122,22 @@ export interface MutationToAuthenticationResolver<
 export interface GQLAuthenticationMutationRootTypeResolver<
   TParent = GQLAuthenticationMutationRoot
 > {
-  getRefreshToken?: AuthenticationMutationRootToGetRefreshTokenResolver<TParent>;
+  refreshToken?: AuthenticationMutationRootToRefreshTokenResolver<TParent>;
   registerUser?: AuthenticationMutationRootToRegisterUserResolver<TParent>;
   loginUser?: AuthenticationMutationRootToLoginUserResolver<TParent>;
   logoutUser?: AuthenticationMutationRootToLogoutUserResolver<TParent>;
 }
 
-export interface AuthenticationMutationRootToGetRefreshTokenArgs {
+export interface AuthenticationMutationRootToRefreshTokenArgs {
   input?: GQLRefreshTokenInput;
 }
-export interface AuthenticationMutationRootToGetRefreshTokenResolver<
+export interface AuthenticationMutationRootToRefreshTokenResolver<
   TParent = GQLAuthenticationMutationRoot,
   TResult = GQLTokenResponse
 > {
   (
     parent: TParent,
-    args: AuthenticationMutationRootToGetRefreshTokenArgs,
+    args: AuthenticationMutationRootToRefreshTokenArgs,
     context: any,
     info: GraphQLResolveInfo
   ): Promise<TResult>;
