@@ -5,14 +5,14 @@
  * @version 1.0.0
  */
 
-import { HttpResponseError } from "../../config/api/error-management/http-response-error";
-import { Context } from "../../context";
+import { HttpResponseError } from '../../config/api/error-management/http-response-error';
+import { Context } from '../../context';
 import {
   AuthenticationMutationRootToLoginUserResolver,
   AuthenticationMutationRootToLogoutUserResolver,
   AuthenticationMutationRootToRefreshTokenResolver,
   AuthenticationMutationRootToRegisterUserResolver
-} from "../../types/TypesGraphQL";
+} from '../../types/TypesGraphQL';
 
 export interface AuthenticationMutations {
   AuthenticationMutationRoot: {
@@ -40,17 +40,13 @@ export const authMutations: AuthenticationMutations = {
       const response = await api.registerUser(body.input);
 
       if (response.status !== 201) {
-        const { type, statusCode, message }= await response.json();
+        const { type, statusCode, message } = await response.json();
         throw new HttpResponseError(type, statusCode, message);
       }
 
       const gqlResponse: GqlRegisterLogoutResponse = {
         statusCode: response.status,
-<<<<<<< HEAD
-        message: "Successful registration"git
-=======
-        message: "Successful registration"
->>>>>>> feature2/Implement-auth-through-gql-apollo
+        message: 'Successful registration'
       };
 
       return gqlResponse;
@@ -82,7 +78,7 @@ export const authMutations: AuthenticationMutations = {
 
       const gqlResponse: GqlRegisterLogoutResponse = {
         statusCode: response.status,
-        message: "Successful logout"
+        message: 'Successful logout'
       };
 
       return gqlResponse;
@@ -90,10 +86,10 @@ export const authMutations: AuthenticationMutations = {
     refreshToken: async (_, body, { api, authorization }: Context) => {
       const response = await api.refreshToken(authorization, body.input);
 
-      console.log()
+      console.log();
 
       if (response.status !== 200) {
-        const { statusCode, message, type } = await response.json()
+        const { statusCode, message, type } = await response.json();
         throw new HttpResponseError(type, statusCode, message);
       }
 
@@ -106,6 +102,6 @@ export const authMutations: AuthenticationMutations = {
       };
 
       return gqlResponse;
-    },
+    }
   }
 };

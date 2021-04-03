@@ -4,7 +4,7 @@
  * @author Daniel Persson
  * @version 1.0.0
  */
-import { merge } from "lodash";
+import { merge } from 'lodash';
 
 interface QueryResolvers {}
 

@@ -5,14 +5,14 @@
  * @version 1.0.0
  */
 
-import express from "express";
-import { rootTypeDefs } from "./root-type-defs";
-import { ApolloServer } from "apollo-server-express";
-import { createContext } from "./context";
-import { merge } from "lodash";
-import { getAuthorization } from "./config/api/getAuthorization";
-import { rootMutation } from "./root-mutation-resolvers";
-import { rootResolver } from "./root-resolvers";
+import express from 'express';
+import { rootTypeDefs } from './root-type-defs';
+import { ApolloServer } from 'apollo-server-express';
+import { createContext } from './context';
+import { merge } from 'lodash';
+import { getAuthorization } from './config/api/getAuthorization';
+import { rootMutation } from './root-mutation-resolvers';
+import { rootResolver } from './root-resolvers';
 
 // Initiate apollo server.
 const server = new ApolloServer({
@@ -23,8 +23,8 @@ const server = new ApolloServer({
     console.log(err.message);
     console.error(err.originalError);
 
-    if (err.message.startsWith("Database Error: ")) {
-      return new Error("Internal server error");
+    if (err.message.startsWith('Database Error: ')) {
+      return new Error('Internal server error');
     }
 
     return err;
@@ -34,7 +34,7 @@ const server = new ApolloServer({
 
 const app = express();
 
-server.applyMiddleware({ app, cors: true, path: "/api/graphql" });
+server.applyMiddleware({ app, cors: true, path: '/api/graphql' });
 
 const PORT = process.env.PORT || 4000;
 

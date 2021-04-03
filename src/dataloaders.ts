@@ -8,5 +8,5 @@
 export interface ContextDataLoaders {}
 
 export const createDataLoaders = (authorization: string): ContextDataLoaders => {
-  return "Temporary";
+  return 'Temporary';
 };

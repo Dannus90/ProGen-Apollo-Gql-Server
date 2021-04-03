@@ -5,8 +5,8 @@
  * @version 1.0.0
  */
 
-import { gql } from "apollo-server";
-import { authenticationTypeDefs } from "./handlers/auth-handler/type-defs";
+import { gql } from 'apollo-server';
+import { authenticationTypeDefs } from './handlers/auth-handler/type-defs';
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against

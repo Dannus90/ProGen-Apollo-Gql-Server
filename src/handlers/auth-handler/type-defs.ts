@@ -5,7 +5,7 @@
  * @version 1.0.0
  */
 
-import { gql } from "apollo-server";
+import { gql } from 'apollo-server';
 
 export const authenticationTypeDefs = gql`
   type TokenResponse {
