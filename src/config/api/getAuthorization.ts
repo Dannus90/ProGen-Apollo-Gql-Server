@@ -1,3 +1,3 @@
-import { Request } from 'express';
+import { Request } from "express";
 
-export const getAuthorization = (req: Request): string => req.headers.authorization ?? '';
+export const getAuthorization = (req: Request): string => req.headers.authorization ?? "";

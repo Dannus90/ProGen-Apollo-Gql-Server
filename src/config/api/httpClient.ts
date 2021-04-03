@@ -1,11 +1,11 @@
-import fetch from 'node-fetch';
+import fetch from "node-fetch";
 
-type HttpMethods = 'POST' | 'PUT' | 'DELETE' | 'PATCH';
+type HttpMethods = "POST" | "PUT" | "DELETE" | "PATCH";
 
 // HEADER OPTIONS
 const headerOptionsNoAuth = {
   headers: {
-    'content-type': 'application/json'
+    "content-type": "application/json"
   }
 };
 
@@ -13,7 +13,7 @@ const headerOptionsAuth = (authorization: string) => {
   return {
     headers: {
       authorization,
-      'content-type': 'application/json'
+      "content-type": "application/json"
     }
   };
 };
@@ -22,7 +22,7 @@ const headerOptionsAuth = (authorization: string) => {
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const fetchPostNoAuth = async <TPayload>(
   url: string,
-  method: HttpMethods = 'POST',
+  method: HttpMethods = "POST",
   body: TPayload
 ) => {
   const response = await fetch(url, {
@@ -37,7 +37,7 @@ export const fetchPostNoAuth = async <TPayload>(
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const fetchPostNoBody = async (
   url: string,
-  method: HttpMethods = 'POST',
+  method: HttpMethods = "POST",
   authorization: string
 ) => {
   const response = await fetch(url, {
@@ -51,7 +51,7 @@ export const fetchPostNoBody = async (
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const fetchPostAuth = async <TPayload>(
   url: string,
-  method: HttpMethods = 'POST',
+  method: HttpMethods = "POST",
   authorization: string,
   body: TPayload
 ) => {

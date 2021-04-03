@@ -5,14 +5,14 @@
  * @version 1.0.0
  */
 
-import { HttpResponseError } from '../../config/api/error-management/http-response-error';
-import { Context } from '../../context';
+import { HttpResponseError } from "../../config/api/error-management/http-response-error";
+import { Context } from "../../context";
 import {
   AuthenticationMutationRootToLoginUserResolver,
   AuthenticationMutationRootToLogoutUserResolver,
   AuthenticationMutationRootToRefreshTokenResolver,
   AuthenticationMutationRootToRegisterUserResolver
-} from '../../types/TypesGraphQL';
+} from "../../types/TypesGraphQL";
 
 export interface AuthenticationMutations {
   AuthenticationMutationRoot: {
@@ -46,7 +46,7 @@ export const authMutations: AuthenticationMutations = {
 
       const gqlResponse: GqlRegisterLogoutResponse = {
         statusCode: response.status,
-        message: 'Successful registration'
+        message: "Successful registration"
       };
 
       return gqlResponse;
@@ -78,7 +78,7 @@ export const authMutations: AuthenticationMutations = {
 
       const gqlResponse: GqlRegisterLogoutResponse = {
         statusCode: response.status,
-        message: 'Successful logout'
+        message: "Successful logout"
       };
 
       return gqlResponse;

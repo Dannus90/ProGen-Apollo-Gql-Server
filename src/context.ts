@@ -5,8 +5,8 @@
  * @version 1.0.0
  */
 
-import { ContextDataLoaders, createDataLoaders } from './dataloaders';
-import { getApiMethods, GetApiMethods } from './api-gatherer';
+import { ContextDataLoaders, createDataLoaders } from "./dataloaders";
+import { getApiMethods, GetApiMethods } from "./api-gatherer";
 
 export interface Context {
   authorization: string;

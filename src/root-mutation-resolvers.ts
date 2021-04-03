@@ -1,6 +1,6 @@
-import { merge } from 'lodash';
-import { QueryToAuthenticationResolver } from './types/TypesGraphQL';
-import { authMutations } from './handlers/auth-handler/mutations';
+import { merge } from "lodash";
+import { QueryToAuthenticationResolver } from "./types/TypesGraphQL";
+import { authMutations } from "./handlers/auth-handler/mutations";
 
 interface MutationResolvers {
   Mutation: {

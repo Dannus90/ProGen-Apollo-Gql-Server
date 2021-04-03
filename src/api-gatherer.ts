@@ -3,8 +3,8 @@ import {
   loginUser,
   logoutUser,
   refreshToken
-} from './handlers/auth-handler/api-calls';
-import { GQLRegisterLoginInput, GQLRefreshTokenInput } from './types/TypesGraphQL';
+} from "./handlers/auth-handler/api-calls";
+import { GQLRegisterLoginInput, GQLRefreshTokenInput } from "./types/TypesGraphQL";
 
 export interface GetApiMethods {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
