@@ -41,7 +41,9 @@ export interface GQLTokenResponse {
   refreshToken: string;
 }
 
-export interface GQLRegisterLoginInput {
+export interface GQLRegisterInput {
+  firstname: string;
+  lastname: string;
   email: string;
   password: string;
 }
@@ -49,6 +51,11 @@ export interface GQLRegisterLoginInput {
 export interface GQLRegisterLogoutResponse {
   statusCode: number;
   message: string;
+}
+
+export interface GQLLoginInput {
+  email: string;
+  password: string;
 }
 
 /*********************************
@@ -144,7 +151,7 @@ export interface AuthenticationMutationRootToRefreshTokenResolver<
 }
 
 export interface AuthenticationMutationRootToRegisterUserArgs {
-  input?: GQLRegisterLoginInput;
+  input?: GQLRegisterInput;
 }
 export interface AuthenticationMutationRootToRegisterUserResolver<
   TParent = GQLAuthenticationMutationRoot,
@@ -159,7 +166,7 @@ export interface AuthenticationMutationRootToRegisterUserResolver<
 }
 
 export interface AuthenticationMutationRootToLoginUserArgs {
-  input?: GQLRegisterLoginInput;
+  input?: GQLLoginInput;
 }
 export interface AuthenticationMutationRootToLoginUserResolver<
   TParent = GQLAuthenticationMutationRoot,

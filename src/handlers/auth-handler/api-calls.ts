@@ -1,10 +1,12 @@
-import { GQLRefreshTokenInput, GQLRegisterLoginInput } from "../../types/TypesGraphQL";
+import { GQLLoginInput, GQLRefreshTokenInput, GQLRegisterInput } from "../../types/TypesGraphQL";
 import { PROGEN_BASE_URL } from "../../config/api/base";
 import { fetchPostAuth, fetchPostNoAuth, fetchPostNoBody } from "../../config/api/httpClient";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const registerUser = async (input: GQLRegisterLoginInput | undefined): Promise<any> => {
+export const registerUser = async (input: GQLRegisterInput | undefined): Promise<any> => {
   const payload = {
+    firstname: input?.firstname,
+    lastname: input?.lastname,
     email: input?.email,
     password: input?.password
   };
@@ -13,7 +15,7 @@ export const registerUser = async (input: GQLRegisterLoginInput | undefined): Pr
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const loginUser = async (input: GQLRegisterLoginInput | undefined): Promise<any> => {
+export const loginUser = async (input: GQLLoginInput | undefined): Promise<any> => {
   const payload = {
     email: input?.email,
     password: input?.password
