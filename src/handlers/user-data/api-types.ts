@@ -22,3 +22,29 @@ export interface UserInformationResponse {
     createdAt: Date;
   };
 }
+
+export interface UserDataForUpdate {
+  phoneNumber?: string;
+  emailCv?: string;
+  cityCv?: string;
+  cityEn?: string;
+  countrySv?: string;
+  countryEn?: string;
+  profileImage?: string;
+}
+
+export interface UserDataUpdateResponse {
+  userDataDto: {
+    id: string;
+    userId: string;
+    phoneNumber?: string;
+    emailCv?: string;
+    cityCv?: string;
+    cityEn?: string;
+    countrySv?: string;
+    countryEn?: string;
+    profileImage?: string;
+    createdAt: Date;
+    updatedAt: Date;
+  }
+}

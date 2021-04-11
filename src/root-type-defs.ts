@@ -19,10 +19,11 @@ const entryTypeDefs = gql`
 
   type Mutation {
     authentication: AuthenticationMutationRoot!
-    userData: UserDataRoot!
+    userData: UserDataMutationRoot!
   }
 
   type UserDataRoot
+  type UserDataMutationRoot
   type AuthenticationMutationRoot
 `;
 
