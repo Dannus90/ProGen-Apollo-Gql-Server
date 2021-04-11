@@ -74,8 +74,8 @@ export interface GQLTokenResponse {
 }
 
 export interface GQLRegisterInput {
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
 }

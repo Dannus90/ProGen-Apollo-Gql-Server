@@ -27,8 +27,8 @@ export const authenticationTypeDefs = gql`
   }
 
   input RegisterInput {
-    firstname: String!
-    lastname: String!
+    firstName: String!
+    lastName: String!
     email: String!
     password: String!
   }
