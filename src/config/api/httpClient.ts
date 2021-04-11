@@ -68,7 +68,7 @@ export const fetchPostAuth = async <TPayload>(
 export const fetchGetAuth = async (
   url: string,
   method: HttpMethods = "GET",
-  authorization: string,
+  authorization: string
 ) => {
   const response = await fetch(url, {
     method,

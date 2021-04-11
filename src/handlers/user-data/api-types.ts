@@ -7,7 +7,7 @@ export interface UserInformationResponse {
     lastLogin: Date;
     createdAt: Date;
     updatedAt: Date;
-  },
+  };
   userData: {
     id: string;
     userId: string;
@@ -20,5 +20,5 @@ export interface UserInformationResponse {
     profileImage?: string;
     updatedAt: Date;
     createdAt: Date;
-  }
+  };
 }

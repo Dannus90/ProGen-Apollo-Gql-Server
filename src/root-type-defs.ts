@@ -13,14 +13,15 @@ import { authenticationTypeDefs } from "./handlers/auth-handler/type-defs";
 // your data.
 const entryTypeDefs = gql`
   type Query {
-    authentication: AuthenticationRoot!
+    userData: UserDataRoot!
   }
 
   type Mutation {
     authentication: AuthenticationMutationRoot!
+    userData: UserDataRoot!
   }
 
-  type AuthenticationRoot
+  type UserDataRoot
   type AuthenticationMutationRoot
 `;
 

@@ -6,11 +6,15 @@
  */
 import { merge } from "lodash";
 
-interface QueryResolvers {}
+interface QueryResolvers {
+  Query: {
+    userData: () => Promise<boolean>
+  }
+}
 
 const queryResolver: QueryResolvers = {
   Query: {
-    authentication: async () => true
+    userData: async () => true
   }
 };
 
