@@ -5,8 +5,8 @@ import { fetchPostAuth, fetchPostNoAuth, fetchPostNoBody } from "../../config/ap
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const registerUser = async (input: GQLRegisterInput | undefined): Promise<any> => {
   const payload = {
-    firstname: input?.firstname,
-    lastname: input?.lastname,
+    firstname: input?.firstName,
+    lastname: input?.lastName,
     email: input?.email,
     password: input?.password
   };
