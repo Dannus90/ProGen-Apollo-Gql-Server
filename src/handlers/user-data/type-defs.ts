@@ -8,32 +8,38 @@
 import { gql } from "apollo-server";
 
 export const userDataTypeDefs = gql`
-   type FullUserInformationResponse {
-     user: {
-       id: String!
-       email: String!
-       firstName: string
-       lastName: string
-       lastLogin: Date!
-       createdAt: Date!
-       updatedAt: Date!
-     },
-     userData: {
-       id: string!
-       userId: string!
-       phoneNumber: string
-       emailCv: string
-       cityCv: string
-       cityEn: string
-       countrySv: string
-       countryEn: string
-       profileImage: string
-       updatedAt: Date!
-       createdAt: Date!
-     }
-   }
+  scalar Date
 
-   extend type UserDataRoot {
-     GetFullUserInformation: FullUserInformationResponse!
-   }
- `;
+  extend type UserDataRoot {
+    GetFullUserInformation: FullUserInformationResponse!
+  }
+
+  type FullUserInformationResponse {
+    user: User!
+    userData: UserData!
+  }
+
+  type User {
+    id: String!
+    email: String!
+    firstName: String
+    lastName: String
+    lastLogin: Date!
+    createdAt: Date!
+    updatedAt: Date!
+  }
+
+  type UserData {
+    id: String!
+    userId: String!
+    phoneNumber: String
+    emailCv: String
+    cityCv: String
+    cityEn: String
+    countrySv: String
+    countryEn: String
+    profileImage: String
+    updatedAt: Date!
+    createdAt: Date!
+  }
+`;

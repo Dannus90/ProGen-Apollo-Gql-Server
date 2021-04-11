@@ -8,8 +8,8 @@ import { merge } from "lodash";
 
 interface QueryResolvers {
   Query: {
-    userData: () => Promise<boolean>
-  }
+    userData: () => Promise<boolean>;
+  };
 }
 
 const queryResolver: QueryResolvers = {
