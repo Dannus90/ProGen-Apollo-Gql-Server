@@ -26,10 +26,6 @@ export const authenticationTypeDefs = gql`
     logoutUser: RegisterLogoutResponse!
   }
 
-  extend type AuthenticationRoot {
-    authentication: String!
-  }
-
   input RegisterInput {
     firstname: String!
     lastname: String!
