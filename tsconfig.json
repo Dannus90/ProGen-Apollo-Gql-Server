@@ -5,7 +5,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "lib": ["es2016", "es2019", "es2017.object", "esnext.asynciterable"],
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "importHelpers": true,
     "forceConsistentCasingInFileNames": true,
     "noEmitOnError": true,
@@ -17,7 +17,8 @@
     "pretty": true,
     "sourceMap": true,
     "strict": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "skipLibCheck": true
   },
   "include": ["./src/"]
 }

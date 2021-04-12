@@ -5,8 +5,14 @@
  * @version 1.0.0
  */
 
-export interface ContextDataLoaders {}
+import { createUserDataLoaders, UserDataLoaders } from "./handlers/user-data/dataloaders";
+
+export interface ContextDataLoaders {
+  userData: UserDataLoaders;
+}
 
 export const createDataLoaders = (authorization: string): ContextDataLoaders => {
-  return "Temporary";
+  return {
+    userData: createUserDataLoaders(authorization)
+  };
 };

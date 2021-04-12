@@ -5,10 +5,12 @@
  * @version 1.0.0
  */
 import { merge } from "lodash";
+import { userDataResolvers } from "./handlers/user-data/resolvers";
+import { QueryToUserDataResolver } from "./types/TypesGraphQL";
 
 interface QueryResolvers {
   Query: {
-    userData: () => Promise<boolean>;
+    userData: QueryToUserDataResolver<unknown, unknown>;
   };
 }
 
@@ -18,4 +20,4 @@ const queryResolver: QueryResolvers = {
   }
 };
 
-export const rootResolver = merge(queryResolver);
+export const rootResolver = merge(queryResolver, userDataResolvers);
