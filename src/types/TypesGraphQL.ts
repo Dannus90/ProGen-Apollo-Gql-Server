@@ -42,7 +42,7 @@ export interface GQLUserData {
   userId: string;
   phoneNumber?: string;
   emailCv?: string;
-  cityCv?: string;
+  citySv?: string;
   cityEn?: string;
   countrySv?: string;
   countryEn?: string;
@@ -98,7 +98,7 @@ export interface GQLUserDataMutationRoot {
 export interface GQLUserDataInput {
   phoneNumber?: string;
   emailCv?: string;
-  cityCv?: string;
+  citySv?: string;
   cityEn?: string;
   countrySv?: string;
   countryEn?: string;
@@ -110,13 +110,14 @@ export interface GQLUserUpdateResponse {
   userId: string;
   phoneNumber?: string;
   emailCv?: string;
-  cityCv?: string;
+  citySv?: string;
   cityEn?: string;
   countrySv?: string;
   countryEn?: string;
   profileImage?: string;
   createdAt: GQLDate;
   updatedAt: GQLDate;
+  statusCode: number;
 }
 
 /*********************************
@@ -303,7 +304,7 @@ export interface GQLUserDataTypeResolver<TParent = GQLUserData> {
   userId?: UserDataToUserIdResolver<TParent>;
   phoneNumber?: UserDataToPhoneNumberResolver<TParent>;
   emailCv?: UserDataToEmailCvResolver<TParent>;
-  cityCv?: UserDataToCityCvResolver<TParent>;
+  citySv?: UserDataToCitySvResolver<TParent>;
   cityEn?: UserDataToCityEnResolver<TParent>;
   countrySv?: UserDataToCountrySvResolver<TParent>;
   countryEn?: UserDataToCountryEnResolver<TParent>;
@@ -357,7 +358,7 @@ export interface UserDataToEmailCvResolver<
   ): Promise<TResult>;
 }
 
-export interface UserDataToCityCvResolver<
+export interface UserDataToCitySvResolver<
   TParent = GQLUserData,
   TResult = string | null
 > {
@@ -637,13 +638,14 @@ export interface GQLUserUpdateResponseTypeResolver<
   userId?: UserUpdateResponseToUserIdResolver<TParent>;
   phoneNumber?: UserUpdateResponseToPhoneNumberResolver<TParent>;
   emailCv?: UserUpdateResponseToEmailCvResolver<TParent>;
-  cityCv?: UserUpdateResponseToCityCvResolver<TParent>;
+  citySv?: UserUpdateResponseToCitySvResolver<TParent>;
   cityEn?: UserUpdateResponseToCityEnResolver<TParent>;
   countrySv?: UserUpdateResponseToCountrySvResolver<TParent>;
   countryEn?: UserUpdateResponseToCountryEnResolver<TParent>;
   profileImage?: UserUpdateResponseToProfileImageResolver<TParent>;
   createdAt?: UserUpdateResponseToCreatedAtResolver<TParent>;
   updatedAt?: UserUpdateResponseToUpdatedAtResolver<TParent>;
+  statusCode?: UserUpdateResponseToStatusCodeResolver<TParent>;
 }
 
 export interface UserUpdateResponseToIdResolver<
@@ -694,7 +696,7 @@ export interface UserUpdateResponseToEmailCvResolver<
   ): Promise<TResult>;
 }
 
-export interface UserUpdateResponseToCityCvResolver<
+export interface UserUpdateResponseToCitySvResolver<
   TParent = GQLUserUpdateResponse,
   TResult = string | null
 > {
@@ -769,6 +771,18 @@ export interface UserUpdateResponseToCreatedAtResolver<
 export interface UserUpdateResponseToUpdatedAtResolver<
   TParent = GQLUserUpdateResponse,
   TResult = GQLDate
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface UserUpdateResponseToStatusCodeResolver<
+  TParent = GQLUserUpdateResponse,
+  TResult = number
 > {
   (
     parent: TParent,

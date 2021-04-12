@@ -1,5 +1,8 @@
 import DataLoader from "dataloader";
-import { HttpResponseError, statusCodeChecker } from "../../config/api/error-management/http-response-error";
+import {
+  HttpResponseError,
+  statusCodeChecker
+} from "../../config/api/error-management/http-response-error";
 import { getFullUserInformation } from "./api-calls";
 import { UserInformationResponse } from "./api-types";
 
@@ -12,7 +15,7 @@ export const createUserDataLoaders = (authorization: string): UserDataLoaders =>
     async (ids) => {
       const response = await getFullUserInformation(authorization);
 
-      if(!statusCodeChecker(response.status)) {
+      if (!statusCodeChecker(response.status)) {
         const { type, statusCode, message } = await response.json();
         throw new HttpResponseError(type, statusCode, message);
       }

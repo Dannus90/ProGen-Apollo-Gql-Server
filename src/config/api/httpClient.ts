@@ -1,4 +1,5 @@
-import fetch from "node-fetch";
+import fetch, { Response } from "node-fetch";
+import { HttpResponseError, statusCodeChecker } from "./error-management/http-response-error";
 
 type HttpMethods = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 
@@ -73,6 +74,22 @@ export const fetchGetAuth = async (
   const response = await fetch(url, {
     method,
     ...headerOptionsAuth(authorization)
+  });
+
+  return response;
+};
+
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const fetchPutAuth = async <TPayload>(
+  url: string,
+  method: HttpMethods = "PUT",
+  authorization: string,
+  body: TPayload
+) => {
+  const response = await fetch(url, {
+    method,
+    ...headerOptionsAuth(authorization),
+    body: JSON.stringify(body)
   });
 
   return response;

@@ -22,4 +22,4 @@ export class HttpResponseError extends Error {
 
 export const statusCodeChecker = (statusCode: number) => {
   return statusCode >= 200 && statusCode <= 250;
-}
+};

@@ -1,4 +1,3 @@
-import { UserDataRootToGetFullUserInformationResolver } from "../../types/TypesGraphQL";
 import { Context } from "./../../context";
 
 export interface UserInformationResponse {

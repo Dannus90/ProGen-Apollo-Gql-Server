@@ -5,7 +5,10 @@
  * @version 1.0.0
  */
 
-import { HttpResponseError } from "../../config/api/error-management/http-response-error";
+import {
+  HttpResponseError,
+  statusCodeChecker
+} from "../../config/api/error-management/http-response-error";
 import { Context } from "../../context";
 import {
   AuthenticationMutationRootToLoginUserResolver,
@@ -39,7 +42,7 @@ export const authMutations: AuthenticationMutations = {
     registerUser: async (_, body, { api }: Context) => {
       const response = await api.registerUser(body.input);
 
-      if (response.status !== 201) {
+      if (!statusCodeChecker(response.status)) {
         const { type, statusCode, message } = await response.json();
         throw new HttpResponseError(type, statusCode, message);
       }
@@ -54,7 +57,7 @@ export const authMutations: AuthenticationMutations = {
     loginUser: async (_, body, { api }: Context) => {
       const response = await api.loginUser(body.input);
 
-      if (response.status !== 200) {
+      if (!statusCodeChecker(response.status)) {
         const { type, statusCode, message } = await response.json();
         throw new HttpResponseError(type, statusCode, message);
       }
@@ -69,10 +72,10 @@ export const authMutations: AuthenticationMutations = {
 
       return gqlResponse;
     },
-    logoutUser: async (_, body, { api, authorization }: Context) => {
+    logoutUser: async (_, __, { api, authorization }: Context) => {
       const response = await api.logoutUser(authorization);
 
-      if (response.status !== 204) {
+      if (!statusCodeChecker(response.status)) {
         throw new HttpResponseError(response.statusText, response.status, response.statusText);
       }
 
@@ -88,7 +91,7 @@ export const authMutations: AuthenticationMutations = {
 
       console.log();
 
-      if (response.status !== 200) {
+      if (!statusCodeChecker(response.status)) {
         const { statusCode, message, type } = await response.json();
         throw new HttpResponseError(type, statusCode, message);
       }

@@ -4,7 +4,13 @@ import {
   logoutUser,
   refreshToken
 } from "./handlers/auth-handler/api-calls";
-import { GQLLoginInput, GQLRefreshTokenInput, GQLRegisterInput } from "./types/TypesGraphQL";
+import { getFullUserInformation, updateUserData } from "./handlers/user-data/api-calls";
+import {
+  GQLLoginInput,
+  GQLRefreshTokenInput,
+  GQLRegisterInput,
+  GQLUserDataInput
+} from "./types/TypesGraphQL";
 
 export interface GetApiMethods {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -15,6 +21,10 @@ export interface GetApiMethods {
   logoutUser: (authorization: string) => Promise<any>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   refreshToken: (authorization: string, input: GQLRefreshTokenInput | undefined) => Promise<any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  updateUserData: (authorization: string, input: GQLUserDataInput | undefined) => Promise<any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  getFullUserInformation: (authorization: string) => Promise<any>;
 }
 
 export const getApiMethods = (): GetApiMethods => {
@@ -22,6 +32,8 @@ export const getApiMethods = (): GetApiMethods => {
     registerUser,
     loginUser,
     logoutUser,
-    refreshToken
+    refreshToken,
+    updateUserData,
+    getFullUserInformation
   };
 };

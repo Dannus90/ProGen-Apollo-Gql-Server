@@ -27,7 +27,7 @@ export const userDataTypeDefs = gql`
   input UserDataInput {
     phoneNumber: String
     emailCv: String
-    cityCv: String
+    citySv: String
     cityEn: String
     countrySv: String
     countryEn: String
@@ -49,13 +49,14 @@ export const userDataTypeDefs = gql`
     userId: String!
     phoneNumber: String
     emailCv: String
-    cityCv: String
+    citySv: String
     cityEn: String
     countrySv: String
     countryEn: String
     profileImage: String
     createdAt: Date!
     updatedAt: Date!
+    statusCode: Int!
   }
 
   type UserData {
@@ -63,7 +64,7 @@ export const userDataTypeDefs = gql`
     userId: String!
     phoneNumber: String
     emailCv: String
-    cityCv: String
+    citySv: String
     cityEn: String
     countrySv: String
     countryEn: String
