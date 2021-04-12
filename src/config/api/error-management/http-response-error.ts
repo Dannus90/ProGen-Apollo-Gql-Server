@@ -19,3 +19,7 @@ export class HttpResponseError extends Error {
     Object.setPrototypeOf(this, HttpResponseError.prototype);
   }
 }
+
+export const statusCodeChecker = (statusCode: number) => {
+  return statusCode >= 200 && statusCode <= 250;
+}

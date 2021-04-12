@@ -28,6 +28,7 @@ export interface UserInformationResponse {
         createdAt: Date;
       }
     | undefined;
+  statusCode?: number;
 }
 
 export const userDataResolvers = {
@@ -41,7 +42,8 @@ export const userDataResolvers = {
 
       return {
         user: userData?.fullUserInformationDto.user,
-        userData: userData?.fullUserInformationDto.userData
+        userData: userData?.fullUserInformationDto.userData,
+        statusCode: userData?.fullUserInformationDto.statusCode
       };
     }
   }

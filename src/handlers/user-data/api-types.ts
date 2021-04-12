@@ -22,6 +22,7 @@ export interface UserInformationResponse {
       updatedAt: Date;
       createdAt: Date;
     };
+    statusCode: number;
   };
 }
 

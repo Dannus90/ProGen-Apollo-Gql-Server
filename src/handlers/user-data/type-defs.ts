@@ -21,6 +21,7 @@ export const userDataTypeDefs = gql`
   type FullUserInformationResponse {
     user: User!
     userData: UserData!
+    statusCode: Int!
   }
 
   input UserDataInput {

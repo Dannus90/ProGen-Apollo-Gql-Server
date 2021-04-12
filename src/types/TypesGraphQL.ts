@@ -22,6 +22,7 @@ export interface GQLUserDataRoot {
 export interface GQLFullUserInformationResponse {
   user: GQLUser;
   userData: GQLUserData;
+  statusCode: number;
 }
 
 export interface GQLUser {
@@ -179,6 +180,7 @@ export interface GQLFullUserInformationResponseTypeResolver<
 > {
   user?: FullUserInformationResponseToUserResolver<TParent>;
   userData?: FullUserInformationResponseToUserDataResolver<TParent>;
+  statusCode?: FullUserInformationResponseToStatusCodeResolver<TParent>;
 }
 
 export interface FullUserInformationResponseToUserResolver<
@@ -196,6 +198,18 @@ export interface FullUserInformationResponseToUserResolver<
 export interface FullUserInformationResponseToUserDataResolver<
   TParent = GQLFullUserInformationResponse,
   TResult = GQLUserData
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface FullUserInformationResponseToStatusCodeResolver<
+  TParent = GQLFullUserInformationResponse,
+  TResult = number
 > {
   (
     parent: TParent,
