@@ -96,6 +96,8 @@ export interface GQLUserDataMutationRoot {
 }
 
 export interface GQLUserDataInput {
+  firstName?: string;
+  lastName?: string;
   phoneNumber?: string;
   emailCv?: string;
   citySv?: string;
@@ -108,6 +110,8 @@ export interface GQLUserDataInput {
 export interface GQLUserUpdateResponse {
   id: string;
   userId: string;
+  firstName?: string;
+  lastName?: string;
   phoneNumber?: string;
   emailCv?: string;
   citySv?: string;
@@ -636,6 +640,8 @@ export interface GQLUserUpdateResponseTypeResolver<
 > {
   id?: UserUpdateResponseToIdResolver<TParent>;
   userId?: UserUpdateResponseToUserIdResolver<TParent>;
+  firstName?: UserUpdateResponseToFirstNameResolver<TParent>;
+  lastName?: UserUpdateResponseToLastNameResolver<TParent>;
   phoneNumber?: UserUpdateResponseToPhoneNumberResolver<TParent>;
   emailCv?: UserUpdateResponseToEmailCvResolver<TParent>;
   citySv?: UserUpdateResponseToCitySvResolver<TParent>;
@@ -663,6 +669,30 @@ export interface UserUpdateResponseToIdResolver<
 export interface UserUpdateResponseToUserIdResolver<
   TParent = GQLUserUpdateResponse,
   TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface UserUpdateResponseToFirstNameResolver<
+  TParent = GQLUserUpdateResponse,
+  TResult = string | null
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface UserUpdateResponseToLastNameResolver<
+  TParent = GQLUserUpdateResponse,
+  TResult = string | null
 > {
   (
     parent: TParent,

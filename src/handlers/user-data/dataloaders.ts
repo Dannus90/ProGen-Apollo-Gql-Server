@@ -16,7 +16,7 @@ export const createUserDataLoaders = (authorization: string): UserDataLoaders =>
       const response = await getFullUserInformation(authorization);
 
       if (response.status === 401) {
-        const { status, statusText } = response
+        const { status, statusText } = response;
         throw new HttpResponseError(statusText, status, statusText);
       } else if (!statusCodeChecker(response.status)) {
         const { type, statusCode, message } = await response.json();

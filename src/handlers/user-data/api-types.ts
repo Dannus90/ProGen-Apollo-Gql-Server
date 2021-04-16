@@ -40,6 +40,8 @@ export interface UserDataUpdateResponse {
   userDataDto: {
     id: string;
     userId: string;
+    firstName?: string;
+    lastName?: string;
     phoneNumber?: string;
     emailCv?: string;
     cityCv?: string;

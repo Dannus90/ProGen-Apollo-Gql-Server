@@ -25,6 +25,8 @@ export const userDataTypeDefs = gql`
   }
 
   input UserDataInput {
+    firstName: String
+    lastName: String
     phoneNumber: String
     emailCv: String
     citySv: String
@@ -47,6 +49,8 @@ export const userDataTypeDefs = gql`
   type UserUpdateResponse {
     id: String!
     userId: String!
+    firstName: String
+    lastName: String
     phoneNumber: String
     emailCv: String
     citySv: String

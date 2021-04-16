@@ -65,6 +65,8 @@ export const userDataMutations: UserDataMutations = {
         userId,
         emailCv,
         phoneNumber,
+        firstName,
+        lastName,
         citySv,
         cityEn,
         countrySv,
@@ -77,6 +79,8 @@ export const userDataMutations: UserDataMutations = {
       const gqlResponse = {
         id: id,
         userId: userId,
+        firstName,
+        lastName,
         phoneNumber: emailCv,
         emailCv: phoneNumber,
         cityCv: citySv,
