@@ -83,7 +83,7 @@ export const userDataMutations: UserDataMutations = {
         lastName,
         phoneNumber: emailCv,
         emailCv: phoneNumber,
-        cityCv: citySv,
+        citySv: citySv,
         cityEn: cityEn,
         countrySv: countrySv,
         countryEn: countryEn,
