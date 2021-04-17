@@ -19,6 +19,7 @@ export interface UserInformationResponse {
       countrySv?: string;
       countryEn?: string;
       profileImage?: string;
+      profileImagePublicId?: string;
       updatedAt: Date;
       createdAt: Date;
     };
@@ -49,6 +50,7 @@ export interface UserDataUpdateResponse {
     countrySv?: string;
     countryEn?: string;
     profileImage?: string;
+    profileImagePublicId?: string;
     createdAt: Date;
     updatedAt: Date;
   };

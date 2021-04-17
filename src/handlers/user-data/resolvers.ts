@@ -23,6 +23,7 @@ export interface UserInformationResponse {
         countrySv?: string;
         countryEn?: string;
         profileImage?: string;
+        profileImagePublicId?: string;
         updatedAt: Date;
         createdAt: Date;
       }

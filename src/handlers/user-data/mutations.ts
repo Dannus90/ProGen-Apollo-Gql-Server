@@ -43,6 +43,7 @@ export interface UpdateUserDataResponse {
     countrySv: string;
     countryEn: string;
     profileImage: string;
+    profileImagePublicId: string;
     createdAt: Date;
     updatedAt: Date;
   };
@@ -72,6 +73,7 @@ export const userDataMutations: UserDataMutations = {
         countrySv,
         countryEn,
         profileImage,
+        profileImagePublicId,
         createdAt,
         updatedAt
       } = userData.userDataDto;
@@ -81,13 +83,14 @@ export const userDataMutations: UserDataMutations = {
         userId: userId,
         firstName,
         lastName,
-        phoneNumber: emailCv,
-        emailCv: phoneNumber,
+        phoneNumber: phoneNumber,
+        emailCv: emailCv,
         citySv: citySv,
         cityEn: cityEn,
         countrySv: countrySv,
         countryEn: countryEn,
         profileImage: profileImage,
+        profileImagePublicId: profileImagePublicId,
         createdAt: createdAt,
         updatedAt: updatedAt,
         statusCode: response.status
