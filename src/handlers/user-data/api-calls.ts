@@ -1,7 +1,6 @@
 import { PROGEN_BASE_URL } from "../../config/api/base";
 import { fetchGetAuth, fetchPutAuth } from "../../config/api/httpClient";
 import { GQLUserDataInput } from "../../types/TypesGraphQL";
-import { UpdateUserDataResponse } from "./mutations";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getFullUserInformation = async (authorization: string): Promise<any> => {

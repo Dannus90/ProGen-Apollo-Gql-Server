@@ -47,6 +47,7 @@ export interface GQLUserData {
   countrySv?: string;
   countryEn?: string;
   profileImage?: string;
+  profileImagePublicId?: string;
   updatedAt: GQLDate;
   createdAt: GQLDate;
 }
@@ -58,9 +59,11 @@ export interface GQLMutation {
 
 export interface GQLAuthenticationMutationRoot {
   refreshToken: GQLTokenResponse;
-  registerUser: GQLRegisterLogoutResponse;
+  registerUser: GQLGeneralResponse;
   loginUser: GQLTokenResponse;
-  logoutUser: GQLRegisterLogoutResponse;
+  logoutUser: GQLGeneralResponse;
+  changeEmail: GQLGeneralResponse;
+  changePassword: GQLGeneralResponse;
 }
 
 export interface GQLRefreshTokenInput {
@@ -81,7 +84,7 @@ export interface GQLRegisterInput {
   password: string;
 }
 
-export interface GQLRegisterLogoutResponse {
+export interface GQLGeneralResponse {
   statusCode: number;
   message: string;
 }
@@ -89,6 +92,16 @@ export interface GQLRegisterLogoutResponse {
 export interface GQLLoginInput {
   email: string;
   password: string;
+}
+
+export interface GQLChangeEmailInput {
+  newEmail: string;
+  password: string;
+}
+
+export interface GQLChangePasswordInput {
+  oldPassword: string;
+  newPassword: string;
 }
 
 export interface GQLUserDataMutationRoot {
@@ -104,7 +117,6 @@ export interface GQLUserDataInput {
   cityEn?: string;
   countrySv?: string;
   countryEn?: string;
-  profileImage?: string;
 }
 
 export interface GQLUserUpdateResponse {
@@ -119,10 +131,13 @@ export interface GQLUserUpdateResponse {
   countrySv?: string;
   countryEn?: string;
   profileImage?: string;
+  profileImagePublicId?: string;
   createdAt: GQLDate;
   updatedAt: GQLDate;
   statusCode: number;
 }
+
+export type GQLVoid = any;
 
 /*********************************
  *                               *
@@ -144,9 +159,10 @@ export interface GQLResolver {
   Mutation?: GQLMutationTypeResolver;
   AuthenticationMutationRoot?: GQLAuthenticationMutationRootTypeResolver;
   TokenResponse?: GQLTokenResponseTypeResolver;
-  RegisterLogoutResponse?: GQLRegisterLogoutResponseTypeResolver;
+  GeneralResponse?: GQLGeneralResponseTypeResolver;
   UserDataMutationRoot?: GQLUserDataMutationRootTypeResolver;
   UserUpdateResponse?: GQLUserUpdateResponseTypeResolver;
+  Void?: GraphQLScalarType;
 }
 export interface GQLQueryTypeResolver<TParent = undefined> {
   userData?: QueryToUserDataResolver<TParent>;
@@ -313,6 +329,7 @@ export interface GQLUserDataTypeResolver<TParent = GQLUserData> {
   countrySv?: UserDataToCountrySvResolver<TParent>;
   countryEn?: UserDataToCountryEnResolver<TParent>;
   profileImage?: UserDataToProfileImageResolver<TParent>;
+  profileImagePublicId?: UserDataToProfileImagePublicIdResolver<TParent>;
   updatedAt?: UserDataToUpdatedAtResolver<TParent>;
   createdAt?: UserDataToCreatedAtResolver<TParent>;
 }
@@ -422,6 +439,18 @@ export interface UserDataToProfileImageResolver<
   ): Promise<TResult>;
 }
 
+export interface UserDataToProfileImagePublicIdResolver<
+  TParent = GQLUserData,
+  TResult = string | null
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
 export interface UserDataToUpdatedAtResolver<
   TParent = GQLUserData,
   TResult = GQLDate
@@ -482,6 +511,8 @@ export interface GQLAuthenticationMutationRootTypeResolver<
   registerUser?: AuthenticationMutationRootToRegisterUserResolver<TParent>;
   loginUser?: AuthenticationMutationRootToLoginUserResolver<TParent>;
   logoutUser?: AuthenticationMutationRootToLogoutUserResolver<TParent>;
+  changeEmail?: AuthenticationMutationRootToChangeEmailResolver<TParent>;
+  changePassword?: AuthenticationMutationRootToChangePasswordResolver<TParent>;
 }
 
 export interface AuthenticationMutationRootToRefreshTokenArgs {
@@ -504,7 +535,7 @@ export interface AuthenticationMutationRootToRegisterUserArgs {
 }
 export interface AuthenticationMutationRootToRegisterUserResolver<
   TParent = GQLAuthenticationMutationRoot,
-  TResult = GQLRegisterLogoutResponse
+  TResult = GQLGeneralResponse
 > {
   (
     parent: TParent,
@@ -531,11 +562,41 @@ export interface AuthenticationMutationRootToLoginUserResolver<
 
 export interface AuthenticationMutationRootToLogoutUserResolver<
   TParent = GQLAuthenticationMutationRoot,
-  TResult = GQLRegisterLogoutResponse
+  TResult = GQLGeneralResponse
 > {
   (
     parent: TParent,
     args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface AuthenticationMutationRootToChangeEmailArgs {
+  input?: GQLChangeEmailInput;
+}
+export interface AuthenticationMutationRootToChangeEmailResolver<
+  TParent = GQLAuthenticationMutationRoot,
+  TResult = GQLGeneralResponse
+> {
+  (
+    parent: TParent,
+    args: AuthenticationMutationRootToChangeEmailArgs,
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface AuthenticationMutationRootToChangePasswordArgs {
+  input?: GQLChangePasswordInput;
+}
+export interface AuthenticationMutationRootToChangePasswordResolver<
+  TParent = GQLAuthenticationMutationRoot,
+  TResult = GQLGeneralResponse
+> {
+  (
+    parent: TParent,
+    args: AuthenticationMutationRootToChangePasswordArgs,
     context: any,
     info: GraphQLResolveInfo
   ): Promise<TResult>;
@@ -583,15 +644,13 @@ export interface TokenResponseToRefreshTokenResolver<
   ): Promise<TResult>;
 }
 
-export interface GQLRegisterLogoutResponseTypeResolver<
-  TParent = GQLRegisterLogoutResponse
-> {
-  statusCode?: RegisterLogoutResponseToStatusCodeResolver<TParent>;
-  message?: RegisterLogoutResponseToMessageResolver<TParent>;
+export interface GQLGeneralResponseTypeResolver<TParent = GQLGeneralResponse> {
+  statusCode?: GeneralResponseToStatusCodeResolver<TParent>;
+  message?: GeneralResponseToMessageResolver<TParent>;
 }
 
-export interface RegisterLogoutResponseToStatusCodeResolver<
-  TParent = GQLRegisterLogoutResponse,
+export interface GeneralResponseToStatusCodeResolver<
+  TParent = GQLGeneralResponse,
   TResult = number
 > {
   (
@@ -602,8 +661,8 @@ export interface RegisterLogoutResponseToStatusCodeResolver<
   ): Promise<TResult>;
 }
 
-export interface RegisterLogoutResponseToMessageResolver<
-  TParent = GQLRegisterLogoutResponse,
+export interface GeneralResponseToMessageResolver<
+  TParent = GQLGeneralResponse,
   TResult = string
 > {
   (
@@ -649,6 +708,7 @@ export interface GQLUserUpdateResponseTypeResolver<
   countrySv?: UserUpdateResponseToCountrySvResolver<TParent>;
   countryEn?: UserUpdateResponseToCountryEnResolver<TParent>;
   profileImage?: UserUpdateResponseToProfileImageResolver<TParent>;
+  profileImagePublicId?: UserUpdateResponseToProfileImagePublicIdResolver<TParent>;
   createdAt?: UserUpdateResponseToCreatedAtResolver<TParent>;
   updatedAt?: UserUpdateResponseToUpdatedAtResolver<TParent>;
   statusCode?: UserUpdateResponseToStatusCodeResolver<TParent>;
@@ -775,6 +835,18 @@ export interface UserUpdateResponseToCountryEnResolver<
 }
 
 export interface UserUpdateResponseToProfileImageResolver<
+  TParent = GQLUserUpdateResponse,
+  TResult = string | null
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface UserUpdateResponseToProfileImagePublicIdResolver<
   TParent = GQLUserUpdateResponse,
   TResult = string | null
 > {

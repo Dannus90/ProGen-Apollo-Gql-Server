@@ -2,10 +2,14 @@ import {
   registerUser,
   loginUser,
   logoutUser,
-  refreshToken
+  refreshToken,
+  changeEmail,
+  changePassword
 } from "./handlers/auth-handler/api-calls";
 import { getFullUserInformation, updateUserData } from "./handlers/user-data/api-calls";
 import {
+  GQLChangeEmailInput,
+  GQLChangePasswordInput,
   GQLLoginInput,
   GQLRefreshTokenInput,
   GQLRegisterInput,
@@ -25,6 +29,10 @@ export interface GetApiMethods {
   updateUserData: (authorization: string, input: GQLUserDataInput | undefined) => Promise<any>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getFullUserInformation: (authorization: string) => Promise<any>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  changeEmail: (authorization: string, input: GQLChangeEmailInput | undefined) => Promise<any>;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  changePassword: (authorization: string, input: GQLChangePasswordInput | undefined) => Promise<any>;
 }
 
 export const getApiMethods = (): GetApiMethods => {
@@ -34,6 +42,8 @@ export const getApiMethods = (): GetApiMethods => {
     logoutUser,
     refreshToken,
     updateUserData,
-    getFullUserInformation
+    getFullUserInformation,
+    changeEmail,
+    changePassword
   };
 };

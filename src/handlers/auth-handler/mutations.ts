@@ -11,6 +11,8 @@ import {
 } from "../../config/api/error-management/http-response-error";
 import { Context } from "../../context";
 import {
+  AuthenticationMutationRootToChangeEmailResolver,
+  AuthenticationMutationRootToChangePasswordResolver,
   AuthenticationMutationRootToLoginUserResolver,
   AuthenticationMutationRootToLogoutUserResolver,
   AuthenticationMutationRootToRefreshTokenResolver,
@@ -23,15 +25,17 @@ export interface AuthenticationMutations {
     loginUser: AuthenticationMutationRootToLoginUserResolver;
     logoutUser: AuthenticationMutationRootToLogoutUserResolver;
     refreshToken: AuthenticationMutationRootToRefreshTokenResolver;
+    changeEmail: AuthenticationMutationRootToChangeEmailResolver;
+    changePassword: AuthenticationMutationRootToChangePasswordResolver;
   };
 }
 
-export interface GqlRegisterLogoutResponse {
+export interface GQLGeneralResponse {
   statusCode: number;
   message: string;
 }
 
-export interface GqlLoginRefreshResponse {
+export interface GQLLoginRefreshResponse {
   statusCode: number;
   accessToken: string;
   refreshToken: string;
@@ -47,7 +51,7 @@ export const authMutations: AuthenticationMutations = {
         throw new HttpResponseError(type, statusCode, message);
       }
 
-      const gqlResponse: GqlRegisterLogoutResponse = {
+      const gqlResponse: GQLGeneralResponse = {
         statusCode: response.status,
         message: "Successful registration"
       };
@@ -64,7 +68,7 @@ export const authMutations: AuthenticationMutations = {
 
       const { tokenResponse } = await response.json();
 
-      const gqlResponse: GqlLoginRefreshResponse = {
+      const gqlResponse: GQLLoginRefreshResponse = {
         statusCode: response.status,
         accessToken: tokenResponse.accessToken,
         refreshToken: tokenResponse.refreshToken
@@ -79,7 +83,7 @@ export const authMutations: AuthenticationMutations = {
         throw new HttpResponseError(response.statusText, response.status, response.statusText);
       }
 
-      const gqlResponse: GqlRegisterLogoutResponse = {
+      const gqlResponse: GQLGeneralResponse = {
         statusCode: response.status,
         message: "Successful logout"
       };
@@ -89,8 +93,6 @@ export const authMutations: AuthenticationMutations = {
     refreshToken: async (_, body, { api, authorization }: Context) => {
       const response = await api.refreshToken(authorization, body.input);
 
-      console.log();
-
       if (!statusCodeChecker(response.status)) {
         const { statusCode, message, type } = await response.json();
         throw new HttpResponseError(type, statusCode, message);
@@ -98,10 +100,40 @@ export const authMutations: AuthenticationMutations = {
 
       const { tokenResponse } = await response.json();
 
-      const gqlResponse: GqlLoginRefreshResponse = {
+      const gqlResponse: GQLLoginRefreshResponse = {
         statusCode: response.status,
         accessToken: tokenResponse.accessToken,
         refreshToken: tokenResponse.refreshToken
+      };
+
+      return gqlResponse;
+    },
+    changeEmail: async (_, body, { api, authorization}: Context) => {
+      const response = await api.changeEmail(authorization, body.input);
+
+      if (!statusCodeChecker(response.status)) {
+        const { statusCode, message, type } = await response.json();
+        throw new HttpResponseError(type, statusCode, message);
+      }
+
+      const gqlResponse: GQLGeneralResponse = {
+        statusCode: response.status,
+        message: "Email updated"
+      };
+
+      return gqlResponse;
+    },
+    changePassword: async (_, body, { api, authorization}: Context) => {
+      const response = await api.changePassword(authorization, body.input);
+
+      if (!statusCodeChecker(response.status)) {
+        const { statusCode, message, type } = await response.json();
+        throw new HttpResponseError(type, statusCode, message);
+      }
+
+      const gqlResponse: GQLGeneralResponse = {
+        statusCode: response.status,
+        message: "Password updated"
       };
 
       return gqlResponse;

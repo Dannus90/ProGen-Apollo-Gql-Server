@@ -18,3 +18,20 @@ export const dateScalar = new GraphQLScalarType({
     return null; // Invalid hard-coded value (not an integer)
   }
 });
+
+export const Void = new GraphQLScalarType({
+  name: 'Void',
+  description: 'Represents NULL values',
+
+  serialize() {
+      return null
+  },
+
+  parseValue() {
+      return null
+  },
+
+  parseLiteral() {
+      return null
+  }
+})
