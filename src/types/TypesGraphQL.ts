@@ -13,6 +13,7 @@ import { GraphQLResolveInfo, GraphQLScalarType } from "graphql";
  *******************************/
 export interface GQLQuery {
   userData: GQLUserDataRoot;
+  userPresentation: GQLUserPresentationRoot;
 }
 
 export interface GQLUserDataRoot {
@@ -52,9 +53,28 @@ export interface GQLUserData {
   createdAt: GQLDate;
 }
 
+export interface GQLUserPresentationRoot {
+  getUserPresentation: GQLUserPresentationResponse;
+}
+
+export interface GQLUserPresentationResponse {
+  userPresentation: GQLUserPresentation;
+  statusCode: number;
+}
+
+export interface GQLUserPresentation {
+  id: string;
+  userId: string;
+  presentationSv?: string;
+  presentationEn?: string;
+  createdAt: GQLDate;
+  updatedAt: GQLDate;
+}
+
 export interface GQLMutation {
   authentication: GQLAuthenticationMutationRoot;
   userData: GQLUserDataMutationRoot;
+  userPresentation: GQLUserPresentationMutationRoot;
 }
 
 export interface GQLAuthenticationMutationRoot {
@@ -137,6 +157,16 @@ export interface GQLUserUpdateResponse {
   statusCode: number;
 }
 
+export interface GQLUserPresentationMutationRoot {
+  updateUserPresentation: GQLUserPresentationResponse;
+}
+
+export interface GQLUserPresentationInput {
+  id: string;
+  presentationSv?: string;
+  presentationEn?: string;
+}
+
 export type GQLVoid = any;
 
 /*********************************
@@ -156,21 +186,38 @@ export interface GQLResolver {
   User?: GQLUserTypeResolver;
   Date?: GraphQLScalarType;
   UserData?: GQLUserDataTypeResolver;
+  UserPresentationRoot?: GQLUserPresentationRootTypeResolver;
+  UserPresentationResponse?: GQLUserPresentationResponseTypeResolver;
+  UserPresentation?: GQLUserPresentationTypeResolver;
   Mutation?: GQLMutationTypeResolver;
   AuthenticationMutationRoot?: GQLAuthenticationMutationRootTypeResolver;
   TokenResponse?: GQLTokenResponseTypeResolver;
   GeneralResponse?: GQLGeneralResponseTypeResolver;
   UserDataMutationRoot?: GQLUserDataMutationRootTypeResolver;
   UserUpdateResponse?: GQLUserUpdateResponseTypeResolver;
+  UserPresentationMutationRoot?: GQLUserPresentationMutationRootTypeResolver;
   Void?: GraphQLScalarType;
 }
 export interface GQLQueryTypeResolver<TParent = undefined> {
   userData?: QueryToUserDataResolver<TParent>;
+  userPresentation?: QueryToUserPresentationResolver<TParent>;
 }
 
 export interface QueryToUserDataResolver<
   TParent = undefined,
   TResult = GQLUserDataRoot
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface QueryToUserPresentationResolver<
+  TParent = undefined,
+  TResult = GQLUserPresentationRoot
 > {
   (
     parent: TParent,
@@ -475,9 +522,142 @@ export interface UserDataToCreatedAtResolver<
   ): Promise<TResult>;
 }
 
+export interface GQLUserPresentationRootTypeResolver<
+  TParent = GQLUserPresentationRoot
+> {
+  getUserPresentation?: UserPresentationRootToGetUserPresentationResolver<TParent>;
+}
+
+export interface UserPresentationRootToGetUserPresentationResolver<
+  TParent = GQLUserPresentationRoot,
+  TResult = GQLUserPresentationResponse
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLUserPresentationResponseTypeResolver<
+  TParent = GQLUserPresentationResponse
+> {
+  userPresentation?: UserPresentationResponseToUserPresentationResolver<TParent>;
+  statusCode?: UserPresentationResponseToStatusCodeResolver<TParent>;
+}
+
+export interface UserPresentationResponseToUserPresentationResolver<
+  TParent = GQLUserPresentationResponse,
+  TResult = GQLUserPresentation
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface UserPresentationResponseToStatusCodeResolver<
+  TParent = GQLUserPresentationResponse,
+  TResult = number
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLUserPresentationTypeResolver<
+  TParent = GQLUserPresentation
+> {
+  id?: UserPresentationToIdResolver<TParent>;
+  userId?: UserPresentationToUserIdResolver<TParent>;
+  presentationSv?: UserPresentationToPresentationSvResolver<TParent>;
+  presentationEn?: UserPresentationToPresentationEnResolver<TParent>;
+  createdAt?: UserPresentationToCreatedAtResolver<TParent>;
+  updatedAt?: UserPresentationToUpdatedAtResolver<TParent>;
+}
+
+export interface UserPresentationToIdResolver<
+  TParent = GQLUserPresentation,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface UserPresentationToUserIdResolver<
+  TParent = GQLUserPresentation,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface UserPresentationToPresentationSvResolver<
+  TParent = GQLUserPresentation,
+  TResult = string | null
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface UserPresentationToPresentationEnResolver<
+  TParent = GQLUserPresentation,
+  TResult = string | null
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface UserPresentationToCreatedAtResolver<
+  TParent = GQLUserPresentation,
+  TResult = GQLDate
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface UserPresentationToUpdatedAtResolver<
+  TParent = GQLUserPresentation,
+  TResult = GQLDate
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
 export interface GQLMutationTypeResolver<TParent = undefined> {
   authentication?: MutationToAuthenticationResolver<TParent>;
   userData?: MutationToUserDataResolver<TParent>;
+  userPresentation?: MutationToUserPresentationResolver<TParent>;
 }
 
 export interface MutationToAuthenticationResolver<
@@ -495,6 +675,18 @@ export interface MutationToAuthenticationResolver<
 export interface MutationToUserDataResolver<
   TParent = undefined,
   TResult = GQLUserDataMutationRoot
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface MutationToUserPresentationResolver<
+  TParent = undefined,
+  TResult = GQLUserPresentationMutationRoot
 > {
   (
     parent: TParent,
@@ -889,6 +1081,27 @@ export interface UserUpdateResponseToStatusCodeResolver<
   (
     parent: TParent,
     args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLUserPresentationMutationRootTypeResolver<
+  TParent = GQLUserPresentationMutationRoot
+> {
+  updateUserPresentation?: UserPresentationMutationRootToUpdateUserPresentationResolver<TParent>;
+}
+
+export interface UserPresentationMutationRootToUpdateUserPresentationArgs {
+  input?: GQLUserPresentationInput;
+}
+export interface UserPresentationMutationRootToUpdateUserPresentationResolver<
+  TParent = GQLUserPresentationMutationRoot,
+  TResult = GQLUserPresentationResponse
+> {
+  (
+    parent: TParent,
+    args: UserPresentationMutationRootToUpdateUserPresentationArgs,
     context: any,
     info: GraphQLResolveInfo
   ): Promise<TResult>;

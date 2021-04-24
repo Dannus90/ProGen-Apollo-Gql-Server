@@ -8,8 +8,6 @@
 import { gql } from "apollo-server";
 
 export const userDataTypeDefs = gql`
-  scalar Date
-
   extend type UserDataRoot {
     getFullUserInformation: FullUserInformationResponse!
   }
