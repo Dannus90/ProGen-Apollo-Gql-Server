@@ -20,18 +20,18 @@ export const dateScalar = new GraphQLScalarType({
 });
 
 export const Void = new GraphQLScalarType({
-  name: 'Void',
-  description: 'Represents NULL values',
+  name: "Void",
+  description: "Represents NULL values",
 
   serialize() {
-      return null
+    return null;
   },
 
   parseValue() {
-      return null
+    return null;
   },
 
   parseLiteral() {
-      return null
+    return null;
   }
-})
+});

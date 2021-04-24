@@ -7,13 +7,15 @@ import {
   changePassword
 } from "./handlers/auth-handler/api-calls";
 import { getFullUserInformation, updateUserData } from "./handlers/user-data/api-calls";
+import { updateUserPresentationData } from "./handlers/user-presentation/api-calls";
 import {
   GQLChangeEmailInput,
   GQLChangePasswordInput,
   GQLLoginInput,
   GQLRefreshTokenInput,
   GQLRegisterInput,
-  GQLUserDataInput
+  GQLUserDataInput,
+  GQLUserPresentationInput
 } from "./types/TypesGraphQL";
 
 export interface GetApiMethods {
@@ -29,10 +31,18 @@ export interface GetApiMethods {
   updateUserData: (authorization: string, input: GQLUserDataInput | undefined) => Promise<any>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getFullUserInformation: (authorization: string) => Promise<any>;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   changeEmail: (authorization: string, input: GQLChangeEmailInput | undefined) => Promise<any>;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  changePassword: (authorization: string, input: GQLChangePasswordInput | undefined) => Promise<any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  changePassword: (
+    authorization: string,
+    input: GQLChangePasswordInput | undefined
+  ) => Promise<any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  updateUserPresentationData: (
+    authorization: string,
+    input: GQLUserPresentationInput | undefined
+  ) => Promise<any>;
 }
 
 export const getApiMethods = (): GetApiMethods => {
@@ -44,6 +54,7 @@ export const getApiMethods = (): GetApiMethods => {
     updateUserData,
     getFullUserInformation,
     changeEmail,
-    changePassword
+    changePassword,
+    updateUserPresentationData
   };
 };

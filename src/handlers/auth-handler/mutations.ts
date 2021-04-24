@@ -108,7 +108,7 @@ export const authMutations: AuthenticationMutations = {
 
       return gqlResponse;
     },
-    changeEmail: async (_, body, { api, authorization}: Context) => {
+    changeEmail: async (_, body, { api, authorization }: Context) => {
       const response = await api.changeEmail(authorization, body.input);
 
       if (!statusCodeChecker(response.status)) {
@@ -123,7 +123,7 @@ export const authMutations: AuthenticationMutations = {
 
       return gqlResponse;
     },
-    changePassword: async (_, body, { api, authorization}: Context) => {
+    changePassword: async (_, body, { api, authorization }: Context) => {
       const response = await api.changePassword(authorization, body.input);
 
       if (!statusCodeChecker(response.status)) {

@@ -37,4 +37,9 @@ const entryTypeDefs = gql`
   type UserPresentationMutationRoot
 `;
 
-export const rootTypeDefs = [entryTypeDefs, authenticationTypeDefs, userDataTypeDefs, userPresentationTypeDefs];
+export const rootTypeDefs = [
+  entryTypeDefs,
+  authenticationTypeDefs,
+  userDataTypeDefs,
+  userPresentationTypeDefs
+];

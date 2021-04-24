@@ -18,37 +18,6 @@ export interface UserDataMutations {
   };
 }
 
-export interface GqlUpdateUserDataResponse {
-  id: string;
-  UserId: string;
-  PhoneNumber?: string;
-  EmailCv?: string;
-  CitySv?: string;
-  CityEn?: string;
-  CountrySv?: string;
-  CountryEn?: string;
-  ProfileImage?: string;
-  CreatedAt: Date;
-  UpdatedAt: Date;
-}
-
-export interface UpdateUserDataResponse {
-  userDataDto: {
-    id: string;
-    userId: string;
-    phoneNumber: string;
-    emailCv: string;
-    citySv: string;
-    cityEn: string;
-    countrySv: string;
-    countryEn: string;
-    profileImage: string;
-    profileImagePublicId: string;
-    createdAt: Date;
-    updatedAt: Date;
-  };
-}
-
 export const userDataMutations: UserDataMutations = {
   UserDataMutationRoot: {
     updateUserData: async (_, body, { api, authorization }: Context) => {
