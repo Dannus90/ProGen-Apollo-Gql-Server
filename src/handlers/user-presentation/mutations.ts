@@ -37,7 +37,7 @@ export const userPresentationMutations: UserPresentationMutations = {
         presentationEn,
         createdAt,
         updatedAt
-      } = userPresentationData.userPresentationDto;
+      } = userPresentationData.userPresentationData;
 
       const gqlResponse = {
         userPresentation: {

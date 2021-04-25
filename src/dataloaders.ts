@@ -6,13 +6,16 @@
  */
 
 import { createUserDataLoaders, UserDataLoaders } from "./handlers/user-data/dataloaders";
+import { createUserPresentationDataLoaders, UserPresentationDataLoaders } from "./handlers/user-presentation/dataloaders";
 
 export interface ContextDataLoaders {
   userData: UserDataLoaders;
+  userPresentation: UserPresentationDataLoaders;
 }
 
 export const createDataLoaders = (authorization: string): ContextDataLoaders => {
   return {
-    userData: createUserDataLoaders(authorization)
+    userData: createUserDataLoaders(authorization),
+    userPresentation: createUserPresentationDataLoaders(authorization)
   };
 };
