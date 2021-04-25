@@ -28,7 +28,7 @@ export const userPresentationMutations: UserPresentationMutations = {
         throw new HttpResponseError(type, statusCode, message);
       }
 
-      const userPresentationData = await response.json();
+      const data = await response.json();
 
       const {
         id,
@@ -37,7 +37,7 @@ export const userPresentationMutations: UserPresentationMutations = {
         presentationEn,
         createdAt,
         updatedAt
-      } = userPresentationData.userPresentationData;
+      } = data.userPresentationData;
 
       const gqlResponse = {
         userPresentation: {

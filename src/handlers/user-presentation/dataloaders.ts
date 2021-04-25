@@ -23,11 +23,11 @@ export const createUserPresentationDataLoaders = (authorization: string): UserPr
         throw new HttpResponseError(type, statusCode, message);
       }
 
-      const userPresentation = await response.json();
+      const data = await response.json();
 
       return ids.map((id) => {
-        userPresentation.statusCode = response.status;
-        return userPresentation;
+        data.statusCode = response.status;
+        return data;
       });
     }
   );
