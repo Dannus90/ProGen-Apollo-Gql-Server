@@ -36,7 +36,18 @@ export const workExperienceTypeDefs = gql`
 
   input UpdateWorkExperienceInput {
     workExperienceId: String!
-    workExperienceInput: WorkExperienceInput!
+    employmentRate: String!
+    companyName: String!
+    roleSv: String!
+    roleEn: String!
+    descriptionSv: String!
+    descriptionEn: String!
+    citySv: String!
+    cityEn: String!
+    countrySv: String!
+    countryEn: String!
+    dateStarted: Date!
+    dateEnded: Date!
   }
 
   input WorkExperienceInput {

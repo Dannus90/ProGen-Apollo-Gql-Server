@@ -195,7 +195,18 @@ export interface GQLCreateWorkExperienceResponse {
 
 export interface GQLUpdateWorkExperienceInput {
   workExperienceId: string;
-  workExperienceInput: GQLWorkExperienceInput;
+  employmentRate: string;
+  companyName: string;
+  roleSv: string;
+  roleEn: string;
+  descriptionSv: string;
+  descriptionEn: string;
+  citySv: string;
+  cityEn: string;
+  countrySv: string;
+  countryEn: string;
+  dateStarted: GQLDate;
+  dateEnded: GQLDate;
 }
 
 export interface GQLUpdateWorkExperienceResponse {

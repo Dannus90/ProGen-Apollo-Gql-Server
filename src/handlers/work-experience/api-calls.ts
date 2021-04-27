@@ -21,10 +21,13 @@ export const updateWorkExperience = async (
   workExperienceId: string | undefined,
   input: GQLUpdateWorkExperienceInput | undefined
 ) => {
+  const data = { ...input };
+  delete data.workExperienceId;
+
   return await fetchPostAuth(
     `${PROGEN_BASE_URL}/user/workexperience/${workExperienceId}`,
     "PUT",
     authorization,
-    input
+    data
   );
 };

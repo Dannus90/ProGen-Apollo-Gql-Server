@@ -40,7 +40,7 @@ export const workExperienceMutations: WorkExperienceMutation = {
       const response = await api.updateWorkExperience(
         authorization,
         body.input?.workExperienceId,
-        body.input?.workExperienceInput
+        body.input
       );
 
       if (!statusCodeChecker(response.status)) {
