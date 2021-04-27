@@ -86,7 +86,8 @@ export const workExperienceMutations: WorkExperienceMutation = {
           dateStarted,
           dateEnded,
           createdAt,
-          updatedAt
+          updatedAt,
+          statusCode: response.status
         }
       };
 

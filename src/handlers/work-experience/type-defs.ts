@@ -3,7 +3,11 @@ import { gql } from "apollo-server";
 export const workExperienceTypeDefs = gql`
   extend type WorkExperienceMutationRoot {
     createWorkExperience(input: WorkExperienceInput): CreateWorkExperienceResponse!
-    updateWorkExperience(input: UpdateWorkExperienceInput): UpdateWorkExperienceResponse!
+    updateWorkExperience(input: UpdateWorkExperienceInput): GetUpdateWorkExperienceResponse!
+  }
+
+  extend type WorkExperienceRoot {
+    getWorkExperience(input: GetWorkExperienceInput): GetUpdateWorkExperienceResponse!
   }
 
   type CreateWorkExperienceResponse {
@@ -11,11 +15,11 @@ export const workExperienceTypeDefs = gql`
     statusCode: Int!
   }
 
-  type UpdateWorkExperienceResponse {
-    workExperience: UpdateWorkExperienceDataResponse!
+  type GetUpdateWorkExperienceResponse {
+    workExperience: GetAndUpdateWorkExperienceDataResponse!
   }
 
-  type UpdateWorkExperienceDataResponse {
+  type GetAndUpdateWorkExperienceDataResponse {
     id: String!
     userId: String!
     employmentRate: String!
@@ -32,6 +36,7 @@ export const workExperienceTypeDefs = gql`
     dateEnded: Date!
     createdAt: Date!
     updatedAt: Date!
+    statusCode: Int!
   }
 
   input UpdateWorkExperienceInput {
@@ -48,6 +53,10 @@ export const workExperienceTypeDefs = gql`
     countryEn: String!
     dateStarted: Date!
     dateEnded: Date!
+  }
+
+  input GetWorkExperienceInput {
+    workExperienceId: String!
   }
 
   input WorkExperienceInput {

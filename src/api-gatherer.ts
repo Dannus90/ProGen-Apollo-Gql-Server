@@ -7,7 +7,7 @@ import {
   changePassword
 } from "./handlers/auth-handler/api-calls";
 import { getFullUserInformation, updateUserData } from "./handlers/user-data/api-calls";
-import { createWorkExperience, updateWorkExperience } from "./handlers/work-experience/api-calls";
+import { createWorkExperience, updateWorkExperience, getWorkExperience } from "./handlers/work-experience/api-calls";
 import { updateUserPresentationData } from "./handlers/user-presentation/api-calls";
 import {
   GQLChangeEmailInput,
@@ -57,6 +57,10 @@ export interface GetApiMethods {
     workExperienceId: string | undefined,
     input: GQLUpdateWorkExperienceInput | undefined
   ) => Promise<any>;
+  getWorkExperience: (
+    authorization: string,
+    workExperienceId: string | undefined
+  ) => Promise<any>;
 }
 
 export const getApiMethods = (): GetApiMethods => {
@@ -71,6 +75,7 @@ export const getApiMethods = (): GetApiMethods => {
     changePassword,
     updateUserPresentationData,
     createWorkExperience,
-    updateWorkExperience
+    updateWorkExperience,
+    getWorkExperience
   };
 };

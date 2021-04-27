@@ -1,5 +1,5 @@
 import { PROGEN_BASE_URL } from "../../config/api/base";
-import { fetchPostAuth } from "../../config/api/httpClient";
+import { fetchGetAuth, fetchPostAuth } from "../../config/api/httpClient";
 import { GQLUpdateWorkExperienceInput, GQLWorkExperienceInput } from "../../types/TypesGraphQL";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -31,3 +31,9 @@ export const updateWorkExperience = async (
     data
   );
 };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getWorkExperience = async (authorization: string, workExperienceId: string | undefined): Promise<any> => {
+  return await fetchGetAuth(`${PROGEN_BASE_URL}/user/workexperience/${workExperienceId}`, "GET", authorization);
+};
+
