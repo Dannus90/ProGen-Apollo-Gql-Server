@@ -1,10 +1,3 @@
-/**
- * UserData type defs.
- *
- * @author Daniel Persson
- * @version 1.0.0
- */
-
 import { gql } from "apollo-server";
 
 export const userPresentationTypeDefs = gql`
