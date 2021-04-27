@@ -2,45 +2,33 @@ import {
   HttpResponseError,
   statusCodeChecker
 } from "../../config/api/error-management/http-response-error";
-import { UserPresentationMutationRootToUpdateUserPresentationResolver } from "./../../types/TypesGraphQL";
+import { WorkExperienceMutationRootToCreateWorkExperienceResolver } from "./../../types/TypesGraphQL";
 import { Context } from "../../context";
 
 export interface WorkExperienceMutation {
   WorkExperienceMutationRoot: {
-    createWorkExperience: UserPresentationMutationRootToUpdateUserPresentationResolver;
+    createWorkExperience: WorkExperienceMutationRootToCreateWorkExperienceResolver;
   };
 }
 
-export const userPresentationMutations: WorkExperienceMutation = {
+export const workExperienceMutations: WorkExperienceMutation = {
   WorkExperienceMutationRoot: {
     createWorkExperience: async (_, body, { api, authorization }: Context) => {
-      const response = await api.updateUserPresentationData(authorization, body.input);
+      const response = await api.createWorkExperience(authorization, body.input);
 
       if (!statusCodeChecker(response.status)) {
         const { type, statusCode, message } = await response.json();
-        throw new HttpResponseError(type, statusCode, message);
+        throw new HttpResponseError(type, statusCode ?? response.status, message);
       }
 
       const data = await response.json();
 
       const {
-        id,
-        userId,
-        presentationSv,
-        presentationEn,
-        createdAt,
-        updatedAt
-      } = data.userPresentationData;
+        workExperienceId
+      } = data;
 
       const gqlResponse = {
-        userPresentation: {
-          id: id,
-          userId: userId,
-          presentationSv,
-          presentationEn,
-          createdAt: createdAt,
-          updatedAt: updatedAt
-        },
+        workExperienceId,
         statusCode: response.status
       };
 

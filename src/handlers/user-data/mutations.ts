@@ -25,7 +25,7 @@ export const userDataMutations: UserDataMutations = {
 
       if (!statusCodeChecker(response.status)) {
         const { type, statusCode, message } = await response.json();
-        throw new HttpResponseError(type, statusCode, message);
+        throw new HttpResponseError(type, statusCode ?? response.status, message);
       }
 
       const userData = await response.json();

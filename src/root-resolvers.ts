@@ -1,9 +1,3 @@
-/**
- * Root-resolvers.
- *
- * @author Daniel Persson
- * @version 1.0.0
- */
 import { merge } from "lodash";
 import { userDataResolvers } from "./handlers/user-data/resolvers";
 import { userPresentationResolvers } from "./handlers/user-presentation/resolvers";

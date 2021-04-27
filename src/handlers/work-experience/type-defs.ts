@@ -2,15 +2,15 @@ import { gql } from "apollo-server";
 
 export const workExperienceTypeDefs = gql`
   extend type WorkExperienceMutationRoot {
-    createWorkExperience(input: WorkPresentationInput): CreateWorkExperienceResponse!
+    createWorkExperience(input: WorkExperienceInput): CreateWorkExperienceResponse!
   }
 
   type CreateWorkExperienceResponse {
-    workExperienceId: Number!
+    workExperienceId: String!
     statusCode: Int!
   }
 
-  input WorkPresentationInput {
+  input WorkExperienceInput {
     employmentRate: String!
     companyName: String!
     roleSv: String!

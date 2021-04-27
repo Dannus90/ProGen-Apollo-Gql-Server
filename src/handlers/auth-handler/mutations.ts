@@ -63,7 +63,7 @@ export const authMutations: AuthenticationMutations = {
 
       if (!statusCodeChecker(response.status)) {
         const { type, statusCode, message } = await response.json();
-        throw new HttpResponseError(type, statusCode, message);
+        throw new HttpResponseError(type, statusCode ?? response.status, message);
       }
 
       const { tokenResponse } = await response.json();
@@ -95,7 +95,7 @@ export const authMutations: AuthenticationMutations = {
 
       if (!statusCodeChecker(response.status)) {
         const { statusCode, message, type } = await response.json();
-        throw new HttpResponseError(type, statusCode, message);
+        throw new HttpResponseError(type, statusCode ?? response.status, message);
       }
 
       const { tokenResponse } = await response.json();
@@ -113,7 +113,7 @@ export const authMutations: AuthenticationMutations = {
 
       if (!statusCodeChecker(response.status)) {
         const { statusCode, message, type } = await response.json();
-        throw new HttpResponseError(type, statusCode, message);
+        throw new HttpResponseError(type, statusCode ?? response.status, message);
       }
 
       const gqlResponse: GQLGeneralResponse = {
@@ -128,7 +128,7 @@ export const authMutations: AuthenticationMutations = {
 
       if (!statusCodeChecker(response.status)) {
         const { statusCode, message, type } = await response.json();
-        throw new HttpResponseError(type, statusCode, message);
+        throw new HttpResponseError(type, statusCode ?? response.status, message);
       }
 
       const gqlResponse: GQLGeneralResponse = {
