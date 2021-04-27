@@ -30,7 +30,7 @@ export const workExperienceResolvers = {
       { loaders }: Context
     ): Promise<WorkExperienceResponse> => {
       const workExperience = await loaders.workExperience.byWorkExperienceId.load(workExperienceId);
-      console.log(workExperience);
+
       const data = workExperience.workExperience
       return {
         workExperience: {
