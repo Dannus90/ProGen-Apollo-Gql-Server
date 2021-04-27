@@ -5,7 +5,7 @@ export interface UserPresentationResponse {
     presentationSv: string;
     presentationEn: string;
     createdAt: Date;
-    updatedAt: Date;  
+    updatedAt: Date;
   };
   statusCode: number;
 }

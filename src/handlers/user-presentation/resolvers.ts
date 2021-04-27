@@ -1,14 +1,16 @@
 import { Context } from "./../../context";
 
 export interface UserPresentationResolverResponse {
-  userPresentation: {
-    id: string;
-    userId: string;
-    presentationSv: string;
-    presentationEn: string;
-    createdAt: Date;
-    updatedAt: Date;  
-  } | undefined;
+  userPresentation:
+    | {
+        id: string;
+        userId: string;
+        presentationSv: string;
+        presentationEn: string;
+        createdAt: Date;
+        updatedAt: Date;
+      }
+    | undefined;
   statusCode?: number;
 }
 
