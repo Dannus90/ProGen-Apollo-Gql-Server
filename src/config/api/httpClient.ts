@@ -66,6 +66,20 @@ export const fetchPostAuth = async <TPayload>(
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const fetchDeleteAuth = async (
+  url: string,
+  method: HttpMethods = "DELETE",
+  authorization: string
+) => {
+  const response = await fetch(url, {
+    method,
+    ...headerOptionsAuth(authorization)
+  });
+
+  return response;
+};
+
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const fetchGetAuth = async (
   url: string,
   method: HttpMethods = "GET",

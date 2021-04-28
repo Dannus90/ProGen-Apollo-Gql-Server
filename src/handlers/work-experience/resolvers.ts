@@ -19,19 +19,19 @@ export interface WorkExperienceResponse {
     createdAt: Date;
     updatedAt: Date;
     statusCode?: number;
-  }   
+  };
 }
 
 export const workExperienceResolvers = {
   WorkExperienceRoot: {
     getWorkExperience: async (
       _,
-      { input: { workExperienceId }},
+      { input: { workExperienceId } },
       { loaders }: Context
     ): Promise<WorkExperienceResponse> => {
       const workExperience = await loaders.workExperience.byWorkExperienceId.load(workExperienceId);
 
-      const data = workExperience.workExperienceDto
+      const data = workExperience.workExperienceDto;
       return {
         workExperience: {
           id: data.id,

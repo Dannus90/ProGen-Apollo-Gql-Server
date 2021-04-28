@@ -7,7 +7,12 @@ import {
   changePassword
 } from "./handlers/auth-handler/api-calls";
 import { getFullUserInformation, updateUserData } from "./handlers/user-data/api-calls";
-import { createWorkExperience, updateWorkExperience, getWorkExperience } from "./handlers/work-experience/api-calls";
+import {
+  createWorkExperience,
+  updateWorkExperience,
+  getWorkExperience,
+  deleteWorkExperience
+} from "./handlers/work-experience/api-calls";
 import { updateUserPresentationData } from "./handlers/user-presentation/api-calls";
 import {
   GQLChangeEmailInput,
@@ -57,10 +62,10 @@ export interface GetApiMethods {
     workExperienceId: string | undefined,
     input: GQLUpdateWorkExperienceInput | undefined
   ) => Promise<any>;
-  getWorkExperience: (
-    authorization: string,
-    workExperienceId: string | undefined
-  ) => Promise<any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  getWorkExperience: (authorization: string, workExperienceId: string | undefined) => Promise<any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  deleteWorkExperience: (authorization: string, workExperienceId: string) => Promise<any>;
 }
 
 export const getApiMethods = (): GetApiMethods => {
@@ -76,6 +81,7 @@ export const getApiMethods = (): GetApiMethods => {
     updateUserPresentationData,
     createWorkExperience,
     updateWorkExperience,
-    getWorkExperience
+    getWorkExperience,
+    deleteWorkExperience
   };
 };

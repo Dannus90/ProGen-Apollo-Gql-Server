@@ -204,6 +204,7 @@ export interface GQLUserPresentationInput {
 export interface GQLWorkExperienceMutationRoot {
   createWorkExperience: GQLCreateWorkExperienceResponse;
   updateWorkExperience: GQLGetUpdateWorkExperienceResponse;
+  deleteWorkExperience: GQLDeleteWorkExperienceResponse;
 }
 
 export interface GQLWorkExperienceInput {
@@ -242,6 +243,15 @@ export interface GQLUpdateWorkExperienceInput {
   dateEnded: GQLDate;
 }
 
+export interface GQLDeleteWorkExperienceInput {
+  workExperienceId: string;
+}
+
+export interface GQLDeleteWorkExperienceResponse {
+  workExperienceId: string;
+  statusCode: number;
+}
+
 export type GQLVoid = any;
 
 /*********************************
@@ -276,6 +286,7 @@ export interface GQLResolver {
   UserPresentationMutationRoot?: GQLUserPresentationMutationRootTypeResolver;
   WorkExperienceMutationRoot?: GQLWorkExperienceMutationRootTypeResolver;
   CreateWorkExperienceResponse?: GQLCreateWorkExperienceResponseTypeResolver;
+  DeleteWorkExperienceResponse?: GQLDeleteWorkExperienceResponseTypeResolver;
   Void?: GraphQLScalarType;
 }
 export interface GQLQueryTypeResolver<TParent = undefined> {
@@ -1483,10 +1494,11 @@ export interface GQLWorkExperienceMutationRootTypeResolver<
 > {
   createWorkExperience?: WorkExperienceMutationRootToCreateWorkExperienceResolver<TParent>;
   updateWorkExperience?: WorkExperienceMutationRootToUpdateWorkExperienceResolver<TParent>;
+  deleteWorkExperience?: WorkExperienceMutationRootToDeleteWorkExperienceResolver<TParent>;
 }
 
 export interface WorkExperienceMutationRootToCreateWorkExperienceArgs {
-  input?: GQLWorkExperienceInput;
+  input: GQLWorkExperienceInput;
 }
 export interface WorkExperienceMutationRootToCreateWorkExperienceResolver<
   TParent = GQLWorkExperienceMutationRoot,
@@ -1501,7 +1513,7 @@ export interface WorkExperienceMutationRootToCreateWorkExperienceResolver<
 }
 
 export interface WorkExperienceMutationRootToUpdateWorkExperienceArgs {
-  input?: GQLUpdateWorkExperienceInput;
+  input: GQLUpdateWorkExperienceInput;
 }
 export interface WorkExperienceMutationRootToUpdateWorkExperienceResolver<
   TParent = GQLWorkExperienceMutationRoot,
@@ -1510,6 +1522,21 @@ export interface WorkExperienceMutationRootToUpdateWorkExperienceResolver<
   (
     parent: TParent,
     args: WorkExperienceMutationRootToUpdateWorkExperienceArgs,
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface WorkExperienceMutationRootToDeleteWorkExperienceArgs {
+  input: GQLDeleteWorkExperienceInput;
+}
+export interface WorkExperienceMutationRootToDeleteWorkExperienceResolver<
+  TParent = GQLWorkExperienceMutationRoot,
+  TResult = GQLDeleteWorkExperienceResponse
+> {
+  (
+    parent: TParent,
+    args: WorkExperienceMutationRootToDeleteWorkExperienceArgs,
     context: any,
     info: GraphQLResolveInfo
   ): Promise<TResult>;
@@ -1536,6 +1563,37 @@ export interface CreateWorkExperienceResponseToWorkExperienceIdResolver<
 
 export interface CreateWorkExperienceResponseToStatusCodeResolver<
   TParent = GQLCreateWorkExperienceResponse,
+  TResult = number
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLDeleteWorkExperienceResponseTypeResolver<
+  TParent = GQLDeleteWorkExperienceResponse
+> {
+  workExperienceId?: DeleteWorkExperienceResponseToWorkExperienceIdResolver<TParent>;
+  statusCode?: DeleteWorkExperienceResponseToStatusCodeResolver<TParent>;
+}
+
+export interface DeleteWorkExperienceResponseToWorkExperienceIdResolver<
+  TParent = GQLDeleteWorkExperienceResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface DeleteWorkExperienceResponseToStatusCodeResolver<
+  TParent = GQLDeleteWorkExperienceResponse,
   TResult = number
 > {
   (

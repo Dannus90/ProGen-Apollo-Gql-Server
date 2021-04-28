@@ -1,5 +1,5 @@
 import { PROGEN_BASE_URL } from "../../config/api/base";
-import { fetchGetAuth, fetchPostAuth } from "../../config/api/httpClient";
+import { fetchDeleteAuth, fetchGetAuth, fetchPostAuth } from "../../config/api/httpClient";
 import { GQLUpdateWorkExperienceInput, GQLWorkExperienceInput } from "../../types/TypesGraphQL";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -33,7 +33,22 @@ export const updateWorkExperience = async (
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getWorkExperience = async (authorization: string, workExperienceId: string | undefined): Promise<any> => {
-  return await fetchGetAuth(`${PROGEN_BASE_URL}/user/workexperience/${workExperienceId}`, "GET", authorization);
+export const deleteWorkExperience = async (authorization: string, workExperienceId: string) => {
+  return await fetchDeleteAuth(
+    `${PROGEN_BASE_URL}/user/workexperience/${workExperienceId}`,
+    "DELETE",
+    authorization
+  );
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getWorkExperience = async (
+  authorization: string,
+  workExperienceId: string | undefined
+): Promise<any> => {
+  return await fetchGetAuth(
+    `${PROGEN_BASE_URL}/user/workexperience/${workExperienceId}`,
+    "GET",
+    authorization
+  );
+};

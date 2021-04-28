@@ -4,6 +4,7 @@ import {
 } from "../../config/api/error-management/http-response-error";
 import {
   WorkExperienceMutationRootToCreateWorkExperienceResolver,
+  WorkExperienceMutationRootToDeleteWorkExperienceResolver,
   WorkExperienceMutationRootToUpdateWorkExperienceResolver
 } from "./../../types/TypesGraphQL";
 import { Context } from "../../context";
@@ -12,6 +13,7 @@ export interface WorkExperienceMutation {
   WorkExperienceMutationRoot: {
     createWorkExperience: WorkExperienceMutationRootToCreateWorkExperienceResolver;
     updateWorkExperience: WorkExperienceMutationRootToUpdateWorkExperienceResolver;
+    deleteWorkExperience: WorkExperienceMutationRootToDeleteWorkExperienceResolver;
   };
 }
 
@@ -92,6 +94,19 @@ export const workExperienceMutations: WorkExperienceMutation = {
       };
 
       return gqlResponse;
+    },
+    deleteWorkExperience: async (_, body, { api, authorization }: Context) => {
+      const response = await api.deleteWorkExperience(authorization, body.input.workExperienceId);
+
+      if (!statusCodeChecker(response.status)) {
+        const { type, statusCode, message } = await response.json();
+        throw new HttpResponseError(type, statusCode ?? response.status, message);
+      }
+
+      return {
+        workExperienceId: body.input?.workExperienceId ?? "",
+        statusCode: response.status
+      };
     }
   }
 };

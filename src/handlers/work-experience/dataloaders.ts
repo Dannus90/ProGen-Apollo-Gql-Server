@@ -14,8 +14,9 @@ export const createWorkExperienceDataLoaders = (
   authorization: string
 ): WorkExperienceDataLoaders => {
   const byWorkExperienceId = new DataLoader<string, GetWorkExperienceAnswer>(async (ids) => {
-    const workExperiences = await Promise.all(ids.map(async (id) => {
-      const response = await getWorkExperience(authorization, id);
+    const workExperiences = await Promise.all(
+      ids.map(async (id) => {
+        const response = await getWorkExperience(authorization, id);
         if (response.status === 401) {
           const { status, statusText } = response;
           throw new HttpResponseError(statusText, status, statusText);
@@ -27,10 +28,11 @@ export const createWorkExperienceDataLoaders = (
         const workExperience = await response.json();
         workExperience.workExperienceDto.statusCode = response.status;
         return workExperience;
-    }))
+      })
+    );
 
     return ids.map((id) => {
-      return workExperiences.find((we) => we.workExperienceDto.id === id)
+      return workExperiences.find((we) => we.workExperienceDto.id === id);
     });
   });
 

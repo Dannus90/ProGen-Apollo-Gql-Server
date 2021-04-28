@@ -21,7 +21,9 @@ export const userPresentationResolvers = {
       __,
       { loaders }: Context
     ): Promise<UserPresentationResolverResponse> => {
-      const userPresentation = await loaders.userPresentation.byUserIdFromClaims.load("loadByUserIdInClaims");
+      const userPresentation = await loaders.userPresentation.byUserIdFromClaims.load(
+        "loadByUserIdInClaims"
+      );
 
       return {
         userPresentation: {

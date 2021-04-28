@@ -13,22 +13,24 @@ export interface UserDataLoaders {
 export const createUserDataLoaders = (authorization: string): UserDataLoaders => {
   const byUserIdFromClaims = new DataLoader<string, UserInformationResponse | undefined>(
     async (ids) => {
-      const userInformations = await Promise.all(ids.map(async(id) => {
-        const response = await getFullUserInformation(authorization);
+      const userInformations = await Promise.all(
+        ids.map(async (id) => {
+          const response = await getFullUserInformation(authorization);
 
-        if (response.status === 401) {
-          const { status, statusText } = response;
-          throw new HttpResponseError(statusText, status, statusText);
-        } else if (!statusCodeChecker(response.status)) {
-          const { type, statusCode, message } = await response.json();
-          throw new HttpResponseError(type, statusCode, message);
-        }
+          if (response.status === 401) {
+            const { status, statusText } = response;
+            throw new HttpResponseError(statusText, status, statusText);
+          } else if (!statusCodeChecker(response.status)) {
+            const { type, statusCode, message } = await response.json();
+            throw new HttpResponseError(type, statusCode, message);
+          }
 
-        const userInformation = await response.json();
-        userInformation.fullUserInformationDto.statusCode = response.status;
-        
-        return userInformation;
-      }))
+          const userInformation = await response.json();
+          userInformation.fullUserInformationDto.statusCode = response.status;
+
+          return userInformation;
+        })
+      );
 
       return ids.map((id) => {
         return userInformations[0];

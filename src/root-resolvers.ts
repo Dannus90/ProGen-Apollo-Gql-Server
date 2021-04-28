@@ -2,7 +2,11 @@ import { merge } from "lodash";
 import { userDataResolvers } from "./handlers/user-data/resolvers";
 import { workExperienceResolvers } from "./handlers/work-experience/resolvers";
 import { userPresentationResolvers } from "./handlers/user-presentation/resolvers";
-import { QueryToUserDataResolver, QueryToUserPresentationResolver, QueryToWorkExperienceResolver } from "./types/TypesGraphQL";
+import {
+  QueryToUserDataResolver,
+  QueryToUserPresentationResolver,
+  QueryToWorkExperienceResolver
+} from "./types/TypesGraphQL";
 
 interface QueryResolvers {
   Query: {
@@ -20,4 +24,9 @@ const queryResolver: QueryResolvers = {
   }
 };
 
-export const rootResolver = merge(queryResolver, userDataResolvers, userPresentationResolvers, workExperienceResolvers);
+export const rootResolver = merge(
+  queryResolver,
+  userDataResolvers,
+  userPresentationResolvers,
+  workExperienceResolvers
+);
