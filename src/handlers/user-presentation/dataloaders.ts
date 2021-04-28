@@ -14,21 +14,25 @@ export const createUserPresentationDataLoaders = (
   authorization: string
 ): UserPresentationDataLoaders => {
   const byUserIdFromClaims = new DataLoader<string, UserPresentationResponse>(async (ids) => {
-    const response = await getUserPresentation(authorization);
+    const userPresentations = await Promise.all(ids.map(async (id) => {
+      const response = await getUserPresentation(authorization);
 
-    if (response.status === 401) {
-      const { status, statusText } = response;
-      throw new HttpResponseError(statusText, status, statusText);
-    } else if (!statusCodeChecker(response.status)) {
-      const { type, statusCode, message } = await response.json();
-      throw new HttpResponseError(type, statusCode, message);
-    }
+      if (response.status === 401) {
+        const { status, statusText } = response;
+        throw new HttpResponseError(statusText, status, statusText);
+      } else if (!statusCodeChecker(response.status)) {
+        const { type, statusCode, message } = await response.json();
+        throw new HttpResponseError(type, statusCode, message);
+      }
 
-    const data = await response.json();
+      const userPresentation = await response.json();
+      userPresentation.statusCode = response.status
+
+      return userPresentation;
+    }))
 
     return ids.map((id) => {
-      data.statusCode = response.status;
-      return data;
+      return userPresentations[0];
     });
   });
 

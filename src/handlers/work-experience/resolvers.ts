@@ -31,7 +31,7 @@ export const workExperienceResolvers = {
     ): Promise<WorkExperienceResponse> => {
       const workExperience = await loaders.workExperience.byWorkExperienceId.load(workExperienceId);
 
-      const data = workExperience.workExperience
+      const data = workExperience.workExperienceDto
       return {
         workExperience: {
           id: data.id,

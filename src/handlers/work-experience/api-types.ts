@@ -24,7 +24,7 @@ export interface GetWorkExperienceResponse {
 }
 
 export interface GetWorkExperienceAnswer {
-  workExperience: {
+  workExperienceDto: {
     id: string;
     userId: string;
     employmentRate: string;
