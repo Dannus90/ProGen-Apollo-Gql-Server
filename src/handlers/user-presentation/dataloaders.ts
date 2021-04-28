@@ -15,7 +15,7 @@ export const createUserPresentationDataLoaders = (
 ): UserPresentationDataLoaders => {
   const byUserIdFromClaims = new DataLoader<string, UserPresentationResponse>(async (ids) => {
     const userPresentations = await Promise.all(
-      ids.map(async (id) => {
+      ids.map(async () => {
         const response = await getUserPresentation(authorization);
 
         if (response.status === 401) {
@@ -33,7 +33,7 @@ export const createUserPresentationDataLoaders = (
       })
     );
 
-    return ids.map((id) => {
+    return ids.map(() => {
       return userPresentations[0];
     });
   });

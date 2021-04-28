@@ -1,4 +1,4 @@
-const { GraphQLScalarType, Kind } = require("graphql");
+import { GraphQLScalarType, Kind } from "graphql";
 
 // More about custom scalars -> https://www.apollographql.com/docs/apollo-server/schema/custom-scalars/
 

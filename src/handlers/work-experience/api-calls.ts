@@ -54,13 +54,6 @@ export const getWorkExperience = async (
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getWorkExperiences = async (
-  authorization: string
-): Promise<any> => {
-  return await fetchGetAuth(
-    `${PROGEN_BASE_URL}/user/workexperience`,
-    "GET",
-    authorization
-  );
+export const getWorkExperiences = async (authorization: string): Promise<any> => {
+  return await fetchGetAuth(`${PROGEN_BASE_URL}/user/workexperience`, "GET", authorization);
 };
-

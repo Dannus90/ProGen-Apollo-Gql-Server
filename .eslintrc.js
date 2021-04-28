@@ -31,6 +31,8 @@ module.exports = {
     "import/namespace": 2,
     "import/default": 2,
     "import/export": 2,
-    "import/no-named-as-default": 0
+    "import/no-named-as-default": 0,
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0
   }
 };

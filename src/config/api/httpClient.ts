@@ -1,5 +1,4 @@
-import fetch, { Response } from "node-fetch";
-import { HttpResponseError, statusCodeChecker } from "./error-management/http-response-error";
+import fetch from "node-fetch";
 
 type HttpMethods = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 

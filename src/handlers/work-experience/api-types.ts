@@ -47,7 +47,7 @@ export interface GetWorkExperienceAnswer {
 
 export interface GetWorkExperiencesAnswer {
   statusCode: number;
-  workExperienceDto: Array<WorkExperienceDto>
+  workExperienceDto: Array<WorkExperienceDto>;
 }
 
 export interface WorkExperienceDto {

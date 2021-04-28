@@ -1,5 +1,4 @@
 import { Context } from "./../../context";
-import { GetWorkExperiencesAnswer } from "./api-types";
 
 export interface WorkExperienceResponse {
   workExperience: {
@@ -80,14 +79,12 @@ export const workExperienceResolvers = {
         }
       };
     },
-    getWorkExperiences: async (
-      _,
-      __,
-      { loaders }: Context
-    ): Promise<WorkExperiencesResponse> => {
-      const workExperiences = await loaders.workExperience.workExperiencesByUserIdInClaims.load("All");
+    getWorkExperiences: async (_, __, { loaders }: Context): Promise<WorkExperiencesResponse> => {
+      const workExperiences = await loaders.workExperience.workExperiencesByUserIdInClaims.load(
+        "All"
+      );
       console.log(workExperiences);
-      
+
       return {
         statusCode: workExperiences.statusCode,
         workExperiences: workExperiences.workExperienceDto

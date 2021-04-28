@@ -14,7 +14,7 @@ export const createUserDataLoaders = (authorization: string): UserDataLoaders =>
   const byUserIdFromClaims = new DataLoader<string, UserInformationResponse | undefined>(
     async (ids) => {
       const userInformations = await Promise.all(
-        ids.map(async (id) => {
+        ids.map(async () => {
           const response = await getFullUserInformation(authorization);
 
           if (response.status === 401) {
@@ -32,7 +32,7 @@ export const createUserDataLoaders = (authorization: string): UserDataLoaders =>
         })
       );
 
-      return ids.map((id) => {
+      return ids.map(() => {
         return userInformations[0];
       });
     }
