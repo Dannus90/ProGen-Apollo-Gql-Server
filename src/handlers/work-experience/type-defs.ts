@@ -9,6 +9,7 @@ export const workExperienceTypeDefs = gql`
 
   extend type WorkExperienceRoot {
     getWorkExperience(input: GetWorkExperienceInput): GetUpdateWorkExperienceResponse!
+    getWorkExperiences: GetWorkExperiencesResponse!
   }
 
   type CreateWorkExperienceResponse {
@@ -21,8 +22,32 @@ export const workExperienceTypeDefs = gql`
     statusCode: Int!
   }
 
+  type GetWorkExperiencesResponse {
+    statusCode: Int!
+    workExperiences: [GetWorkExperiencesDataResponse]
+  }
+
   type GetUpdateWorkExperienceResponse {
     workExperience: GetAndUpdateWorkExperienceDataResponse!
+  }
+
+  type GetWorkExperiencesDataResponse {
+    id: String!
+    userId: String!
+    employmentRate: String!
+    companyName: String!
+    roleSv: String!
+    roleEn: String!
+    descriptionSv: String!
+    descriptionEn: String!
+    citySv: String!
+    cityEn: String!
+    countrySv: String!
+    countryEn: String!
+    dateStarted: Date!
+    dateEnded: Date!
+    createdAt: Date!
+    updatedAt: Date!
   }
 
   type GetAndUpdateWorkExperienceDataResponse {

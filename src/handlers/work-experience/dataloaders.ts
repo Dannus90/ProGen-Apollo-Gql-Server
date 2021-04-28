@@ -3,11 +3,12 @@ import {
   HttpResponseError,
   statusCodeChecker
 } from "../../config/api/error-management/http-response-error";
-import { getWorkExperience } from "./api-calls";
-import { GetWorkExperienceAnswer } from "./api-types";
+import { getWorkExperience, getWorkExperiences } from "./api-calls";
+import { GetWorkExperienceAnswer, GetWorkExperiencesAnswer } from "./api-types";
 
 export interface WorkExperienceDataLoaders {
   byWorkExperienceId: DataLoader<string, GetWorkExperienceAnswer>;
+  workExperiencesByUserIdInClaims: DataLoader<string, GetWorkExperiencesAnswer>;
 }
 
 export const createWorkExperienceDataLoaders = (
@@ -36,7 +37,31 @@ export const createWorkExperienceDataLoaders = (
     });
   });
 
+  const workExperiencesByUserIdInClaims = new DataLoader<"All", GetWorkExperiencesAnswer>(async (ids) => {
+    const workExperiences = await Promise.all(
+      ids.map(async (id) => {
+        const response = await getWorkExperiences(authorization);
+        if (response.status === 401) {
+          const { status, statusText } = response;
+          throw new HttpResponseError(statusText, status, statusText);
+        } else if (!statusCodeChecker(response.status)) {
+          const { type, statusCode, message } = await response.json();
+          throw new HttpResponseError(type, statusCode, message);
+        }
+
+        const workExperiencesResponse = await response.json();
+        workExperiencesResponse.statusCode = response.status;
+        return workExperiencesResponse;
+      })
+    )
+
+    return ids.map((id) => {
+      return workExperiences[0];
+    });
+  })
+
   return {
-    byWorkExperienceId
+    byWorkExperienceId,
+    workExperiencesByUserIdInClaims
   };
 };
