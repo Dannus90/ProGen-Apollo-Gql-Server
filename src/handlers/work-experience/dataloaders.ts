@@ -22,8 +22,13 @@ export const createWorkExperienceDataLoaders = (
           const { status, statusText } = response;
           throw new HttpResponseError(statusText, status, statusText);
         } else if (!statusCodeChecker(response.status)) {
-          const { type, statusCode, message } = await response.json();
-          throw new HttpResponseError(type, statusCode, message);
+          const { type, statusCode, message, errors } = await response.json();
+
+          const errorOutput = Object.keys(errors).map((err) => {
+            return errors[err];
+          })
+  
+          throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
         }
 
         const workExperience = await response.json();
@@ -46,8 +51,13 @@ export const createWorkExperienceDataLoaders = (
             const { status, statusText } = response;
             throw new HttpResponseError(statusText, status, statusText);
           } else if (!statusCodeChecker(response.status)) {
-            const { type, statusCode, message } = await response.json();
-            throw new HttpResponseError(type, statusCode, message);
+            const { type, statusCode, message, errors } = await response.json();
+
+            const errorOutput = Object.keys(errors).map((err) => {
+              return errors[err];
+            })
+    
+            throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
           }
 
           const workExperiencesResponse = await response.json();

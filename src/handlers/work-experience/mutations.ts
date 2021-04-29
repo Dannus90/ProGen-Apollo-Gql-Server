@@ -23,8 +23,13 @@ export const workExperienceMutations: WorkExperienceMutation = {
       const response = await api.createWorkExperience(authorization, body.input);
 
       if (!statusCodeChecker(response.status)) {
-        const { type, statusCode, message } = await response.json();
-        throw new HttpResponseError(type, statusCode ?? response.status, message);
+        const { type, statusCode, message, errors } = await response.json();
+
+        const errorOutput = Object.keys(errors).map((err) => {
+          return errors[err];
+        })
+
+        throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
       }
 
       const data = await response.json();
@@ -46,8 +51,13 @@ export const workExperienceMutations: WorkExperienceMutation = {
       );
 
       if (!statusCodeChecker(response.status)) {
-        const { type, statusCode, message } = await response.json();
-        throw new HttpResponseError(type, statusCode ?? response.status, message);
+        const { type, statusCode, message, errors } = await response.json();
+
+        const errorOutput = Object.keys(errors).map((err) => {
+          return errors[err];
+        })
+
+        throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
       }
 
       const data = await response.json();
@@ -99,8 +109,13 @@ export const workExperienceMutations: WorkExperienceMutation = {
       const response = await api.deleteWorkExperience(authorization, body.input.workExperienceId);
 
       if (!statusCodeChecker(response.status)) {
-        const { type, statusCode, message } = await response.json();
-        throw new HttpResponseError(type, statusCode ?? response.status, message);
+        const { type, statusCode, message, errors } = await response.json();
+
+        const errorOutput = Object.keys(errors).map((err) => {
+          return errors[err];
+        })
+
+        throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
       }
 
       return {
