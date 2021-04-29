@@ -83,7 +83,6 @@ export const workExperienceResolvers = {
       const workExperiences = await loaders.workExperience.workExperiencesByUserIdInClaims.load(
         "All"
       );
-      console.log(workExperiences);
 
       return {
         statusCode: workExperiences.statusCode,

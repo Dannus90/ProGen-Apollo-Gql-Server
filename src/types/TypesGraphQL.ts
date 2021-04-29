@@ -98,8 +98,8 @@ export interface GQLGetAndUpdateWorkExperienceDataResponse {
   cityEn: string;
   countrySv: string;
   countryEn: string;
-  dateStarted: GQLDate;
-  dateEnded: GQLDate;
+  dateStarted?: GQLDate;
+  dateEnded?: GQLDate;
   createdAt: GQLDate;
   updatedAt: GQLDate;
   statusCode: number;
@@ -123,8 +123,8 @@ export interface GQLGetWorkExperiencesDataResponse {
   cityEn: string;
   countrySv: string;
   countryEn: string;
-  dateStarted: GQLDate;
-  dateEnded: GQLDate;
+  dateStarted?: GQLDate;
+  dateEnded?: GQLDate;
   createdAt: GQLDate;
   updatedAt: GQLDate;
 }
@@ -243,8 +243,8 @@ export interface GQLWorkExperienceInput {
   cityEn: string;
   countrySv: string;
   countryEn: string;
-  dateStarted: GQLDate;
-  dateEnded: GQLDate;
+  dateStarted?: GQLDate;
+  dateEnded?: GQLDate;
 }
 
 export interface GQLCreateWorkExperienceResponse {
@@ -264,8 +264,8 @@ export interface GQLUpdateWorkExperienceInput {
   cityEn: string;
   countrySv: string;
   countryEn: string;
-  dateStarted: GQLDate;
-  dateEnded: GQLDate;
+  dateStarted?: GQLDate;
+  dateEnded?: GQLDate;
 }
 
 export interface GQLDeleteWorkExperienceInput {
@@ -322,22 +322,40 @@ export interface GQLQueryTypeResolver<TParent = undefined> {
   workExperience?: QueryToWorkExperienceResolver<TParent>;
 }
 
-export interface QueryToUserDataResolver<TParent = undefined, TResult = GQLUserDataRoot> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+export interface QueryToUserDataResolver<
+  TParent = undefined,
+  TResult = GQLUserDataRoot
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface QueryToUserPresentationResolver<
   TParent = undefined,
   TResult = GQLUserPresentationRoot
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface QueryToWorkExperienceResolver<
   TParent = undefined,
   TResult = GQLWorkExperienceRoot
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GQLUserDataRootTypeResolver<TParent = GQLUserDataRoot> {
@@ -348,7 +366,12 @@ export interface UserDataRootToGetFullUserInformationResolver<
   TParent = GQLUserDataRoot,
   TResult = GQLFullUserInformationResponse
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GQLFullUserInformationResponseTypeResolver<
@@ -363,21 +386,36 @@ export interface FullUserInformationResponseToUserResolver<
   TParent = GQLFullUserInformationResponse,
   TResult = GQLUser
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface FullUserInformationResponseToUserDataResolver<
   TParent = GQLFullUserInformationResponse,
   TResult = GQLUserData
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface FullUserInformationResponseToStatusCodeResolver<
   TParent = GQLFullUserInformationResponse,
   TResult = number
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GQLUserTypeResolver<TParent = GQLUser> {
@@ -391,31 +429,72 @@ export interface GQLUserTypeResolver<TParent = GQLUser> {
 }
 
 export interface UserToIdResolver<TParent = GQLUser, TResult = string> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface UserToEmailResolver<TParent = GQLUser, TResult = string> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
-export interface UserToFirstNameResolver<TParent = GQLUser, TResult = string | null> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+export interface UserToFirstNameResolver<
+  TParent = GQLUser,
+  TResult = string | null
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
-export interface UserToLastNameResolver<TParent = GQLUser, TResult = string | null> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+export interface UserToLastNameResolver<
+  TParent = GQLUser,
+  TResult = string | null
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface UserToLastLoginResolver<TParent = GQLUser, TResult = GQLDate> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface UserToCreatedAtResolver<TParent = GQLUser, TResult = GQLDate> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface UserToUpdatedAtResolver<TParent = GQLUser, TResult = GQLDate> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GQLUserDataTypeResolver<TParent = GQLUserData> {
@@ -434,57 +513,149 @@ export interface GQLUserDataTypeResolver<TParent = GQLUserData> {
 }
 
 export interface UserDataToIdResolver<TParent = GQLUserData, TResult = string> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
-export interface UserDataToUserIdResolver<TParent = GQLUserData, TResult = string> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+export interface UserDataToUserIdResolver<
+  TParent = GQLUserData,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
-export interface UserDataToPhoneNumberResolver<TParent = GQLUserData, TResult = string | null> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+export interface UserDataToPhoneNumberResolver<
+  TParent = GQLUserData,
+  TResult = string | null
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
-export interface UserDataToEmailCvResolver<TParent = GQLUserData, TResult = string | null> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+export interface UserDataToEmailCvResolver<
+  TParent = GQLUserData,
+  TResult = string | null
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
-export interface UserDataToCitySvResolver<TParent = GQLUserData, TResult = string | null> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+export interface UserDataToCitySvResolver<
+  TParent = GQLUserData,
+  TResult = string | null
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
-export interface UserDataToCityEnResolver<TParent = GQLUserData, TResult = string | null> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+export interface UserDataToCityEnResolver<
+  TParent = GQLUserData,
+  TResult = string | null
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
-export interface UserDataToCountrySvResolver<TParent = GQLUserData, TResult = string | null> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+export interface UserDataToCountrySvResolver<
+  TParent = GQLUserData,
+  TResult = string | null
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
-export interface UserDataToCountryEnResolver<TParent = GQLUserData, TResult = string | null> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+export interface UserDataToCountryEnResolver<
+  TParent = GQLUserData,
+  TResult = string | null
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
-export interface UserDataToProfileImageResolver<TParent = GQLUserData, TResult = string | null> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+export interface UserDataToProfileImageResolver<
+  TParent = GQLUserData,
+  TResult = string | null
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface UserDataToProfileImagePublicIdResolver<
   TParent = GQLUserData,
   TResult = string | null
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
-export interface UserDataToUpdatedAtResolver<TParent = GQLUserData, TResult = GQLDate> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+export interface UserDataToUpdatedAtResolver<
+  TParent = GQLUserData,
+  TResult = GQLDate
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
-export interface UserDataToCreatedAtResolver<TParent = GQLUserData, TResult = GQLDate> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+export interface UserDataToCreatedAtResolver<
+  TParent = GQLUserData,
+  TResult = GQLDate
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
-export interface GQLUserPresentationRootTypeResolver<TParent = GQLUserPresentationRoot> {
+export interface GQLUserPresentationRootTypeResolver<
+  TParent = GQLUserPresentationRoot
+> {
   getUserPresentation?: UserPresentationRootToGetUserPresentationResolver<TParent>;
 }
 
@@ -492,10 +663,17 @@ export interface UserPresentationRootToGetUserPresentationResolver<
   TParent = GQLUserPresentationRoot,
   TResult = GQLUserPresentationResponse
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
-export interface GQLUserPresentationResponseTypeResolver<TParent = GQLUserPresentationResponse> {
+export interface GQLUserPresentationResponseTypeResolver<
+  TParent = GQLUserPresentationResponse
+> {
   userPresentation?: UserPresentationResponseToUserPresentationResolver<TParent>;
   statusCode?: UserPresentationResponseToStatusCodeResolver<TParent>;
 }
@@ -504,17 +682,29 @@ export interface UserPresentationResponseToUserPresentationResolver<
   TParent = GQLUserPresentationResponse,
   TResult = GQLUserPresentation
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface UserPresentationResponseToStatusCodeResolver<
   TParent = GQLUserPresentationResponse,
   TResult = number
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
-export interface GQLUserPresentationTypeResolver<TParent = GQLUserPresentation> {
+export interface GQLUserPresentationTypeResolver<
+  TParent = GQLUserPresentation
+> {
   id?: UserPresentationToIdResolver<TParent>;
   userId?: UserPresentationToUserIdResolver<TParent>;
   presentationSv?: UserPresentationToPresentationSvResolver<TParent>;
@@ -523,43 +713,81 @@ export interface GQLUserPresentationTypeResolver<TParent = GQLUserPresentation> 
   updatedAt?: UserPresentationToUpdatedAtResolver<TParent>;
 }
 
-export interface UserPresentationToIdResolver<TParent = GQLUserPresentation, TResult = string> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+export interface UserPresentationToIdResolver<
+  TParent = GQLUserPresentation,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
-export interface UserPresentationToUserIdResolver<TParent = GQLUserPresentation, TResult = string> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+export interface UserPresentationToUserIdResolver<
+  TParent = GQLUserPresentation,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface UserPresentationToPresentationSvResolver<
   TParent = GQLUserPresentation,
   TResult = string | null
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface UserPresentationToPresentationEnResolver<
   TParent = GQLUserPresentation,
   TResult = string | null
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface UserPresentationToCreatedAtResolver<
   TParent = GQLUserPresentation,
   TResult = GQLDate
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface UserPresentationToUpdatedAtResolver<
   TParent = GQLUserPresentation,
   TResult = GQLDate
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
-export interface GQLWorkExperienceRootTypeResolver<TParent = GQLWorkExperienceRoot> {
+export interface GQLWorkExperienceRootTypeResolver<
+  TParent = GQLWorkExperienceRoot
+> {
   getWorkExperience?: WorkExperienceRootToGetWorkExperienceResolver<TParent>;
   getWorkExperiences?: WorkExperienceRootToGetWorkExperiencesResolver<TParent>;
 }
@@ -583,7 +811,12 @@ export interface WorkExperienceRootToGetWorkExperiencesResolver<
   TParent = GQLWorkExperienceRoot,
   TResult = GQLGetWorkExperiencesResponse
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GQLGetUpdateWorkExperienceResponseTypeResolver<
@@ -596,7 +829,12 @@ export interface GetUpdateWorkExperienceResponseToWorkExperienceResolver<
   TParent = GQLGetUpdateWorkExperienceResponse,
   TResult = GQLGetAndUpdateWorkExperienceDataResponse
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GQLGetAndUpdateWorkExperienceDataResponseTypeResolver<
@@ -625,119 +863,204 @@ export interface GetAndUpdateWorkExperienceDataResponseToIdResolver<
   TParent = GQLGetAndUpdateWorkExperienceDataResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetAndUpdateWorkExperienceDataResponseToUserIdResolver<
   TParent = GQLGetAndUpdateWorkExperienceDataResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetAndUpdateWorkExperienceDataResponseToEmploymentRateResolver<
   TParent = GQLGetAndUpdateWorkExperienceDataResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetAndUpdateWorkExperienceDataResponseToCompanyNameResolver<
   TParent = GQLGetAndUpdateWorkExperienceDataResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetAndUpdateWorkExperienceDataResponseToRoleSvResolver<
   TParent = GQLGetAndUpdateWorkExperienceDataResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetAndUpdateWorkExperienceDataResponseToRoleEnResolver<
   TParent = GQLGetAndUpdateWorkExperienceDataResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetAndUpdateWorkExperienceDataResponseToDescriptionSvResolver<
   TParent = GQLGetAndUpdateWorkExperienceDataResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetAndUpdateWorkExperienceDataResponseToDescriptionEnResolver<
   TParent = GQLGetAndUpdateWorkExperienceDataResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetAndUpdateWorkExperienceDataResponseToCitySvResolver<
   TParent = GQLGetAndUpdateWorkExperienceDataResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetAndUpdateWorkExperienceDataResponseToCityEnResolver<
   TParent = GQLGetAndUpdateWorkExperienceDataResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetAndUpdateWorkExperienceDataResponseToCountrySvResolver<
   TParent = GQLGetAndUpdateWorkExperienceDataResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetAndUpdateWorkExperienceDataResponseToCountryEnResolver<
   TParent = GQLGetAndUpdateWorkExperienceDataResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetAndUpdateWorkExperienceDataResponseToDateStartedResolver<
   TParent = GQLGetAndUpdateWorkExperienceDataResponse,
-  TResult = GQLDate
+  TResult = GQLDate | null
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetAndUpdateWorkExperienceDataResponseToDateEndedResolver<
   TParent = GQLGetAndUpdateWorkExperienceDataResponse,
-  TResult = GQLDate
+  TResult = GQLDate | null
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetAndUpdateWorkExperienceDataResponseToCreatedAtResolver<
   TParent = GQLGetAndUpdateWorkExperienceDataResponse,
   TResult = GQLDate
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetAndUpdateWorkExperienceDataResponseToUpdatedAtResolver<
   TParent = GQLGetAndUpdateWorkExperienceDataResponse,
   TResult = GQLDate
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetAndUpdateWorkExperienceDataResponseToStatusCodeResolver<
   TParent = GQLGetAndUpdateWorkExperienceDataResponse,
   TResult = number
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GQLGetWorkExperiencesResponseTypeResolver<
@@ -751,14 +1074,24 @@ export interface GetWorkExperiencesResponseToStatusCodeResolver<
   TParent = GQLGetWorkExperiencesResponse,
   TResult = number
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetWorkExperiencesResponseToWorkExperiencesResolver<
   TParent = GQLGetWorkExperiencesResponse,
   TResult = Array<GQLGetWorkExperiencesDataResponse | null> | null
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GQLGetWorkExperiencesDataResponseTypeResolver<
@@ -786,112 +1119,192 @@ export interface GetWorkExperiencesDataResponseToIdResolver<
   TParent = GQLGetWorkExperiencesDataResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetWorkExperiencesDataResponseToUserIdResolver<
   TParent = GQLGetWorkExperiencesDataResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetWorkExperiencesDataResponseToEmploymentRateResolver<
   TParent = GQLGetWorkExperiencesDataResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetWorkExperiencesDataResponseToCompanyNameResolver<
   TParent = GQLGetWorkExperiencesDataResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetWorkExperiencesDataResponseToRoleSvResolver<
   TParent = GQLGetWorkExperiencesDataResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetWorkExperiencesDataResponseToRoleEnResolver<
   TParent = GQLGetWorkExperiencesDataResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetWorkExperiencesDataResponseToDescriptionSvResolver<
   TParent = GQLGetWorkExperiencesDataResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetWorkExperiencesDataResponseToDescriptionEnResolver<
   TParent = GQLGetWorkExperiencesDataResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetWorkExperiencesDataResponseToCitySvResolver<
   TParent = GQLGetWorkExperiencesDataResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetWorkExperiencesDataResponseToCityEnResolver<
   TParent = GQLGetWorkExperiencesDataResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetWorkExperiencesDataResponseToCountrySvResolver<
   TParent = GQLGetWorkExperiencesDataResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetWorkExperiencesDataResponseToCountryEnResolver<
   TParent = GQLGetWorkExperiencesDataResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetWorkExperiencesDataResponseToDateStartedResolver<
   TParent = GQLGetWorkExperiencesDataResponse,
-  TResult = GQLDate
+  TResult = GQLDate | null
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetWorkExperiencesDataResponseToDateEndedResolver<
   TParent = GQLGetWorkExperiencesDataResponse,
-  TResult = GQLDate
+  TResult = GQLDate | null
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetWorkExperiencesDataResponseToCreatedAtResolver<
   TParent = GQLGetWorkExperiencesDataResponse,
   TResult = GQLDate
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GetWorkExperiencesDataResponseToUpdatedAtResolver<
   TParent = GQLGetWorkExperiencesDataResponse,
   TResult = GQLDate
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GQLMutationTypeResolver<TParent = undefined> {
@@ -905,28 +1318,48 @@ export interface MutationToAuthenticationResolver<
   TParent = undefined,
   TResult = GQLAuthenticationMutationRoot
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface MutationToUserDataResolver<
   TParent = undefined,
   TResult = GQLUserDataMutationRoot
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface MutationToUserPresentationResolver<
   TParent = undefined,
   TResult = GQLUserPresentationMutationRoot
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface MutationToWorkExperienceResolver<
   TParent = undefined,
   TResult = GQLWorkExperienceMutationRoot
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GQLAuthenticationMutationRootTypeResolver<
@@ -989,7 +1422,12 @@ export interface AuthenticationMutationRootToLogoutUserResolver<
   TParent = GQLAuthenticationMutationRoot,
   TResult = GQLGeneralResponse
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface AuthenticationMutationRootToChangeEmailArgs {
@@ -1028,16 +1466,40 @@ export interface GQLTokenResponseTypeResolver<TParent = GQLTokenResponse> {
   refreshToken?: TokenResponseToRefreshTokenResolver<TParent>;
 }
 
-export interface TokenResponseToStatusCodeResolver<TParent = GQLTokenResponse, TResult = number> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+export interface TokenResponseToStatusCodeResolver<
+  TParent = GQLTokenResponse,
+  TResult = number
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
-export interface TokenResponseToAccessTokenResolver<TParent = GQLTokenResponse, TResult = string> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+export interface TokenResponseToAccessTokenResolver<
+  TParent = GQLTokenResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
-export interface TokenResponseToRefreshTokenResolver<TParent = GQLTokenResponse, TResult = string> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+export interface TokenResponseToRefreshTokenResolver<
+  TParent = GQLTokenResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GQLGeneralResponseTypeResolver<TParent = GQLGeneralResponse> {
@@ -1049,14 +1511,29 @@ export interface GeneralResponseToStatusCodeResolver<
   TParent = GQLGeneralResponse,
   TResult = number
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
-export interface GeneralResponseToMessageResolver<TParent = GQLGeneralResponse, TResult = string> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+export interface GeneralResponseToMessageResolver<
+  TParent = GQLGeneralResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
-export interface GQLUserDataMutationRootTypeResolver<TParent = GQLUserDataMutationRoot> {
+export interface GQLUserDataMutationRootTypeResolver<
+  TParent = GQLUserDataMutationRoot
+> {
   updateUserData?: UserDataMutationRootToUpdateUserDataResolver<TParent>;
 }
 
@@ -1075,7 +1552,9 @@ export interface UserDataMutationRootToUpdateUserDataResolver<
   ): Promise<TResult>;
 }
 
-export interface GQLUserUpdateResponseTypeResolver<TParent = GQLUserUpdateResponse> {
+export interface GQLUserUpdateResponseTypeResolver<
+  TParent = GQLUserUpdateResponse
+> {
   id?: UserUpdateResponseToIdResolver<TParent>;
   userId?: UserUpdateResponseToUserIdResolver<TParent>;
   firstName?: UserUpdateResponseToFirstNameResolver<TParent>;
@@ -1093,106 +1572,184 @@ export interface GQLUserUpdateResponseTypeResolver<TParent = GQLUserUpdateRespon
   statusCode?: UserUpdateResponseToStatusCodeResolver<TParent>;
 }
 
-export interface UserUpdateResponseToIdResolver<TParent = GQLUserUpdateResponse, TResult = string> {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+export interface UserUpdateResponseToIdResolver<
+  TParent = GQLUserUpdateResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface UserUpdateResponseToUserIdResolver<
   TParent = GQLUserUpdateResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface UserUpdateResponseToFirstNameResolver<
   TParent = GQLUserUpdateResponse,
   TResult = string | null
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface UserUpdateResponseToLastNameResolver<
   TParent = GQLUserUpdateResponse,
   TResult = string | null
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface UserUpdateResponseToPhoneNumberResolver<
   TParent = GQLUserUpdateResponse,
   TResult = string | null
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface UserUpdateResponseToEmailCvResolver<
   TParent = GQLUserUpdateResponse,
   TResult = string | null
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface UserUpdateResponseToCitySvResolver<
   TParent = GQLUserUpdateResponse,
   TResult = string | null
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface UserUpdateResponseToCityEnResolver<
   TParent = GQLUserUpdateResponse,
   TResult = string | null
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface UserUpdateResponseToCountrySvResolver<
   TParent = GQLUserUpdateResponse,
   TResult = string | null
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface UserUpdateResponseToCountryEnResolver<
   TParent = GQLUserUpdateResponse,
   TResult = string | null
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface UserUpdateResponseToProfileImageResolver<
   TParent = GQLUserUpdateResponse,
   TResult = string | null
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface UserUpdateResponseToProfileImagePublicIdResolver<
   TParent = GQLUserUpdateResponse,
   TResult = string | null
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface UserUpdateResponseToCreatedAtResolver<
   TParent = GQLUserUpdateResponse,
   TResult = GQLDate
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface UserUpdateResponseToUpdatedAtResolver<
   TParent = GQLUserUpdateResponse,
   TResult = GQLDate
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface UserUpdateResponseToStatusCodeResolver<
   TParent = GQLUserUpdateResponse,
   TResult = number
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GQLUserPresentationMutationRootTypeResolver<
@@ -1280,14 +1837,24 @@ export interface CreateWorkExperienceResponseToWorkExperienceIdResolver<
   TParent = GQLCreateWorkExperienceResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface CreateWorkExperienceResponseToStatusCodeResolver<
   TParent = GQLCreateWorkExperienceResponse,
   TResult = number
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface GQLDeleteWorkExperienceResponseTypeResolver<
@@ -1301,12 +1868,22 @@ export interface DeleteWorkExperienceResponseToWorkExperienceIdResolver<
   TParent = GQLDeleteWorkExperienceResponse,
   TResult = string
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface DeleteWorkExperienceResponseToStatusCodeResolver<
   TParent = GQLDeleteWorkExperienceResponse,
   TResult = number
 > {
-  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }

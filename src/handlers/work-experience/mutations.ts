@@ -24,7 +24,7 @@ export const workExperienceMutations: WorkExperienceMutation = {
 
       if (!statusCodeChecker(response.status)) {
         const { type, statusCode, message, errors } = await response.json();
-
+        
         const errorOutput = Object.keys(errors).map((err) => {
           return errors[err];
         })

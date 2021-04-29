@@ -44,8 +44,8 @@ export const workExperienceTypeDefs = gql`
     cityEn: String!
     countrySv: String!
     countryEn: String!
-    dateStarted: Date!
-    dateEnded: Date!
+    dateStarted: Date
+    dateEnded: Date
     createdAt: Date!
     updatedAt: Date!
   }
@@ -63,8 +63,8 @@ export const workExperienceTypeDefs = gql`
     cityEn: String!
     countrySv: String!
     countryEn: String!
-    dateStarted: Date!
-    dateEnded: Date!
+    dateStarted: Date
+    dateEnded: Date
     createdAt: Date!
     updatedAt: Date!
     statusCode: Int!
@@ -82,8 +82,8 @@ export const workExperienceTypeDefs = gql`
     cityEn: String!
     countrySv: String!
     countryEn: String!
-    dateStarted: Date!
-    dateEnded: Date!
+    dateStarted: Date
+    dateEnded: Date
   }
 
   input GetWorkExperienceInput {
@@ -105,7 +105,7 @@ export const workExperienceTypeDefs = gql`
     cityEn: String!
     countrySv: String!
     countryEn: String!
-    dateStarted: Date!
-    dateEnded: Date!
+    dateStarted: Date
+    dateEnded: Date
   }
 `;
