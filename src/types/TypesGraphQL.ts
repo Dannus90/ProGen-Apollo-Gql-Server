@@ -134,6 +134,7 @@ export interface GQLMutation {
   userData: GQLUserDataMutationRoot;
   userPresentation: GQLUserPresentationMutationRoot;
   workExperience: GQLWorkExperienceMutationRoot;
+  education: GQLEducationMutationRoot;
 }
 
 export interface GQLAuthenticationMutationRoot {
@@ -277,6 +278,31 @@ export interface GQLDeleteWorkExperienceResponse {
   statusCode: number;
 }
 
+export interface GQLEducationMutationRoot {
+  createEducation: GQLCreateEducationResponse;
+}
+
+export interface GQLCreateEducationInput {
+  educationName: string;
+  examName: string;
+  subjectAreaSv: string;
+  subjectAreaEn: string;
+  descriptionSv: string;
+  descriptionEn: string;
+  grade: string;
+  citySv: string;
+  cityEn: string;
+  countrySv: string;
+  countryEn: string;
+  dateStarted?: GQLDate;
+  dateEnded?: GQLDate;
+}
+
+export interface GQLCreateEducationResponse {
+  educationId: string;
+  statusCode: number;
+}
+
 export type GQLVoid = any;
 
 /*********************************
@@ -314,6 +340,8 @@ export interface GQLResolver {
   WorkExperienceMutationRoot?: GQLWorkExperienceMutationRootTypeResolver;
   CreateWorkExperienceResponse?: GQLCreateWorkExperienceResponseTypeResolver;
   DeleteWorkExperienceResponse?: GQLDeleteWorkExperienceResponseTypeResolver;
+  EducationMutationRoot?: GQLEducationMutationRootTypeResolver;
+  CreateEducationResponse?: GQLCreateEducationResponseTypeResolver;
   Void?: GraphQLScalarType;
 }
 export interface GQLQueryTypeResolver<TParent = undefined> {
@@ -1312,6 +1340,7 @@ export interface GQLMutationTypeResolver<TParent = undefined> {
   userData?: MutationToUserDataResolver<TParent>;
   userPresentation?: MutationToUserPresentationResolver<TParent>;
   workExperience?: MutationToWorkExperienceResolver<TParent>;
+  education?: MutationToEducationResolver<TParent>;
 }
 
 export interface MutationToAuthenticationResolver<
@@ -1353,6 +1382,18 @@ export interface MutationToUserPresentationResolver<
 export interface MutationToWorkExperienceResolver<
   TParent = undefined,
   TResult = GQLWorkExperienceMutationRoot
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface MutationToEducationResolver<
+  TParent = undefined,
+  TResult = GQLEducationMutationRoot
 > {
   (
     parent: TParent,
@@ -1878,6 +1919,58 @@ export interface DeleteWorkExperienceResponseToWorkExperienceIdResolver<
 
 export interface DeleteWorkExperienceResponseToStatusCodeResolver<
   TParent = GQLDeleteWorkExperienceResponse,
+  TResult = number
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLEducationMutationRootTypeResolver<
+  TParent = GQLEducationMutationRoot
+> {
+  createEducation?: EducationMutationRootToCreateEducationResolver<TParent>;
+}
+
+export interface EducationMutationRootToCreateEducationArgs {
+  input: GQLCreateEducationInput;
+}
+export interface EducationMutationRootToCreateEducationResolver<
+  TParent = GQLEducationMutationRoot,
+  TResult = GQLCreateEducationResponse
+> {
+  (
+    parent: TParent,
+    args: EducationMutationRootToCreateEducationArgs,
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLCreateEducationResponseTypeResolver<
+  TParent = GQLCreateEducationResponse
+> {
+  educationId?: CreateEducationResponseToEducationIdResolver<TParent>;
+  statusCode?: CreateEducationResponseToStatusCodeResolver<TParent>;
+}
+
+export interface CreateEducationResponseToEducationIdResolver<
+  TParent = GQLCreateEducationResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface CreateEducationResponseToStatusCodeResolver<
+  TParent = GQLCreateEducationResponse,
   TResult = number
 > {
   (
