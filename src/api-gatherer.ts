@@ -14,9 +14,11 @@ import {
   deleteWorkExperience
 } from "./handlers/work-experience/api-calls";
 import { updateUserPresentationData } from "./handlers/user-presentation/api-calls";
+import { createEducation } from "./handlers/education/api-calls";
 import {
   GQLChangeEmailInput,
   GQLChangePasswordInput,
+  GQLCreateEducationInput,
   GQLLoginInput,
   GQLRefreshTokenInput,
   GQLRegisterInput,
@@ -66,6 +68,11 @@ export interface GetApiMethods {
   getWorkExperience: (authorization: string, workExperienceId: string | undefined) => Promise<any>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   deleteWorkExperience: (authorization: string, workExperienceId: string) => Promise<any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  createEducation: (
+    authorization: string,
+    input: GQLCreateEducationInput | undefined
+  ) => Promise<any>;
 }
 
 export const getApiMethods = (): GetApiMethods => {
@@ -82,6 +89,7 @@ export const getApiMethods = (): GetApiMethods => {
     createWorkExperience,
     updateWorkExperience,
     getWorkExperience,
-    deleteWorkExperience
+    deleteWorkExperience,
+    createEducation
   };
 };
