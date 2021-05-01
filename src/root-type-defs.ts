@@ -10,6 +10,7 @@ import { authenticationTypeDefs } from "./handlers/auth-handler/type-defs";
 import { userDataTypeDefs } from "./handlers/user-data/type-defs";
 import { userPresentationTypeDefs } from "./handlers/user-presentation/type-defs";
 import { workExperienceTypeDefs } from "./handlers/work-experience/type-defs";
+import { educationTypeDefs } from "./handlers/education/type-defs";
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
@@ -28,6 +29,7 @@ const entryTypeDefs = gql`
     userData: UserDataMutationRoot!
     userPresentation: UserPresentationMutationRoot!
     workExperience: WorkExperienceMutationRoot!
+    education: EducationMutationRoot!
   }
 
   # Query Roots
@@ -40,6 +42,7 @@ const entryTypeDefs = gql`
   type AuthenticationMutationRoot
   type UserPresentationMutationRoot
   type WorkExperienceMutationRoot
+  type EducationMutationRoot
 `;
 
 export const rootTypeDefs = [
@@ -47,5 +50,6 @@ export const rootTypeDefs = [
   authenticationTypeDefs,
   userDataTypeDefs,
   userPresentationTypeDefs,
-  workExperienceTypeDefs
+  workExperienceTypeDefs,
+  educationTypeDefs
 ];
