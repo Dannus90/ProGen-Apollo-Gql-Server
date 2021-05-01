@@ -3,19 +3,18 @@ import {
   statusCodeChecker
 } from "../../config/api/error-management/http-response-error";
 import {
-  EducationMutationRootToCreateEducationResolver
+  EducationMutationRootToCreateEducationResolver, GQLCreateEducationResponse
 } from "./../../types/TypesGraphQL";
 import { Context } from "../../context";
-
 export interface EducationMutation {
   EducationMutationRoot: {
     createEducation: EducationMutationRootToCreateEducationResolver;
   };
 }
 
-export const workExperienceMutations: EducationMutation = {
+export const educationMutations: EducationMutation = {
   EducationMutationRoot: {
-    createEducation: async (_, body, { api, authorization }: Context) => {
+    createEducation: async (_, body, { api, authorization }: Context): Promise<GQLCreateEducationResponse> => {
       const response = await api.createEducation(authorization, body.input);
 
       if (!statusCodeChecker(response.status)) {

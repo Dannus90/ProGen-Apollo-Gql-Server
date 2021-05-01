@@ -10,6 +10,7 @@ import { authMutations } from "./handlers/auth-handler/mutations";
 import { userDataMutations } from "./handlers/user-data/mutations";
 import { userPresentationMutations } from "./handlers/user-presentation/mutations";
 import { workExperienceMutations } from "./handlers/work-experience/mutations";
+import { educationMutations } from "./handlers/education/mutations";
 
 interface MutationResolvers {
   Mutation: {
@@ -37,5 +38,5 @@ export const rootMutation = merge(
   userDataMutations,
   userPresentationMutations,
   workExperienceMutations,
-  workExperienceMutations
+  educationMutations
 );
