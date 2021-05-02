@@ -131,12 +131,17 @@ export interface GQLGetWorkExperiencesDataResponse {
 }
 
 export interface GQLEducationRoot {
+  getEducation: GQLGetEducationResponse;
   getEducations: GQLGetEducationsResponse;
 }
 
-export interface GQLGetEducationsResponse {
+export interface GQLGetEducationInput {
+  educationId: string;
+}
+
+export interface GQLGetEducationResponse {
   statusCode: number;
-  educations?: Array<GQLGetEducationDataResponse | null>;
+  education: GQLGetEducationDataResponse;
 }
 
 export interface GQLGetEducationDataResponse {
@@ -144,8 +149,8 @@ export interface GQLGetEducationDataResponse {
   userId: string;
   educationName: string;
   examName: string;
-  SubjectAreaSv: string;
-  SubjectAreaEn: string;
+  subjectAreaSv: string;
+  subjectAreaEn: string;
   descriptionSv: string;
   descriptionEn: string;
   grade: string;
@@ -157,6 +162,11 @@ export interface GQLGetEducationDataResponse {
   dateEnded?: GQLDate;
   createdAt: GQLDate;
   updatedAt: GQLDate;
+}
+
+export interface GQLGetEducationsResponse {
+  statusCode: number;
+  educations?: Array<GQLGetEducationDataResponse | null>;
 }
 
 export interface GQLMutation {
@@ -361,8 +371,9 @@ export interface GQLResolver {
   GetWorkExperiencesResponse?: GQLGetWorkExperiencesResponseTypeResolver;
   GetWorkExperiencesDataResponse?: GQLGetWorkExperiencesDataResponseTypeResolver;
   EducationRoot?: GQLEducationRootTypeResolver;
-  GetEducationsResponse?: GQLGetEducationsResponseTypeResolver;
+  GetEducationResponse?: GQLGetEducationResponseTypeResolver;
   GetEducationDataResponse?: GQLGetEducationDataResponseTypeResolver;
+  GetEducationsResponse?: GQLGetEducationsResponseTypeResolver;
   Mutation?: GQLMutationTypeResolver;
   AuthenticationMutationRoot?: GQLAuthenticationMutationRootTypeResolver;
   TokenResponse?: GQLTokenResponseTypeResolver;
@@ -1382,7 +1393,23 @@ export interface GetWorkExperiencesDataResponseToUpdatedAtResolver<
 }
 
 export interface GQLEducationRootTypeResolver<TParent = GQLEducationRoot> {
+  getEducation?: EducationRootToGetEducationResolver<TParent>;
   getEducations?: EducationRootToGetEducationsResolver<TParent>;
+}
+
+export interface EducationRootToGetEducationArgs {
+  input: GQLGetEducationInput;
+}
+export interface EducationRootToGetEducationResolver<
+  TParent = GQLEducationRoot,
+  TResult = GQLGetEducationResponse
+> {
+  (
+    parent: TParent,
+    args: EducationRootToGetEducationArgs,
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface EducationRootToGetEducationsResolver<
@@ -1397,15 +1424,15 @@ export interface EducationRootToGetEducationsResolver<
   ): Promise<TResult>;
 }
 
-export interface GQLGetEducationsResponseTypeResolver<
-  TParent = GQLGetEducationsResponse
+export interface GQLGetEducationResponseTypeResolver<
+  TParent = GQLGetEducationResponse
 > {
-  statusCode?: GetEducationsResponseToStatusCodeResolver<TParent>;
-  educations?: GetEducationsResponseToEducationsResolver<TParent>;
+  statusCode?: GetEducationResponseToStatusCodeResolver<TParent>;
+  education?: GetEducationResponseToEducationResolver<TParent>;
 }
 
-export interface GetEducationsResponseToStatusCodeResolver<
-  TParent = GQLGetEducationsResponse,
+export interface GetEducationResponseToStatusCodeResolver<
+  TParent = GQLGetEducationResponse,
   TResult = number
 > {
   (
@@ -1416,9 +1443,9 @@ export interface GetEducationsResponseToStatusCodeResolver<
   ): Promise<TResult>;
 }
 
-export interface GetEducationsResponseToEducationsResolver<
-  TParent = GQLGetEducationsResponse,
-  TResult = Array<GQLGetEducationDataResponse | null> | null
+export interface GetEducationResponseToEducationResolver<
+  TParent = GQLGetEducationResponse,
+  TResult = GQLGetEducationDataResponse
 > {
   (
     parent: TParent,
@@ -1435,8 +1462,8 @@ export interface GQLGetEducationDataResponseTypeResolver<
   userId?: GetEducationDataResponseToUserIdResolver<TParent>;
   educationName?: GetEducationDataResponseToEducationNameResolver<TParent>;
   examName?: GetEducationDataResponseToExamNameResolver<TParent>;
-  SubjectAreaSv?: GetEducationDataResponseToSubjectAreaSvResolver<TParent>;
-  SubjectAreaEn?: GetEducationDataResponseToSubjectAreaEnResolver<TParent>;
+  subjectAreaSv?: GetEducationDataResponseToSubjectAreaSvResolver<TParent>;
+  subjectAreaEn?: GetEducationDataResponseToSubjectAreaEnResolver<TParent>;
   descriptionSv?: GetEducationDataResponseToDescriptionSvResolver<TParent>;
   descriptionEn?: GetEducationDataResponseToDescriptionEnResolver<TParent>;
   grade?: GetEducationDataResponseToGradeResolver<TParent>;
@@ -1645,6 +1672,37 @@ export interface GetEducationDataResponseToCreatedAtResolver<
 export interface GetEducationDataResponseToUpdatedAtResolver<
   TParent = GQLGetEducationDataResponse,
   TResult = GQLDate
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLGetEducationsResponseTypeResolver<
+  TParent = GQLGetEducationsResponse
+> {
+  statusCode?: GetEducationsResponseToStatusCodeResolver<TParent>;
+  educations?: GetEducationsResponseToEducationsResolver<TParent>;
+}
+
+export interface GetEducationsResponseToStatusCodeResolver<
+  TParent = GQLGetEducationsResponse,
+  TResult = number
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GetEducationsResponseToEducationsResolver<
+  TParent = GQLGetEducationsResponse,
+  TResult = Array<GQLGetEducationDataResponse | null> | null
 > {
   (
     parent: TParent,

@@ -2,6 +2,7 @@ import { gql } from "apollo-server";
 
 export const educationTypeDefs = gql`
   extend type EducationRoot {
+    getEducation(input: GetEducationInput!): GetEducationResponse!
     getEducations: GetEducationsResponse!
   }
 
@@ -30,9 +31,18 @@ export const educationTypeDefs = gql`
     dateEnded: Date
   }
 
+  input GetEducationInput {
+    educationId: String!
+  }
+
   type GetEducationsResponse {
     statusCode: Int!
     educations: [GetEducationDataResponse]
+  }
+
+  type GetEducationResponse {
+    statusCode: Int!
+    education: GetEducationDataResponse!
   }
 
   type GetEducationDataResponse {
@@ -40,8 +50,8 @@ export const educationTypeDefs = gql`
     userId: String!
     educationName: String!
     examName: String!
-    SubjectAreaSv: String!
-    SubjectAreaEn: String!
+    subjectAreaSv: String!
+    subjectAreaEn: String!
     descriptionSv: String!
     descriptionEn: String!
     grade: String!

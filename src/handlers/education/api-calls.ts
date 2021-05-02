@@ -1,5 +1,5 @@
 import { PROGEN_BASE_URL } from "../../config/api/base";
-import { fetchPostAuth } from "../../config/api/httpClient";
+import { fetchGetAuth, fetchPostAuth } from "../../config/api/httpClient";
 import { GQLCreateEducationInput } from "../../types/TypesGraphQL";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -12,5 +12,17 @@ export const createEducation = async (
     "POST",
     authorization,
     input
+  );
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getEducation = async (
+  authorization: string,
+  educationId: string | undefined
+): Promise<any> => {
+  return await fetchGetAuth(
+    `${PROGEN_BASE_URL}/user/education/${educationId}`,
+    "GET",
+    authorization
   );
 };
