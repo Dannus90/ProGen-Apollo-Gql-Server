@@ -41,8 +41,6 @@ export const EducationResolvers = {
         "All"
       );
 
-      console.log(educations);
-
       return {
         statusCode: educations.statusCode,
         educations: educations.educationsDto
