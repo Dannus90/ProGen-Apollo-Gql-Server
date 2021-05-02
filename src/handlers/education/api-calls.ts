@@ -26,3 +26,8 @@ export const getEducation = async (
     authorization
   );
 };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getEducations = async (authorization: string): Promise<any> => {
+  return await fetchGetAuth(`${PROGEN_BASE_URL}/user/education`, "GET", authorization);
+};

@@ -5,7 +5,7 @@ export interface EducationResponse {
 
 export interface EducationsResponse {
   statusCode: number;
-  educations: Array<Education>;
+  educationsDto: Array<Education>;
 }
 
 type Education = {

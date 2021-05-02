@@ -3,11 +3,12 @@ import {
   HttpResponseError,
   statusCodeChecker
 } from "../../config/api/error-management/http-response-error";
-import { getEducation } from "./api-calls";
-import { EducationResponse } from "./api-types";
+import { getEducation, getEducations } from "./api-calls";
+import { EducationResponse, EducationsResponse } from "./api-types";
 
 export interface EducationDataLoaders {
   byEducationId: DataLoader<string, EducationResponse>;
+  educationsByUserIdInClaims: DataLoader<string, EducationsResponse>;
 }
 
 export const createEducationDataLoaders = (
@@ -41,11 +42,11 @@ export const createEducationDataLoaders = (
     });
   });
 
-/*   const workExperiencesByUserIdInClaims = new DataLoader<"All", GetWorkExperiencesAnswer>(
+  const educationsByUserIdInClaims = new DataLoader<"All", EducationsResponse>(
     async (ids) => {
-      const workExperiences = await Promise.all(
+      const educations = await Promise.all(
         ids.map(async () => {
-          const response = await getWorkExperiences(authorization);
+          const response = await getEducations(authorization);
           if (response.status === 401) {
             const { status, statusText } = response;
             throw new HttpResponseError(statusText, status, statusText);
@@ -59,19 +60,20 @@ export const createEducationDataLoaders = (
             throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
           }
 
-          const workExperiencesResponse = await response.json();
-          workExperiencesResponse.statusCode = response.status;
-          return workExperiencesResponse;
+          const educationsResponse = await response.json();
+          educationsResponse.statusCode = response.status;
+          return educationsResponse;
         })
       );
 
       return ids.map(() => {
-        return workExperiences[0];
+        return educations[0];
       });
     }
-  ); */
+  );
 
   return {
-    byEducationId
+    byEducationId,
+    educationsByUserIdInClaims
   };
 };

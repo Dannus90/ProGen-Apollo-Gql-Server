@@ -1,5 +1,6 @@
 import { GQLGetEducationResponse, GQLGetEducationsResponse } from "../../types/TypesGraphQL";
 import { Context } from "./../../context";
+import { EducationsResponse } from "./api-types";
 
 export const EducationResolvers = {
   EducationRoot: {
@@ -33,6 +34,18 @@ export const EducationResolvers = {
           userId: data.userId,
           examName: data.examName
         }
+      };
+    },
+    getEducations: async (_, __, { loaders }: Context): Promise<GQLGetEducationsResponse> => {
+      const educations = await loaders.education.educationsByUserIdInClaims.load(
+        "All"
+      );
+
+      console.log(educations);
+
+      return {
+        statusCode: educations.statusCode,
+        educations: educations.educationsDto
       };
     }
   }
