@@ -15,6 +15,7 @@ export interface GQLQuery {
   userData: GQLUserDataRoot;
   userPresentation: GQLUserPresentationRoot;
   workExperience: GQLWorkExperienceRoot;
+  education: GQLEducationRoot;
 }
 
 export interface GQLUserDataRoot {
@@ -119,6 +120,35 @@ export interface GQLGetWorkExperiencesDataResponse {
   roleEn: string;
   descriptionSv: string;
   descriptionEn: string;
+  citySv: string;
+  cityEn: string;
+  countrySv: string;
+  countryEn: string;
+  dateStarted?: GQLDate;
+  dateEnded?: GQLDate;
+  createdAt: GQLDate;
+  updatedAt: GQLDate;
+}
+
+export interface GQLEducationRoot {
+  getEducations: GQLGetEducationsResponse;
+}
+
+export interface GQLGetEducationsResponse {
+  statusCode: number;
+  educations?: Array<GQLGetEducationDataResponse | null>;
+}
+
+export interface GQLGetEducationDataResponse {
+  id: string;
+  userId: string;
+  educationName: string;
+  examName: string;
+  SubjectAreaSv: string;
+  SubjectAreaEn: string;
+  descriptionSv: string;
+  descriptionEn: string;
+  grade: string;
   citySv: string;
   cityEn: string;
   countrySv: string;
@@ -330,6 +360,9 @@ export interface GQLResolver {
   GetAndUpdateWorkExperienceDataResponse?: GQLGetAndUpdateWorkExperienceDataResponseTypeResolver;
   GetWorkExperiencesResponse?: GQLGetWorkExperiencesResponseTypeResolver;
   GetWorkExperiencesDataResponse?: GQLGetWorkExperiencesDataResponseTypeResolver;
+  EducationRoot?: GQLEducationRootTypeResolver;
+  GetEducationsResponse?: GQLGetEducationsResponseTypeResolver;
+  GetEducationDataResponse?: GQLGetEducationDataResponseTypeResolver;
   Mutation?: GQLMutationTypeResolver;
   AuthenticationMutationRoot?: GQLAuthenticationMutationRootTypeResolver;
   TokenResponse?: GQLTokenResponseTypeResolver;
@@ -348,6 +381,7 @@ export interface GQLQueryTypeResolver<TParent = undefined> {
   userData?: QueryToUserDataResolver<TParent>;
   userPresentation?: QueryToUserPresentationResolver<TParent>;
   workExperience?: QueryToWorkExperienceResolver<TParent>;
+  education?: QueryToEducationResolver<TParent>;
 }
 
 export interface QueryToUserDataResolver<
@@ -377,6 +411,18 @@ export interface QueryToUserPresentationResolver<
 export interface QueryToWorkExperienceResolver<
   TParent = undefined,
   TResult = GQLWorkExperienceRoot
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface QueryToEducationResolver<
+  TParent = undefined,
+  TResult = GQLEducationRoot
 > {
   (
     parent: TParent,
@@ -1325,6 +1371,279 @@ export interface GetWorkExperiencesDataResponseToCreatedAtResolver<
 
 export interface GetWorkExperiencesDataResponseToUpdatedAtResolver<
   TParent = GQLGetWorkExperiencesDataResponse,
+  TResult = GQLDate
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLEducationRootTypeResolver<TParent = GQLEducationRoot> {
+  getEducations?: EducationRootToGetEducationsResolver<TParent>;
+}
+
+export interface EducationRootToGetEducationsResolver<
+  TParent = GQLEducationRoot,
+  TResult = GQLGetEducationsResponse
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLGetEducationsResponseTypeResolver<
+  TParent = GQLGetEducationsResponse
+> {
+  statusCode?: GetEducationsResponseToStatusCodeResolver<TParent>;
+  educations?: GetEducationsResponseToEducationsResolver<TParent>;
+}
+
+export interface GetEducationsResponseToStatusCodeResolver<
+  TParent = GQLGetEducationsResponse,
+  TResult = number
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GetEducationsResponseToEducationsResolver<
+  TParent = GQLGetEducationsResponse,
+  TResult = Array<GQLGetEducationDataResponse | null> | null
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLGetEducationDataResponseTypeResolver<
+  TParent = GQLGetEducationDataResponse
+> {
+  id?: GetEducationDataResponseToIdResolver<TParent>;
+  userId?: GetEducationDataResponseToUserIdResolver<TParent>;
+  educationName?: GetEducationDataResponseToEducationNameResolver<TParent>;
+  examName?: GetEducationDataResponseToExamNameResolver<TParent>;
+  SubjectAreaSv?: GetEducationDataResponseToSubjectAreaSvResolver<TParent>;
+  SubjectAreaEn?: GetEducationDataResponseToSubjectAreaEnResolver<TParent>;
+  descriptionSv?: GetEducationDataResponseToDescriptionSvResolver<TParent>;
+  descriptionEn?: GetEducationDataResponseToDescriptionEnResolver<TParent>;
+  grade?: GetEducationDataResponseToGradeResolver<TParent>;
+  citySv?: GetEducationDataResponseToCitySvResolver<TParent>;
+  cityEn?: GetEducationDataResponseToCityEnResolver<TParent>;
+  countrySv?: GetEducationDataResponseToCountrySvResolver<TParent>;
+  countryEn?: GetEducationDataResponseToCountryEnResolver<TParent>;
+  dateStarted?: GetEducationDataResponseToDateStartedResolver<TParent>;
+  dateEnded?: GetEducationDataResponseToDateEndedResolver<TParent>;
+  createdAt?: GetEducationDataResponseToCreatedAtResolver<TParent>;
+  updatedAt?: GetEducationDataResponseToUpdatedAtResolver<TParent>;
+}
+
+export interface GetEducationDataResponseToIdResolver<
+  TParent = GQLGetEducationDataResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GetEducationDataResponseToUserIdResolver<
+  TParent = GQLGetEducationDataResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GetEducationDataResponseToEducationNameResolver<
+  TParent = GQLGetEducationDataResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GetEducationDataResponseToExamNameResolver<
+  TParent = GQLGetEducationDataResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GetEducationDataResponseToSubjectAreaSvResolver<
+  TParent = GQLGetEducationDataResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GetEducationDataResponseToSubjectAreaEnResolver<
+  TParent = GQLGetEducationDataResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GetEducationDataResponseToDescriptionSvResolver<
+  TParent = GQLGetEducationDataResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GetEducationDataResponseToDescriptionEnResolver<
+  TParent = GQLGetEducationDataResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GetEducationDataResponseToGradeResolver<
+  TParent = GQLGetEducationDataResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GetEducationDataResponseToCitySvResolver<
+  TParent = GQLGetEducationDataResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GetEducationDataResponseToCityEnResolver<
+  TParent = GQLGetEducationDataResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GetEducationDataResponseToCountrySvResolver<
+  TParent = GQLGetEducationDataResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GetEducationDataResponseToCountryEnResolver<
+  TParent = GQLGetEducationDataResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GetEducationDataResponseToDateStartedResolver<
+  TParent = GQLGetEducationDataResponse,
+  TResult = GQLDate | null
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GetEducationDataResponseToDateEndedResolver<
+  TParent = GQLGetEducationDataResponse,
+  TResult = GQLDate | null
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GetEducationDataResponseToCreatedAtResolver<
+  TParent = GQLGetEducationDataResponse,
+  TResult = GQLDate
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GetEducationDataResponseToUpdatedAtResolver<
+  TParent = GQLGetEducationDataResponse,
   TResult = GQLDate
 > {
   (

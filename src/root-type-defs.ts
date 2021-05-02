@@ -22,6 +22,7 @@ const entryTypeDefs = gql`
     userData: UserDataRoot!
     userPresentation: UserPresentationRoot!
     workExperience: WorkExperienceRoot!
+    education: EducationRoot!
   }
 
   type Mutation {
@@ -36,6 +37,7 @@ const entryTypeDefs = gql`
   type UserPresentationRoot
   type UserDataRoot
   type WorkExperienceRoot
+  type EducationRoot
 
   # Mutation Roots
   type UserDataMutationRoot
