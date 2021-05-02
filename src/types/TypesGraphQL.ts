@@ -321,6 +321,7 @@ export interface GQLDeleteWorkExperienceResponse {
 export interface GQLEducationMutationRoot {
   createEducation: GQLCreateEducationResponse;
   updateEducation: GQLUpdateEducationResponse;
+  deleteEducation: GQLDeleteEducationResponse;
 }
 
 export interface GQLCreateEducationInput {
@@ -382,6 +383,15 @@ export interface GQLEducationResponse {
   dateEnded?: GQLDate;
 }
 
+export interface GQLDeleteEducationInput {
+  educationId: string;
+}
+
+export interface GQLDeleteEducationResponse {
+  educationId: string;
+  statusCode: number;
+}
+
 export type GQLVoid = any;
 
 /*********************************
@@ -427,6 +437,7 @@ export interface GQLResolver {
   CreateEducationResponse?: GQLCreateEducationResponseTypeResolver;
   UpdateEducationResponse?: GQLUpdateEducationResponseTypeResolver;
   EducationResponse?: GQLEducationResponseTypeResolver;
+  DeleteEducationResponse?: GQLDeleteEducationResponseTypeResolver;
   Void?: GraphQLScalarType;
 }
 export interface GQLQueryTypeResolver<TParent = undefined> {
@@ -2352,6 +2363,7 @@ export interface GQLEducationMutationRootTypeResolver<
 > {
   createEducation?: EducationMutationRootToCreateEducationResolver<TParent>;
   updateEducation?: EducationMutationRootToUpdateEducationResolver<TParent>;
+  deleteEducation?: EducationMutationRootToDeleteEducationResolver<TParent>;
 }
 
 export interface EducationMutationRootToCreateEducationArgs {
@@ -2379,6 +2391,21 @@ export interface EducationMutationRootToUpdateEducationResolver<
   (
     parent: TParent,
     args: EducationMutationRootToUpdateEducationArgs,
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface EducationMutationRootToDeleteEducationArgs {
+  input: GQLDeleteEducationInput;
+}
+export interface EducationMutationRootToDeleteEducationResolver<
+  TParent = GQLEducationMutationRoot,
+  TResult = GQLDeleteEducationResponse
+> {
+  (
+    parent: TParent,
+    args: EducationMutationRootToDeleteEducationArgs,
     context: any,
     info: GraphQLResolveInfo
   ): Promise<TResult>;
@@ -2611,6 +2638,37 @@ export interface EducationResponseToDateStartedResolver<
 export interface EducationResponseToDateEndedResolver<
   TParent = GQLEducationResponse,
   TResult = GQLDate | null
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLDeleteEducationResponseTypeResolver<
+  TParent = GQLDeleteEducationResponse
+> {
+  educationId?: DeleteEducationResponseToEducationIdResolver<TParent>;
+  statusCode?: DeleteEducationResponseToStatusCodeResolver<TParent>;
+}
+
+export interface DeleteEducationResponseToEducationIdResolver<
+  TParent = GQLDeleteEducationResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface DeleteEducationResponseToStatusCodeResolver<
+  TParent = GQLDeleteEducationResponse,
+  TResult = number
 > {
   (
     parent: TParent,
