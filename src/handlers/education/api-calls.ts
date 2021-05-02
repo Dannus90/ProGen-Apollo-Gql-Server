@@ -1,6 +1,6 @@
 import { PROGEN_BASE_URL } from "../../config/api/base";
-import { fetchGetAuth, fetchPostAuth } from "../../config/api/httpClient";
-import { GQLCreateEducationInput } from "../../types/TypesGraphQL";
+import { fetchGetAuth, fetchPostAuth, fetchPutAuth } from "../../config/api/httpClient";
+import { GQLCreateEducationInput, GQLUpdateEducationInput } from "../../types/TypesGraphQL";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createEducation = async (
@@ -12,6 +12,22 @@ export const createEducation = async (
     "POST",
     authorization,
     input
+  );
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const updateEducation = async (
+  authorization: string,
+  educationId: string | undefined,
+  input: GQLUpdateEducationInput | undefined
+) => {
+  const data = { ...input };
+
+  return await fetchPutAuth(
+    `${PROGEN_BASE_URL}/user/education/${educationId}`,
+    "PUT",
+    authorization,
+    data
   );
 };
 

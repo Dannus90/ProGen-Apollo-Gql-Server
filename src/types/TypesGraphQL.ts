@@ -344,6 +344,23 @@ export interface GQLCreateEducationResponse {
   statusCode: number;
 }
 
+export interface GQLUpdateEducationInput {
+  educationId: string;
+  educationName: string;
+  examName: string;
+  subjectAreaSv: string;
+  subjectAreaEn: string;
+  descriptionSv: string;
+  descriptionEn: string;
+  grade: string;
+  citySv: string;
+  cityEn: string;
+  countrySv: string;
+  countryEn: string;
+  dateStarted?: GQLDate;
+  dateEnded?: GQLDate;
+}
+
 export interface GQLUpdateEducationResponse {
   statusCode: number;
   education: GQLEducationResponse;
@@ -366,22 +383,6 @@ export interface GQLEducationResponse {
 }
 
 export type GQLVoid = any;
-
-export interface GQLUpdateEducationInput {
-  educationName: string;
-  examName: string;
-  subjectAreaSv: string;
-  subjectAreaEn: string;
-  descriptionSv: string;
-  descriptionEn: string;
-  grade: string;
-  citySv: string;
-  cityEn: string;
-  countrySv: string;
-  countryEn: string;
-  dateStarted?: GQLDate;
-  dateEnded?: GQLDate;
-}
 
 /*********************************
  *                               *
@@ -2369,7 +2370,7 @@ export interface EducationMutationRootToCreateEducationResolver<
 }
 
 export interface EducationMutationRootToUpdateEducationArgs {
-  input: GQLCreateEducationInput;
+  input: GQLUpdateEducationInput;
 }
 export interface EducationMutationRootToUpdateEducationResolver<
   TParent = GQLEducationMutationRoot,

@@ -8,7 +8,7 @@ export const educationTypeDefs = gql`
 
   extend type EducationMutationRoot {
     createEducation(input: CreateEducationInput!): CreateEducationResponse!
-    updateEducation(input: CreateEducationInput!): UpdateEducationResponse!
+    updateEducation(input: UpdateEducationInput!): UpdateEducationResponse!
   }
 
   type CreateEducationResponse {
@@ -52,8 +52,9 @@ export const educationTypeDefs = gql`
     dateStarted: Date
     dateEnded: Date
   }
-
+  
   input UpdateEducationInput {
+    educationId: String!
     educationName: String!
     examName: String!
     subjectAreaSv: String!

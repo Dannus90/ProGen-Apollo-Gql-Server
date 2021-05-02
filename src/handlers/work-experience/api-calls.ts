@@ -1,5 +1,5 @@
 import { PROGEN_BASE_URL } from "../../config/api/base";
-import { fetchDeleteAuth, fetchGetAuth, fetchPostAuth } from "../../config/api/httpClient";
+import { fetchDeleteAuth, fetchGetAuth, fetchPostAuth, fetchPutAuth } from "../../config/api/httpClient";
 import { GQLUpdateWorkExperienceInput, GQLWorkExperienceInput } from "../../types/TypesGraphQL";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -24,7 +24,7 @@ export const updateWorkExperience = async (
   const data = { ...input };
   delete data.workExperienceId;
 
-  return await fetchPostAuth(
+  return await fetchPutAuth(
     `${PROGEN_BASE_URL}/user/workexperience/${workExperienceId}`,
     "PUT",
     authorization,
