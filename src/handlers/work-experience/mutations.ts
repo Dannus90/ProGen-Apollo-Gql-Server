@@ -62,43 +62,9 @@ export const workExperienceMutations: WorkExperienceMutation = {
 
       const data = await response.json();
 
-      const {
-        id,
-        userId,
-        employmentRate,
-        companyName,
-        roleSv,
-        roleEn,
-        descriptionSv,
-        descriptionEn,
-        citySv,
-        cityEn,
-        countrySv,
-        countryEn,
-        dateStarted,
-        dateEnded,
-        createdAt,
-        updatedAt
-      } = data.workExperienceDto;
-
       const gqlResponse = {
         workExperience: {
-          id,
-          userId,
-          employmentRate,
-          companyName,
-          roleSv,
-          roleEn,
-          descriptionSv,
-          descriptionEn,
-          citySv,
-          cityEn,
-          countrySv,
-          countryEn,
-          dateStarted,
-          dateEnded,
-          createdAt,
-          updatedAt,
+          ...data.workExperienceDto,
           statusCode: response.status
         }
       };
