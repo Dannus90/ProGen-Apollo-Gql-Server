@@ -368,6 +368,8 @@ export interface GQLUpdateEducationResponse {
 }
 
 export interface GQLEducationResponse {
+  id: string;
+  userId: string;
   educationName: string;
   examName: string;
   subjectAreaSv: string;
@@ -2476,6 +2478,8 @@ export interface UpdateEducationResponseToEducationResolver<
 export interface GQLEducationResponseTypeResolver<
   TParent = GQLEducationResponse
 > {
+  id?: EducationResponseToIdResolver<TParent>;
+  userId?: EducationResponseToUserIdResolver<TParent>;
   educationName?: EducationResponseToEducationNameResolver<TParent>;
   examName?: EducationResponseToExamNameResolver<TParent>;
   subjectAreaSv?: EducationResponseToSubjectAreaSvResolver<TParent>;
@@ -2489,6 +2493,30 @@ export interface GQLEducationResponseTypeResolver<
   countryEn?: EducationResponseToCountryEnResolver<TParent>;
   dateStarted?: EducationResponseToDateStartedResolver<TParent>;
   dateEnded?: EducationResponseToDateEndedResolver<TParent>;
+}
+
+export interface EducationResponseToIdResolver<
+  TParent = GQLEducationResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface EducationResponseToUserIdResolver<
+  TParent = GQLEducationResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }
 
 export interface EducationResponseToEducationNameResolver<

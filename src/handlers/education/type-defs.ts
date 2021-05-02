@@ -28,6 +28,8 @@ export const educationTypeDefs = gql`
   }
 
   type EducationResponse {
+    id: String!
+    userId: String!
     educationName: String!
     examName: String!
     subjectAreaSv: String!

@@ -3,13 +3,14 @@ import {
   statusCodeChecker
 } from "../../config/api/error-management/http-response-error";
 import {
-  EducationMutationRootToCreateEducationResolver, EducationMutationRootToUpdateEducationResolver, GQLCreateEducationResponse
+  EducationMutationRootToCreateEducationResolver, EducationMutationRootToDeleteEducationResolver, EducationMutationRootToUpdateEducationResolver, GQLCreateEducationResponse
 } from "./../../types/TypesGraphQL";
 import { Context } from "../../context";
 export interface EducationMutation {
   EducationMutationRoot: {
     createEducation: EducationMutationRootToCreateEducationResolver;
     updateEducation: EducationMutationRootToUpdateEducationResolver;
+    deleteEducation: EducationMutationRootToDeleteEducationResolver;
   };
 }
 
@@ -67,5 +68,23 @@ export const educationMutations: EducationMutation = {
 
       return gqlResponse;
     },
+    deleteEducation: async (_, body, { api, authorization }: Context) => {
+      const response = await api.deleteEducation(authorization, body.input.educationId);
+
+      if (!statusCodeChecker(response.status)) {
+        const { type, statusCode, message, errors } = await response.json();
+
+        const errorOutput = Object.keys(errors).map((err) => {
+          return errors[err];
+        })
+
+        throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
+      }
+
+      return {
+        educationId: body.input?.educationId,
+        statusCode: response.status
+      };
+    }
   }
 };
