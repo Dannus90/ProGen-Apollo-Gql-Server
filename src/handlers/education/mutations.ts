@@ -21,10 +21,14 @@ export const educationMutations: EducationMutation = {
 
       if (!statusCodeChecker(response.status)) {
         const { type, statusCode, message, errors } = await response.json();
+
+        let errorOutput = ["Unspecified error"];
         
-        const errorOutput = Object.keys(errors).map((err) => {
-          return errors[err];
-        })
+        if(errors) {
+          errorOutput = Object.keys(errors).map((err) => {
+            return errors[err];
+          })
+      }
 
         throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
       }
