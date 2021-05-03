@@ -30,8 +30,10 @@ export const educationTypeDefs = gql`
   type EducationResponse {
     id: String!
     userId: String!
-    educationName: String!
-    examName: String!
+    educationNameSv: String!
+    educationNameEn: String!
+    examNameSv: String!
+    examNameEn: String!
     subjectAreaSv: String!
     subjectAreaEn: String!
     descriptionSv: String!
@@ -50,8 +52,10 @@ export const educationTypeDefs = gql`
   }
 
   input CreateEducationInput {
-    educationName: String!
-    examName: String!
+    educationNameSv: String!
+    educationNameEn: String!
+    examNameSv: String!
+    examNameEn: String!
     subjectAreaSv: String!
     subjectAreaEn: String!
     descriptionSv: String!
@@ -67,8 +71,10 @@ export const educationTypeDefs = gql`
   
   input UpdateEducationInput {
     educationId: String!
-    educationName: String!
-    examName: String!
+    educationNameSv: String!
+    educationNameEn: String!
+    examNameSv: String!
+    examNameEn: String!
     subjectAreaSv: String!
     subjectAreaEn: String!
     descriptionSv: String!
@@ -99,8 +105,10 @@ export const educationTypeDefs = gql`
   type GetEducationDataResponse {
     id: String!
     userId: String!
-    educationName: String!
-    examName: String!
+    educationNameSv: String!
+    educationNameEn: String!
+    examNameSv: String!
+    examNameEn: String!
     subjectAreaSv: String!
     subjectAreaEn: String!
     descriptionSv: String!

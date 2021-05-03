@@ -1,6 +1,5 @@
 import { GQLGetEducationResponse, GQLGetEducationsResponse } from "../../types/TypesGraphQL";
 import { Context } from "./../../context";
-import { EducationsResponse } from "./api-types";
 
 export const EducationResolvers = {
   EducationRoot: {
@@ -19,7 +18,8 @@ export const EducationResolvers = {
           id: data.id,
           cityEn: data.cityEn,
           citySv: data.citySv,
-          educationName: data.educationName,
+          educationNameSv: data.educationNameSv,
+          educationNameEn: data.educationNameEn,
           countryEn: data.countryEn,
           countrySv: data.countrySv,
           createdAt: data.createdAt,
@@ -32,7 +32,8 @@ export const EducationResolvers = {
           subjectAreaSv: data.subjectAreaSv,
           subjectAreaEn: data.subjectAreaEn,
           userId: data.userId,
-          examName: data.examName
+          examNameSv: data.examNameSv,
+          examNameEn: data.examNameEn
         }
       };
     },

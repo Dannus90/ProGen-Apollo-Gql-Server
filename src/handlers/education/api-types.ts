@@ -11,8 +11,10 @@ export interface EducationsResponse {
 type Education = {
   id: string;
   userId: string;
-  educationName: string;
-  examName: string;
+  educationNameSv: string;
+  educationNameEn: string;
+  examNameSv: string;
+  examNameEn: string;
   subjectAreaSv: string;
   subjectAreaEn: string;
   descriptionSv: string;
