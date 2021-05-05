@@ -1,0 +1,24 @@
+image: node:latest
+
+cache:
+  paths:
+    - node_modules/
+
+before_script:
+  - rm -rf build # remove the existing build
+  - CI=false yarn install # install required packages
+
+stages:
+  - audit
+  - lint
+
+audit:
+  stage: audit
+  script:
+    - yarn audit
+
+lint:
+  stage: lint
+  script:
+    - yarn lint:ci
+    - rm -rf node_modules/

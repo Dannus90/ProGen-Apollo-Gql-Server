@@ -9,6 +9,7 @@
     "types": "ts-node ./scripts/generate-types-from-schema.ts && prettier --no-config --write \"src/types/TypesGraphQL.ts\" --ignore-path .gitignore",
     "formatlint:fix": "eslint --fix . && prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "lint:fix": "eslint --fix .",
+    "lint:ci": "eslint --fix . && prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "format:fix": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
   "keywords": [
