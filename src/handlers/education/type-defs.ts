@@ -68,7 +68,7 @@ export const educationTypeDefs = gql`
     dateStarted: Date
     dateEnded: Date
   }
-  
+
   input UpdateEducationInput {
     educationId: String!
     educationNameSv: String!

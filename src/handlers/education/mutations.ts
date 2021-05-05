@@ -3,7 +3,10 @@ import {
   statusCodeChecker
 } from "../../config/api/error-management/http-response-error";
 import {
-  EducationMutationRootToCreateEducationResolver, EducationMutationRootToDeleteEducationResolver, EducationMutationRootToUpdateEducationResolver, GQLCreateEducationResponse
+  EducationMutationRootToCreateEducationResolver,
+  EducationMutationRootToDeleteEducationResolver,
+  EducationMutationRootToUpdateEducationResolver,
+  GQLCreateEducationResponse
 } from "./../../types/TypesGraphQL";
 import { Context } from "../../context";
 export interface EducationMutation {
@@ -16,19 +19,23 @@ export interface EducationMutation {
 
 export const educationMutations: EducationMutation = {
   EducationMutationRoot: {
-    createEducation: async (_, body, { api, authorization }: Context): Promise<GQLCreateEducationResponse> => {
+    createEducation: async (
+      _,
+      body,
+      { api, authorization }: Context
+    ): Promise<GQLCreateEducationResponse> => {
       const response = await api.createEducation(authorization, body.input);
 
       if (!statusCodeChecker(response.status)) {
         const { type, statusCode, message, errors } = await response.json();
 
         let errorOutput = ["Unspecified error"];
-        
-        if(errors) {
+
+        if (errors) {
           errorOutput = Object.keys(errors).map((err) => {
             return errors[err];
-          })
-      }
+          });
+        }
 
         throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
       }
@@ -43,20 +50,16 @@ export const educationMutations: EducationMutation = {
       };
 
       return gqlResponse;
-    },  
+    },
     updateEducation: async (_, body, { api, authorization }: Context) => {
-      const response = await api.updateEducation(
-        authorization,
-        body.input.educationId,
-        body.input
-      );
+      const response = await api.updateEducation(authorization, body.input.educationId, body.input);
 
       if (!statusCodeChecker(response.status)) {
         const { type, statusCode, message, errors } = await response.json();
 
         const errorOutput = Object.keys(errors).map((err) => {
           return errors[err];
-        })
+        });
 
         throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
       }
@@ -80,7 +83,7 @@ export const educationMutations: EducationMutation = {
 
         const errorOutput = Object.keys(errors).map((err) => {
           return errors[err];
-        })
+        });
 
         throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
       }

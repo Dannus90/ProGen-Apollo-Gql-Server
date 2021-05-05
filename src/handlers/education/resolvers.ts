@@ -9,8 +9,8 @@ export const EducationResolvers = {
       { loaders }: Context
     ): Promise<GQLGetEducationResponse> => {
       const education = await loaders.education.byEducationId.load(educationId);
-      
-      const data = education.educationDto
+
+      const data = education.educationDto;
 
       return {
         statusCode: education.statusCode,
@@ -38,9 +38,7 @@ export const EducationResolvers = {
       };
     },
     getEducations: async (_, __, { loaders }: Context): Promise<GQLGetEducationsResponse> => {
-      const educations = await loaders.education.educationsByUserIdInClaims.load(
-        "All"
-      );
+      const educations = await loaders.education.educationsByUserIdInClaims.load("All");
 
       return {
         statusCode: educations.statusCode,

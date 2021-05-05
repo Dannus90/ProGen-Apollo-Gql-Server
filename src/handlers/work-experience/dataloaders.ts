@@ -26,8 +26,8 @@ export const createWorkExperienceDataLoaders = (
 
           const errorOutput = Object.keys(errors).map((err) => {
             return errors[err];
-          })
-  
+          });
+
           throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
         }
 
@@ -55,9 +55,13 @@ export const createWorkExperienceDataLoaders = (
 
             const errorOutput = Object.keys(errors).map((err) => {
               return errors[err];
-            })
-    
-            throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
+            });
+
+            throw new HttpResponseError(
+              type,
+              statusCode ?? response.status,
+              message ?? errorOutput
+            );
           }
 
           const workExperiencesResponse = await response.json();

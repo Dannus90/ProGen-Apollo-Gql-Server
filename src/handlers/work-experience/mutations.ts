@@ -24,10 +24,10 @@ export const workExperienceMutations: WorkExperienceMutation = {
 
       if (!statusCodeChecker(response.status)) {
         const { type, statusCode, message, errors } = await response.json();
-        
+
         const errorOutput = Object.keys(errors).map((err) => {
           return errors[err];
-        })
+        });
 
         throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
       }
@@ -55,7 +55,7 @@ export const workExperienceMutations: WorkExperienceMutation = {
 
         const errorOutput = Object.keys(errors).map((err) => {
           return errors[err];
-        })
+        });
 
         throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
       }
@@ -79,7 +79,7 @@ export const workExperienceMutations: WorkExperienceMutation = {
 
         const errorOutput = Object.keys(errors).map((err) => {
           return errors[err];
-        })
+        });
 
         throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
       }

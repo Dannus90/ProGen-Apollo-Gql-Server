@@ -1,5 +1,10 @@
 import { PROGEN_BASE_URL } from "../../config/api/base";
-import { fetchDeleteAuth, fetchGetAuth, fetchPostAuth, fetchPutAuth } from "../../config/api/httpClient";
+import {
+  fetchDeleteAuth,
+  fetchGetAuth,
+  fetchPostAuth,
+  fetchPutAuth
+} from "../../config/api/httpClient";
 import { GQLCreateEducationInput, GQLUpdateEducationInput } from "../../types/TypesGraphQL";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -7,12 +12,7 @@ export const createEducation = async (
   authorization: string,
   input: GQLCreateEducationInput | undefined
 ) => {
-  return await fetchPostAuth(
-    `${PROGEN_BASE_URL}/user/education`,
-    "POST",
-    authorization,
-    input
-  );
+  return await fetchPostAuth(`${PROGEN_BASE_URL}/user/education`, "POST", authorization, input);
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -30,7 +30,6 @@ export const updateEducation = async (
     data
   );
 };
-
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const deleteEducation = async (authorization: string, educationId: string) => {

@@ -14,7 +14,12 @@ import {
   deleteWorkExperience
 } from "./handlers/work-experience/api-calls";
 import { updateUserPresentationData } from "./handlers/user-presentation/api-calls";
-import { createEducation, deleteEducation, getEducation, updateEducation } from "./handlers/education/api-calls";
+import {
+  createEducation,
+  deleteEducation,
+  getEducation,
+  updateEducation
+} from "./handlers/education/api-calls";
 import {
   GQLChangeEmailInput,
   GQLChangePasswordInput,

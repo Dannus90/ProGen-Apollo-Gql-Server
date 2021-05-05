@@ -1,5 +1,10 @@
 import { PROGEN_BASE_URL } from "../../config/api/base";
-import { fetchDeleteAuth, fetchGetAuth, fetchPostAuth, fetchPutAuth } from "../../config/api/httpClient";
+import {
+  fetchDeleteAuth,
+  fetchGetAuth,
+  fetchPostAuth,
+  fetchPutAuth
+} from "../../config/api/httpClient";
 import { GQLUpdateWorkExperienceInput, GQLWorkExperienceInput } from "../../types/TypesGraphQL";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
