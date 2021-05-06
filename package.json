@@ -6,7 +6,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "node --loader ts-node src/server.ts",
+    "start": "node --loader ts-node/esm src/server.ts",
     "build": "tsc",
     "start-dev": "env-cmd ts-node-dev --debounce=1000 ./src/server.ts",
     "types": "ts-node ./scripts/generate-types-from-schema.ts && prettier --no-config --write \"src/types/TypesGraphQL.ts\" --ignore-path .gitignore",
