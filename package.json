@@ -4,6 +4,7 @@
   "description": "Middlelayer for the Progen application built with graphql and apollo.",
   "main": "server.ts",
   "private": true,
+  "type": "module",
   "scripts": {
     "start": "node dist/server.js",
     "build": "tsc",
