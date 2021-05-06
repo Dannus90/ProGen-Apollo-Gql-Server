@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Middlelayer for the Progen application built with graphql and apollo.",
   "main": "server.ts",
-  "type": "module",
   "private": true,
   "scripts": {
     "start": "ts-node src/server.ts",
