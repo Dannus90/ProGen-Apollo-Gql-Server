@@ -2,8 +2,8 @@
   "compilerOptions": {
     "outDir": "dist/",
     "target": "es2020",
-    "module": "commonjs",
     "moduleResolution": "node",
+    "module": "commonjs",
     "lib": ["es2016", "es2019", "es2017.object", "esnext.asynciterable"],
     "noImplicitAny": false,
     "importHelpers": true,
