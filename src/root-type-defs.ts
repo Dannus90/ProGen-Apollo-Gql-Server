@@ -33,6 +33,7 @@ const entryTypeDefs = gql`
     userPresentation: UserPresentationMutationRoot!
     workExperience: WorkExperienceMutationRoot!
     education: EducationMutationRoot!
+    otherInformation: OtherInformationMutationRoot!
   }
 
   # Query Roots
@@ -48,6 +49,7 @@ const entryTypeDefs = gql`
   type UserPresentationMutationRoot
   type WorkExperienceMutationRoot
   type EducationMutationRoot
+  type OtherInformationMutationRoot
 `;
 
 export const rootTypeDefs = [

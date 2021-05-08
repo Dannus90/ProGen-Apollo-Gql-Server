@@ -5,6 +5,15 @@ export const otherInformationTypeDefs = gql`
     getOtherInformation: OtherInformationResponse!
   }
 
+  extend type OtherInformationMutationRoot {
+    updateOtherInformation(input: OtherInformationInput!): OtherInformationResponse!
+  }
+
+  input OtherInformationInput {
+    drivingLicenseSv: String!
+    drivingLicenseEn: String!
+  }
+
   type OtherInformationResponse {
     otherInformation: OtherInformation!
     statusCode: Int!

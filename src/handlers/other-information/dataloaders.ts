@@ -16,7 +16,7 @@ export const createOtherInformationDataLoaders = (
   const byUserIdFromClaims = new DataLoader<string, OtherInformationAnswer | undefined>(
     async (ids) => {
       const otherInformations = await Promise.all(
-        ids.map(async (id) => {
+        ids.map(async () => {
           const response = await getOtherInformation(authorization);
           if (response.status === 401) {
             const { status, statusText } = response;
