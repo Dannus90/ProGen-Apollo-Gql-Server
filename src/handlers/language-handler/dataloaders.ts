@@ -3,11 +3,12 @@ import {
   HttpResponseError,
   statusCodeChecker
 } from "../../config/api/error-management/http-response-error";
-import { getUserLanguage } from "./api-calls";
-import { LanguageAnswer } from "./api-types";
+import { getUserLanguage, getUserLanguages } from "./api-calls";
+import { LanguageAnswer, LanguagesAnswer } from "./api-types";
 
 export interface LanguageDataLoaders {
   byLanguageId: DataLoader<string, LanguageAnswer | undefined>;
+  allLanguagesByUserIdInClaims: DataLoader<string, LanguagesAnswer | undefined>;
 }
 
 export const createLanguageDataLoaders = (
@@ -41,15 +42,45 @@ export const createLanguageDataLoaders = (
         })
       );
 
-      console.log(languages);
-
       return ids.map((id) => {
         return languages.find((l) => l.languageDto.id === id)
       });
     }
   );
+  const allLanguagesByUserIdInClaims = new DataLoader<string, LanguagesAnswer | undefined>(
+    async (ids) => {
+      return await Promise.all(
+        ids.map(async () => {
+          const response = await getUserLanguages(authorization);
+
+          if (response.status === 401) {
+            const { status, statusText } = response;
+            throw new HttpResponseError(statusText, status, statusText);
+          } else if (!statusCodeChecker(response.status)) {
+            const { type, statusCode, message, errors } = await response.json();
+    
+            const errorOutput = Object.keys(errors).map((err) => {
+              return errors[err];
+            });
+    
+            throw new HttpResponseError(
+              type,
+              statusCode ?? response.status,
+              message ?? errorOutput
+            );
+          }
+
+          const languages: LanguagesAnswer = await response.json();
+          languages.statusCode = response.status;
+
+          return languages
+        })
+      )
+    }
+  );
 
   return {
-    byLanguageId
+    byLanguageId,
+    allLanguagesByUserIdInClaims
   };
 };

@@ -3,6 +3,7 @@ import { gql } from "apollo-server";
 export const languageTypeDefs = gql`
   extend type LanguageRoot {
     getLanguage(input: GetLanguageInput!): LanguageResponse!
+    getLanguages: LanguagesResponse!
   }
 
   extend type LanguageMutationRoot {
@@ -20,6 +21,11 @@ export const languageTypeDefs = gql`
 
   type LanguageIdResponse {
     languageId: String!
+    statusCode: Int!
+  }
+
+  type LanguagesResponse {
+    languages: [Language]!
     statusCode: Int!
   }
 

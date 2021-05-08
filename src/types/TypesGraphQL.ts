@@ -193,6 +193,7 @@ export interface GQLOtherInformation {
 
 export interface GQLLanguageRoot {
   getLanguage: GQLLanguageResponse;
+  getLanguages: GQLLanguagesResponse;
 }
 
 export interface GQLGetLanguageInput {
@@ -209,6 +210,11 @@ export interface GQLLanguage {
   userId: string;
   languageSv: string;
   languageEn: string;
+}
+
+export interface GQLLanguagesResponse {
+  languages: Array<GQLLanguage | null>;
+  statusCode: number;
 }
 
 export interface GQLMutation {
@@ -504,6 +510,7 @@ export interface GQLResolver {
   LanguageRoot?: GQLLanguageRootTypeResolver;
   LanguageResponse?: GQLLanguageResponseTypeResolver;
   Language?: GQLLanguageTypeResolver;
+  LanguagesResponse?: GQLLanguagesResponseTypeResolver;
   Mutation?: GQLMutationTypeResolver;
   AuthenticationMutationRoot?: GQLAuthenticationMutationRootTypeResolver;
   TokenResponse?: GQLTokenResponseTypeResolver;
@@ -2034,6 +2041,7 @@ export interface OtherInformationToUpdatedAtResolver<
 
 export interface GQLLanguageRootTypeResolver<TParent = GQLLanguageRoot> {
   getLanguage?: LanguageRootToGetLanguageResolver<TParent>;
+  getLanguages?: LanguageRootToGetLanguagesResolver<TParent>;
 }
 
 export interface LanguageRootToGetLanguageArgs {
@@ -2046,6 +2054,18 @@ export interface LanguageRootToGetLanguageResolver<
   (
     parent: TParent,
     args: LanguageRootToGetLanguageArgs,
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface LanguageRootToGetLanguagesResolver<
+  TParent = GQLLanguageRoot,
+  TResult = GQLLanguagesResponse
+> {
+  (
+    parent: TParent,
+    args: {},
     context: any,
     info: GraphQLResolveInfo
   ): Promise<TResult>;
@@ -2125,6 +2145,37 @@ export interface LanguageToLanguageSvResolver<
 export interface LanguageToLanguageEnResolver<
   TParent = GQLLanguage,
   TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLLanguagesResponseTypeResolver<
+  TParent = GQLLanguagesResponse
+> {
+  languages?: LanguagesResponseToLanguagesResolver<TParent>;
+  statusCode?: LanguagesResponseToStatusCodeResolver<TParent>;
+}
+
+export interface LanguagesResponseToLanguagesResolver<
+  TParent = GQLLanguagesResponse,
+  TResult = Array<GQLLanguage | null>
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface LanguagesResponseToStatusCodeResolver<
+  TParent = GQLLanguagesResponse,
+  TResult = number
 > {
   (
     parent: TParent,

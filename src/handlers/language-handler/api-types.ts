@@ -15,3 +15,13 @@ export interface LanguageAnswer {
   },
   statusCode: number;
 }
+
+export interface LanguagesAnswer {
+  languageDtos: Array<{
+    id: string;
+    userId: string;
+    languageSv: string;
+    languageEn: string;
+  }>
+  statusCode: number;
+}

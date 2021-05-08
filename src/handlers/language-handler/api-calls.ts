@@ -18,3 +18,8 @@ export const createLanguage = async (
 export const getUserLanguage = async (authorization: string, languageId: string): Promise<any> => {
   return await fetchGetAuth(`${PROGEN_BASE_URL}/user/languages/${languageId}`, "GET", authorization);
 };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getUserLanguages = async (authorization: string): Promise<any> => {
+  return await fetchGetAuth(`${PROGEN_BASE_URL}/user/languages`, "GET", authorization);
+};

@@ -1,12 +1,13 @@
+import { GQLLanguage } from "../../types/TypesGraphQL";
 import { Context } from "./../../context";
 
 export interface UserLanguageResolverResponse {
-  language: {
-    id: string;
-    userId: string;
-    languageSv: string;
-    languageEn: string;
-  };
+  language: GQLLanguage;
+  statusCode: number;
+}
+
+export interface UserLanguagesResolverResponse {
+  languages: Array<GQLLanguage>;
   statusCode: number;
 }
 
@@ -31,6 +32,22 @@ export const languageResolvers = {
           languageEn
         },
         statusCode: languageResponse.statusCode
+      };
+    },
+    getLanguages: async (
+      _,
+      __,
+      { loaders }: Context
+    ): Promise<UserLanguagesResolverResponse | null> => {
+      const languagesResponse = await loaders.language.allLanguagesByUserIdInClaims.load("LoadAllByUserIdInClaims");
+
+      if (!languagesResponse) return null;
+
+      const { languageDtos, statusCode } = languagesResponse
+
+      return {
+        languages: languageDtos,
+        statusCode
       };
     }
   }
