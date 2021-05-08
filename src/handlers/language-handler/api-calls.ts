@@ -7,7 +7,7 @@ export const createLanguage = async (
   input: GQLLanguageInput | undefined
 ) => {
   return await fetchPostAuth(
-    `${PROGEN_BASE_URL}/user/workexperience`,
+    `${PROGEN_BASE_URL}/user/languages`,
     "POST",
     authorization,
     input
