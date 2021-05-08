@@ -1,5 +1,8 @@
 import { createEducationDataLoaders, EducationDataLoaders } from "./handlers/education/dataloaders";
-import { createLanguageDataLoaders, LanguageDataLoaders } from "./handlers/language-handler/dataloaders";
+import {
+  createLanguageDataLoaders,
+  LanguageDataLoaders
+} from "./handlers/language-handler/dataloaders";
 import {
   createOtherInformationDataLoaders,
   OtherInformationDataLoaders
@@ -20,7 +23,7 @@ export interface ContextDataLoaders {
   workExperience: WorkExperienceDataLoaders;
   education: EducationDataLoaders;
   otherInformation: OtherInformationDataLoaders;
-  language: LanguageDataLoaders
+  language: LanguageDataLoaders;
 }
 
 export const createDataLoaders = (authorization: string): ContextDataLoaders => {

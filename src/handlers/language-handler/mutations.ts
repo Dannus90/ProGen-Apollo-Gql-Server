@@ -2,13 +2,18 @@ import {
   HttpResponseError,
   statusCodeChecker
 } from "../../config/api/error-management/http-response-error";
-import { LanguageMutationRootToCreateLanguageResolver, LanguageMutationRootToUpdateLanguageResolver } from "./../../types/TypesGraphQL";
+import {
+  LanguageMutationRootToCreateLanguageResolver,
+  LanguageMutationRootToDeleteLanguageResolver,
+  LanguageMutationRootToUpdateLanguageResolver
+} from "./../../types/TypesGraphQL";
 import { Context } from "../../context";
 
 export interface LanguageMutations {
   LanguageMutationRoot: {
     createLanguage: LanguageMutationRootToCreateLanguageResolver;
     updateLanguage: LanguageMutationRootToUpdateLanguageResolver;
+    deleteLanguage: LanguageMutationRootToDeleteLanguageResolver;
   };
 }
 
@@ -52,5 +57,24 @@ export const languageMutations: LanguageMutations = {
 
       return gqlResponse;
     },
+    deleteLanguage: async (_, body, { api, authorization }: Context) => {
+      const response = await api.deleteLanguage(authorization, body.input.languageId);
+
+      if (!statusCodeChecker(response.status)) {
+        const { type, statusCode, message } = await response.json();
+        throw new HttpResponseError(type, statusCode ?? response.status, message);
+      }
+
+      const data = await response.json();
+
+      const { languageId } = data;
+
+      const gqlResponse = {
+        languageId,
+        statusCode: response.status
+      };
+
+      return gqlResponse;
+    }
   }
 };

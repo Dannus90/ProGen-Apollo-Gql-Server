@@ -22,7 +22,7 @@ export const languageResolvers = {
 
       if (!languageResponse) return null;
 
-      const { id, userId, languageEn, languageSv  } = languageResponse.languageDto
+      const { id, userId, languageEn, languageSv } = languageResponse.languageDto;
 
       return {
         language: {
@@ -39,11 +39,13 @@ export const languageResolvers = {
       __,
       { loaders }: Context
     ): Promise<UserLanguagesResolverResponse | null> => {
-      const languagesResponse = await loaders.language.allLanguagesByUserIdInClaims.load("LoadAllByUserIdInClaims");
+      const languagesResponse = await loaders.language.allLanguagesByUserIdInClaims.load(
+        "LoadAllByUserIdInClaims"
+      );
 
       if (!languagesResponse) return null;
 
-      const { languageDtos, statusCode } = languagesResponse
+      const { languageDtos, statusCode } = languagesResponse;
 
       return {
         languages: languageDtos,

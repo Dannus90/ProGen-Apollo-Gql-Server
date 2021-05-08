@@ -8,7 +8,8 @@ export const languageTypeDefs = gql`
 
   extend type LanguageMutationRoot {
     createLanguage(input: LanguageInput!): LanguageIdResponse!
-    updateLanguage(input: UpdateLanguageInput): LanguageIdResponse!
+    updateLanguage(input: UpdateLanguageInput!): LanguageIdResponse!
+    deleteLanguage(input: DeleteLanguageInput!): LanguageIdResponse!
   }
 
   input LanguageInput {
@@ -23,6 +24,10 @@ export const languageTypeDefs = gql`
   }
 
   input GetLanguageInput {
+    languageId: String!
+  }
+
+  input DeleteLanguageInput {
     languageId: String!
   }
 

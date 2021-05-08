@@ -12,7 +12,7 @@ export interface LanguageAnswer {
     userId: string;
     languageSv: string;
     languageEn: string;
-  },
+  };
   statusCode: number;
 }
 
@@ -22,6 +22,6 @@ export interface LanguagesAnswer {
     userId: string;
     languageSv: string;
     languageEn: string;
-  }>
+  }>;
   statusCode: number;
 }

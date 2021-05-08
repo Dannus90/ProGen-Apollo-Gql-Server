@@ -37,7 +37,11 @@ import {
   GQLWorkExperienceInput
 } from "./types/TypesGraphQL";
 import { updateOtherInformation } from "./handlers/other-information/api-calls";
-import { createLanguage, updateLanguage } from "./handlers/language-handler/api-calls";
+import {
+  createLanguage,
+  updateLanguage,
+  deleteLanguage
+} from "./handlers/language-handler/api-calls";
 
 export interface GetApiMethods {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -103,6 +107,7 @@ export interface GetApiMethods {
     authorization: string,
     input: GQLUpdateLanguageInput | undefined
   ) => Promise<any>;
+  deleteLanguage: (authorization: string, languageId: string) => Promise<any>;
 }
 
 export const getApiMethods = (): GetApiMethods => {
@@ -126,6 +131,7 @@ export const getApiMethods = (): GetApiMethods => {
     deleteEducation,
     updateOtherInformation,
     createLanguage,
-    updateLanguage
+    updateLanguage,
+    deleteLanguage
   };
 };

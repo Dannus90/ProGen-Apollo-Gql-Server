@@ -32,7 +32,7 @@ const queryResolver: QueryResolvers = {
     workExperience: async () => true,
     education: async () => true,
     otherInformation: async () => true,
-    language: async () => true,
+    language: async () => true
   }
 };
 
