@@ -197,6 +197,7 @@ export interface GQLMutation {
   workExperience: GQLWorkExperienceMutationRoot;
   education: GQLEducationMutationRoot;
   otherInformation: GQLOtherInformationMutationRoot;
+  language: GQLLanguageMutationRoot;
 }
 
 export interface GQLAuthenticationMutationRoot {
@@ -431,6 +432,20 @@ export interface GQLOtherInformationInput {
   drivingLicenseEn: string;
 }
 
+export interface GQLLanguageMutationRoot {
+  createLanguage: GQLLanguageIdResponse;
+}
+
+export interface GQLLanguageInput {
+  languageSv: string;
+  languageEn: string;
+}
+
+export interface GQLLanguageIdResponse {
+  languageId: string;
+  statusCode: number;
+}
+
 export type GQLVoid = any;
 
 /*********************************
@@ -481,6 +496,8 @@ export interface GQLResolver {
   EducationResponse?: GQLEducationResponseTypeResolver;
   DeleteEducationResponse?: GQLDeleteEducationResponseTypeResolver;
   OtherInformationMutationRoot?: GQLOtherInformationMutationRootTypeResolver;
+  LanguageMutationRoot?: GQLLanguageMutationRootTypeResolver;
+  LanguageIdResponse?: GQLLanguageIdResponseTypeResolver;
   Void?: GraphQLScalarType;
 }
 export interface GQLQueryTypeResolver<TParent = undefined> {
@@ -1376,6 +1393,7 @@ export interface GQLMutationTypeResolver<TParent = undefined> {
   workExperience?: MutationToWorkExperienceResolver<TParent>;
   education?: MutationToEducationResolver<TParent>;
   otherInformation?: MutationToOtherInformationResolver<TParent>;
+  language?: MutationToLanguageResolver<TParent>;
 }
 
 export interface MutationToAuthenticationResolver<
@@ -1416,6 +1434,13 @@ export interface MutationToEducationResolver<
 export interface MutationToOtherInformationResolver<
   TParent = undefined,
   TResult = GQLOtherInformationMutationRoot
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface MutationToLanguageResolver<
+  TParent = undefined,
+  TResult = GQLLanguageMutationRoot
 > {
   (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
 }
@@ -2065,4 +2090,42 @@ export interface OtherInformationMutationRootToUpdateOtherInformationResolver<
     context: any,
     info: GraphQLResolveInfo
   ): Promise<TResult>;
+}
+
+export interface GQLLanguageMutationRootTypeResolver<TParent = GQLLanguageMutationRoot> {
+  createLanguage?: LanguageMutationRootToCreateLanguageResolver<TParent>;
+}
+
+export interface LanguageMutationRootToCreateLanguageArgs {
+  input: GQLLanguageInput;
+}
+export interface LanguageMutationRootToCreateLanguageResolver<
+  TParent = GQLLanguageMutationRoot,
+  TResult = GQLLanguageIdResponse
+> {
+  (
+    parent: TParent,
+    args: LanguageMutationRootToCreateLanguageArgs,
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLLanguageIdResponseTypeResolver<TParent = GQLLanguageIdResponse> {
+  languageId?: LanguageIdResponseToLanguageIdResolver<TParent>;
+  statusCode?: LanguageIdResponseToStatusCodeResolver<TParent>;
+}
+
+export interface LanguageIdResponseToLanguageIdResolver<
+  TParent = GQLLanguageIdResponse,
+  TResult = string
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface LanguageIdResponseToStatusCodeResolver<
+  TParent = GQLLanguageIdResponse,
+  TResult = number
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
 }

@@ -24,6 +24,7 @@ import {
   GQLChangeEmailInput,
   GQLChangePasswordInput,
   GQLCreateEducationInput,
+  GQLLanguageInput,
   GQLLoginInput,
   GQLOtherInformationInput,
   GQLRefreshTokenInput,
@@ -35,6 +36,7 @@ import {
   GQLWorkExperienceInput
 } from "./types/TypesGraphQL";
 import { updateOtherInformation } from "./handlers/other-information/api-calls";
+import { createLanguage } from "./handlers/language-handler/api-calls";
 
 export interface GetApiMethods {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -95,6 +97,7 @@ export interface GetApiMethods {
     authorization: string,
     input: GQLOtherInformationInput | undefined
   ) => Promise<any>;
+  createLanguage: (authorization: string, input: GQLLanguageInput | undefined) => Promise<any>;
 }
 
 export const getApiMethods = (): GetApiMethods => {
@@ -116,6 +119,7 @@ export const getApiMethods = (): GetApiMethods => {
     getEducation,
     updateEducation,
     deleteEducation,
-    updateOtherInformation
+    updateOtherInformation,
+    createLanguage
   };
 };
