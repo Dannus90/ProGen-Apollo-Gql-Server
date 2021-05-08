@@ -461,6 +461,7 @@ export interface GQLOtherInformationInput {
 
 export interface GQLLanguageMutationRoot {
   createLanguage: GQLLanguageIdResponse;
+  updateLanguage: GQLLanguageIdResponse;
 }
 
 export interface GQLLanguageInput {
@@ -471,6 +472,12 @@ export interface GQLLanguageInput {
 export interface GQLLanguageIdResponse {
   languageId: string;
   statusCode: number;
+}
+
+export interface GQLUpdateLanguageInput {
+  languageId: string;
+  languageSv: string;
+  languageEn: string;
 }
 
 export type GQLVoid = any;
@@ -3202,6 +3209,7 @@ export interface GQLLanguageMutationRootTypeResolver<
   TParent = GQLLanguageMutationRoot
 > {
   createLanguage?: LanguageMutationRootToCreateLanguageResolver<TParent>;
+  updateLanguage?: LanguageMutationRootToUpdateLanguageResolver<TParent>;
 }
 
 export interface LanguageMutationRootToCreateLanguageArgs {
@@ -3214,6 +3222,21 @@ export interface LanguageMutationRootToCreateLanguageResolver<
   (
     parent: TParent,
     args: LanguageMutationRootToCreateLanguageArgs,
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface LanguageMutationRootToUpdateLanguageArgs {
+  input?: GQLUpdateLanguageInput;
+}
+export interface LanguageMutationRootToUpdateLanguageResolver<
+  TParent = GQLLanguageMutationRoot,
+  TResult = GQLLanguageIdResponse
+> {
+  (
+    parent: TParent,
+    args: LanguageMutationRootToUpdateLanguageArgs,
     context: any,
     info: GraphQLResolveInfo
   ): Promise<TResult>;

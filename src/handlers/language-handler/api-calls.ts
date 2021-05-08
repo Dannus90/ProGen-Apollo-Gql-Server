@@ -1,6 +1,6 @@
-import { fetchGetAuth, fetchPostAuth } from "./../../config/api/httpClient";
+import { fetchGetAuth, fetchPostAuth, fetchPutAuth } from "./../../config/api/httpClient";
 import { PROGEN_BASE_URL } from "./../../config/api/base";
-import { GQLLanguageInput } from "../../types/TypesGraphQL";
+import { GQLLanguageInput, GQLUpdateLanguageInput } from "../../types/TypesGraphQL";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createLanguage = async (
   authorization: string,
@@ -9,6 +9,19 @@ export const createLanguage = async (
   return await fetchPostAuth(
     `${PROGEN_BASE_URL}/user/languages`,
     "POST",
+    authorization,
+    input
+  );
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const updateLanguage = async (
+  authorization: string,
+  input: GQLUpdateLanguageInput | undefined
+) => {
+  return await fetchPutAuth(
+    `${PROGEN_BASE_URL}/user/languages/${input?.languageId}`,
+    "PUT",
     authorization,
     input
   );
