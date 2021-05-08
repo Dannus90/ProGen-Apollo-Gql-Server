@@ -1,4 +1,8 @@
 import { createEducationDataLoaders, EducationDataLoaders } from "./handlers/education/dataloaders";
+import {
+  createOtherInformationDataLoaders,
+  OtherInformationDataLoaders
+} from "./handlers/other-information/dataloaders";
 import { createUserDataLoaders, UserDataLoaders } from "./handlers/user-data/dataloaders";
 import {
   createUserPresentationDataLoaders,
@@ -14,6 +18,7 @@ export interface ContextDataLoaders {
   userPresentation: UserPresentationDataLoaders;
   workExperience: WorkExperienceDataLoaders;
   education: EducationDataLoaders;
+  otherInformation: OtherInformationDataLoaders;
 }
 
 export const createDataLoaders = (authorization: string): ContextDataLoaders => {
@@ -21,6 +26,7 @@ export const createDataLoaders = (authorization: string): ContextDataLoaders => 
     userData: createUserDataLoaders(authorization),
     userPresentation: createUserPresentationDataLoaders(authorization),
     workExperience: createWorkExperienceDataLoaders(authorization),
-    education: createEducationDataLoaders(authorization)
+    education: createEducationDataLoaders(authorization),
+    otherInformation: createOtherInformationDataLoaders(authorization)
   };
 };
