@@ -41,8 +41,10 @@ export const createLanguageDataLoaders = (
         })
       );
 
+      console.log(languages);
+
       return ids.map((id) => {
-        return languages.find((l) => l.id === id)
+        return languages.find((l) => l.languageDto.id === id)
       });
     }
   );

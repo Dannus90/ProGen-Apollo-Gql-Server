@@ -10,9 +10,9 @@ export interface UserLanguageResolverResponse {
   statusCode: number;
 }
 
-export const otherInformationResolvers = {
-  OtherInformationRoot: {
-    getOtherInformation: async (
+export const languageResolvers = {
+  LanguageRoot: {
+    getLanguage: async (
       _,
       { input: { languageId } },
       { loaders }: Context
@@ -21,7 +21,7 @@ export const otherInformationResolvers = {
 
       if (!languageResponse) return null;
 
-      const { id, userId, languageEn, languageSv, statusCode  } = languageResponse
+      const { id, userId, languageEn, languageSv  } = languageResponse.languageDto
 
       return {
         language: {
@@ -30,7 +30,7 @@ export const otherInformationResolvers = {
           languageSv,
           languageEn
         },
-        statusCode: statusCode
+        statusCode: languageResponse.statusCode
       };
     }
   }

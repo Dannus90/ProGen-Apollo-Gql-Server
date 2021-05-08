@@ -4,6 +4,7 @@ import { workExperienceResolvers } from "./handlers/work-experience/resolvers";
 import { userPresentationResolvers } from "./handlers/user-presentation/resolvers";
 import {
   QueryToEducationResolver,
+  QueryToLanguageResolver,
   QueryToOtherInformationResolver,
   QueryToUserDataResolver,
   QueryToUserPresentationResolver,
@@ -11,6 +12,7 @@ import {
 } from "./types/TypesGraphQL";
 import { EducationResolvers } from "./handlers/education/resolvers";
 import { otherInformationResolvers } from "./handlers/other-information/resolvers";
+import { languageResolvers } from "./handlers/language-handler/resolvers";
 
 interface QueryResolvers {
   Query: {
@@ -19,6 +21,7 @@ interface QueryResolvers {
     workExperience: QueryToWorkExperienceResolver<unknown, unknown>;
     education: QueryToEducationResolver<unknown, unknown>;
     otherInformation: QueryToOtherInformationResolver<unknown, unknown>;
+    language: QueryToLanguageResolver<unknown, unknown>;
   };
 }
 
@@ -28,7 +31,8 @@ const queryResolver: QueryResolvers = {
     userPresentation: async () => true,
     workExperience: async () => true,
     education: async () => true,
-    otherInformation: async () => true
+    otherInformation: async () => true,
+    language: async () => true,
   }
 };
 
@@ -38,5 +42,6 @@ export const rootResolver = merge(
   userPresentationResolvers,
   workExperienceResolvers,
   EducationResolvers,
-  otherInformationResolvers
+  otherInformationResolvers,
+  languageResolvers
 );

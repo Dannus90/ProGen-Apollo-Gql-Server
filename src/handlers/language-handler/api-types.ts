@@ -7,9 +7,11 @@ export interface CreateUpdateDeleteLanguageAnswer extends CreateUpdateDeleteLang
 }
 
 export interface LanguageAnswer {
-  id: string;
-  userId: string;
-  languageSv: string;
-  languageEn: string;
+  languageDto: {
+    id: string;
+    userId: string;
+    languageSv: string;
+    languageEn: string;
+  },
   statusCode: number;
 }
