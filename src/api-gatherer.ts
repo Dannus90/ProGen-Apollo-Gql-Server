@@ -25,6 +25,7 @@ import {
   GQLChangePasswordInput,
   GQLCreateEducationInput,
   GQLLoginInput,
+  GQLOtherInformationInput,
   GQLRefreshTokenInput,
   GQLRegisterInput,
   GQLUpdateEducationInput,
@@ -33,6 +34,7 @@ import {
   GQLUserPresentationInput,
   GQLWorkExperienceInput
 } from "./types/TypesGraphQL";
+import { updateOtherInformation } from "./handlers/other-information/api-calls";
 
 export interface GetApiMethods {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -89,6 +91,10 @@ export interface GetApiMethods {
   ) => Promise<any>;
   deleteEducation: (authorization: string, educationId: string) => Promise<any>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  updateOtherInformation: (
+    authorization: string,
+    input: GQLOtherInformationInput | undefined
+  ) => Promise<any>;
 }
 
 export const getApiMethods = (): GetApiMethods => {
@@ -109,6 +115,7 @@ export const getApiMethods = (): GetApiMethods => {
     createEducation,
     getEducation,
     updateEducation,
-    deleteEducation
+    deleteEducation,
+    updateOtherInformation
   };
 };

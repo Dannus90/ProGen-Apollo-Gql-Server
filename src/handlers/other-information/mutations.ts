@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 import {
   HttpResponseError,
   statusCodeChecker
@@ -50,4 +48,3 @@ export const otherInformationMutations: OtherInformationMutations = {
     }
   }
 };
->>>>>>> Stashed changes

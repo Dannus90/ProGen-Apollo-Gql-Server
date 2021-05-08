@@ -196,6 +196,7 @@ export interface GQLMutation {
   userPresentation: GQLUserPresentationMutationRoot;
   workExperience: GQLWorkExperienceMutationRoot;
   education: GQLEducationMutationRoot;
+  otherInformation: GQLOtherInformationMutationRoot;
 }
 
 export interface GQLAuthenticationMutationRoot {
@@ -421,6 +422,15 @@ export interface GQLDeleteEducationResponse {
   statusCode: number;
 }
 
+export interface GQLOtherInformationMutationRoot {
+  updateOtherInformation: GQLOtherInformationResponse;
+}
+
+export interface GQLOtherInformationInput {
+  drivingLicenseSv: string;
+  drivingLicenseEn: string;
+}
+
 export type GQLVoid = any;
 
 /*********************************
@@ -470,6 +480,7 @@ export interface GQLResolver {
   UpdateEducationResponse?: GQLUpdateEducationResponseTypeResolver;
   EducationResponse?: GQLEducationResponseTypeResolver;
   DeleteEducationResponse?: GQLDeleteEducationResponseTypeResolver;
+  OtherInformationMutationRoot?: GQLOtherInformationMutationRootTypeResolver;
   Void?: GraphQLScalarType;
 }
 export interface GQLQueryTypeResolver<TParent = undefined> {
@@ -1364,6 +1375,7 @@ export interface GQLMutationTypeResolver<TParent = undefined> {
   userPresentation?: MutationToUserPresentationResolver<TParent>;
   workExperience?: MutationToWorkExperienceResolver<TParent>;
   education?: MutationToEducationResolver<TParent>;
+  otherInformation?: MutationToOtherInformationResolver<TParent>;
 }
 
 export interface MutationToAuthenticationResolver<
@@ -1397,6 +1409,13 @@ export interface MutationToWorkExperienceResolver<
 export interface MutationToEducationResolver<
   TParent = undefined,
   TResult = GQLEducationMutationRoot
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface MutationToOtherInformationResolver<
+  TParent = undefined,
+  TResult = GQLOtherInformationMutationRoot
 > {
   (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
 }
@@ -2025,4 +2044,25 @@ export interface DeleteEducationResponseToStatusCodeResolver<
   TResult = number
 > {
   (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface GQLOtherInformationMutationRootTypeResolver<
+  TParent = GQLOtherInformationMutationRoot
+> {
+  updateOtherInformation?: OtherInformationMutationRootToUpdateOtherInformationResolver<TParent>;
+}
+
+export interface OtherInformationMutationRootToUpdateOtherInformationArgs {
+  input: GQLOtherInformationInput;
+}
+export interface OtherInformationMutationRootToUpdateOtherInformationResolver<
+  TParent = GQLOtherInformationMutationRoot,
+  TResult = GQLOtherInformationResponse
+> {
+  (
+    parent: TParent,
+    args: OtherInformationMutationRootToUpdateOtherInformationArgs,
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
 }

@@ -1,5 +1,3 @@
-import { Headers } from "apollo-env";
-
 export interface CreateWorkExperienceApiResponse {
   workExperienceId: string;
 }
