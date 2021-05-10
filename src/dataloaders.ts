@@ -16,6 +16,10 @@ import {
   createWorkExperienceDataLoaders,
   WorkExperienceDataLoaders
 } from "./handlers/work-experience/dataloaders";
+import {
+  FullCvInformationDataLoaders,
+  createFullCvInformationDataLoaders
+} from "./handlers/full-cv-information/dataloaders";
 
 export interface ContextDataLoaders {
   userData: UserDataLoaders;
@@ -24,6 +28,7 @@ export interface ContextDataLoaders {
   education: EducationDataLoaders;
   otherInformation: OtherInformationDataLoaders;
   language: LanguageDataLoaders;
+  fullCvInformation: FullCvInformationDataLoaders;
 }
 
 export const createDataLoaders = (authorization: string): ContextDataLoaders => {
@@ -33,6 +38,7 @@ export const createDataLoaders = (authorization: string): ContextDataLoaders => 
     workExperience: createWorkExperienceDataLoaders(authorization),
     education: createEducationDataLoaders(authorization),
     otherInformation: createOtherInformationDataLoaders(authorization),
-    language: createLanguageDataLoaders(authorization)
+    language: createLanguageDataLoaders(authorization),
+    fullCvInformation: createFullCvInformationDataLoaders(authorization)
   };
 };

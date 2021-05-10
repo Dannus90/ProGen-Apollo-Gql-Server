@@ -9,7 +9,7 @@ import {
   QueryToOtherInformationResolver,
   QueryToUserDataResolver,
   QueryToUserPresentationResolver,
-  QueryToWorkExperienceResolver,
+  QueryToWorkExperienceResolver
 } from "./types/TypesGraphQL";
 import { EducationResolvers } from "./handlers/education/resolvers";
 import { otherInformationResolvers } from "./handlers/other-information/resolvers";
