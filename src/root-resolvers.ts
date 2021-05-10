@@ -4,11 +4,12 @@ import { workExperienceResolvers } from "./handlers/work-experience/resolvers";
 import { userPresentationResolvers } from "./handlers/user-presentation/resolvers";
 import {
   QueryToEducationResolver,
+  QueryToFullCvInformationResolver,
   QueryToLanguageResolver,
   QueryToOtherInformationResolver,
   QueryToUserDataResolver,
   QueryToUserPresentationResolver,
-  QueryToWorkExperienceResolver
+  QueryToWorkExperienceResolver,
 } from "./types/TypesGraphQL";
 import { EducationResolvers } from "./handlers/education/resolvers";
 import { otherInformationResolvers } from "./handlers/other-information/resolvers";
@@ -22,6 +23,7 @@ interface QueryResolvers {
     education: QueryToEducationResolver<unknown, unknown>;
     otherInformation: QueryToOtherInformationResolver<unknown, unknown>;
     language: QueryToLanguageResolver<unknown, unknown>;
+    fullCvInformation: QueryToFullCvInformationResolver<unknown, unknown>;
   };
 }
 
@@ -32,7 +34,8 @@ const queryResolver: QueryResolvers = {
     workExperience: async () => true,
     education: async () => true,
     otherInformation: async () => true,
-    language: async () => true
+    language: async () => true,
+    fullCvInformation: async () => true
   }
 };
 

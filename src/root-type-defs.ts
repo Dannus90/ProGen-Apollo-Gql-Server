@@ -13,6 +13,7 @@ import { workExperienceTypeDefs } from "./handlers/work-experience/type-defs";
 import { educationTypeDefs } from "./handlers/education/type-defs";
 import { otherInformationTypeDefs } from "./handlers/other-information/type-defs";
 import { languageTypeDefs } from "./handlers/language-handler/type-defs";
+import { fullCvInformationTypeDefs } from "./handlers/full-cv-information/type-defs";
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
@@ -27,6 +28,7 @@ const entryTypeDefs = gql`
     education: EducationRoot!
     otherInformation: OtherInformationRoot!
     language: LanguageRoot!
+    fullCvInformation: FullCvInformationRoot!
   }
 
   type Mutation {
@@ -46,6 +48,7 @@ const entryTypeDefs = gql`
   type EducationRoot
   type OtherInformationRoot
   type LanguageRoot
+  type FullCvInformationRoot
 
   # Mutation Roots
   type UserDataMutationRoot
@@ -65,5 +68,6 @@ export const rootTypeDefs = [
   workExperienceTypeDefs,
   educationTypeDefs,
   otherInformationTypeDefs,
-  languageTypeDefs
+  languageTypeDefs,
+  fullCvInformationTypeDefs
 ];
