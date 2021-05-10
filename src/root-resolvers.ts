@@ -14,6 +14,7 @@ import {
 import { EducationResolvers } from "./handlers/education/resolvers";
 import { otherInformationResolvers } from "./handlers/other-information/resolvers";
 import { languageResolvers } from "./handlers/language-handler/resolvers";
+import { fullCvInformationResolversResolvers } from "./handlers/full-cv-information/resolvers";
 
 interface QueryResolvers {
   Query: {
@@ -46,5 +47,6 @@ export const rootResolver = merge(
   workExperienceResolvers,
   EducationResolvers,
   otherInformationResolvers,
-  languageResolvers
+  languageResolvers,
+  fullCvInformationResolversResolvers
 );
