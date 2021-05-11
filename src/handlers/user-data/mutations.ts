@@ -61,7 +61,7 @@ export const userDataMutations: UserDataMutations = {
         countryEn: countryEn,
         profileImage: profileImage,
         profileImagePublicId: profileImagePublicId,
-        workTile: workTitle,
+        workTitle: workTitle,
         createdAt: createdAt,
         updatedAt: updatedAt,
         statusCode: response.status

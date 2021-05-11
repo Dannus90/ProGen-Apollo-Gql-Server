@@ -31,6 +31,7 @@ export const userDataTypeDefs = gql`
     cityEn: String
     countrySv: String
     countryEn: String
+    workTitle: String
   }
 
   type User {

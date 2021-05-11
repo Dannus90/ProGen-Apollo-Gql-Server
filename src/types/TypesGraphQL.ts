@@ -364,6 +364,7 @@ export interface GQLUserDataInput {
   cityEn?: string;
   countrySv?: string;
   countryEn?: string;
+  workTitle?: string;
 }
 
 export interface GQLUserUpdateResponse {
