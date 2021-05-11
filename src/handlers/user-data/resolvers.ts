@@ -24,6 +24,7 @@ export interface UserInformationResponse {
         countryEn?: string;
         profileImage?: string;
         profileImagePublicId?: string;
+        workTitle?: string;
         updatedAt: Date;
         createdAt: Date;
       }

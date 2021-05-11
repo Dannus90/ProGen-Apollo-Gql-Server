@@ -45,6 +45,7 @@ export const fullCvInformationResolversResolvers = {
           emailCv: fullUserInformationDto.userData.emailCv ?? "",
           firstName: fullUserInformationDto.user.firstName,
           lastName: fullUserInformationDto.user.lastName,
+          workTitle: fullUserInformationDto.userData.workTitle ?? "",
           phoneNumber: fullUserInformationDto.userData.phoneNumber ?? ""
         },
         otherInformation: otherInformationDto,

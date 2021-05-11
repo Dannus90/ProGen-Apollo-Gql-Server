@@ -56,6 +56,7 @@ export const userDataTypeDefs = gql`
     countryEn: String
     profileImage: String
     profileImagePublicId: String
+    workTitle: String
     createdAt: Date!
     updatedAt: Date!
     statusCode: Int!
@@ -72,6 +73,7 @@ export const userDataTypeDefs = gql`
     countryEn: String
     profileImage: String
     profileImagePublicId: String
+    workTitle: String
     updatedAt: Date!
     createdAt: Date!
   }

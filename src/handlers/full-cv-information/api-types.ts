@@ -100,6 +100,7 @@ type UserData = {
   countryEn?: string;
   profileImage?: string;
   profileImagePublicId?: string;
+  workTitle?: string;
   updatedAt: Date;
   createdAt: Date;
 };

@@ -43,6 +43,7 @@ export const userDataMutations: UserDataMutations = {
         countryEn,
         profileImage,
         profileImagePublicId,
+        workTitle,
         createdAt,
         updatedAt
       } = userData.userDataDto;
@@ -60,6 +61,7 @@ export const userDataMutations: UserDataMutations = {
         countryEn: countryEn,
         profileImage: profileImage,
         profileImagePublicId: profileImagePublicId,
+        workTile: workTitle,
         createdAt: createdAt,
         updatedAt: updatedAt,
         statusCode: response.status

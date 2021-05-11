@@ -25,6 +25,7 @@ export const fullCvInformationTypeDefs = gql`
     countrySv: String!
     countryEn: String!
     profileImage: String!
+    workTitle: String!
   }
 
   type OtherInformationFullCv {

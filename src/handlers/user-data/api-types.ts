@@ -20,6 +20,7 @@ export interface UserInformationResponse {
       countryEn?: string;
       profileImage?: string;
       profileImagePublicId?: string;
+      workTitle?: string;
       updatedAt: Date;
       createdAt: Date;
     };
@@ -34,6 +35,7 @@ export interface UserDataForUpdate {
   cityEn?: string;
   countrySv?: string;
   countryEn?: string;
+  workTitle?: string;
   profileImage?: string;
 }
 
@@ -51,6 +53,7 @@ export interface UserDataUpdateResponse {
     countryEn?: string;
     profileImage?: string;
     profileImagePublicId?: string;
+    workTitle?: string;
     createdAt: Date;
     updatedAt: Date;
   };
