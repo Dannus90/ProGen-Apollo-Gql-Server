@@ -54,7 +54,8 @@ export interface GQLUserData {
   countryEn?: string;
   profileImage?: string;
   profileImagePublicId?: string;
-  workTitle?: string;
+  workTitleSv?: string;
+  workTitleEn?: string;
   updatedAt: GQLDate;
   createdAt: GQLDate;
 }
@@ -243,7 +244,8 @@ export interface GQLFullUserInformationFullCv {
   countrySv: string;
   countryEn: string;
   profileImage: string;
-  workTitle: string;
+  workTitleSv: string;
+  workTitleEn: string;
 }
 
 export interface GQLOtherInformationFullCv {
@@ -364,7 +366,8 @@ export interface GQLUserDataInput {
   cityEn?: string;
   countrySv?: string;
   countryEn?: string;
-  workTitle?: string;
+  workTitleSv?: string;
+  workTitleEn?: string;
 }
 
 export interface GQLUserUpdateResponse {
@@ -380,7 +383,8 @@ export interface GQLUserUpdateResponse {
   countryEn?: string;
   profileImage?: string;
   profileImagePublicId?: string;
-  workTitle?: string;
+  workTitleSv?: string;
+  workTitleEn?: string;
   createdAt: GQLDate;
   updatedAt: GQLDate;
   statusCode: number;
@@ -874,7 +878,8 @@ export interface GQLUserDataTypeResolver<TParent = GQLUserData> {
   countryEn?: UserDataToCountryEnResolver<TParent>;
   profileImage?: UserDataToProfileImageResolver<TParent>;
   profileImagePublicId?: UserDataToProfileImagePublicIdResolver<TParent>;
-  workTitle?: UserDataToWorkTitleResolver<TParent>;
+  workTitleSv?: UserDataToWorkTitleSvResolver<TParent>;
+  workTitleEn?: UserDataToWorkTitleEnResolver<TParent>;
   updatedAt?: UserDataToUpdatedAtResolver<TParent>;
   createdAt?: UserDataToCreatedAtResolver<TParent>;
 }
@@ -996,7 +1001,19 @@ export interface UserDataToProfileImagePublicIdResolver<
   ): Promise<TResult>;
 }
 
-export interface UserDataToWorkTitleResolver<
+export interface UserDataToWorkTitleSvResolver<
+  TParent = GQLUserData,
+  TResult = string | null
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface UserDataToWorkTitleEnResolver<
   TParent = GQLUserData,
   TResult = string | null
 > {
@@ -2424,7 +2441,8 @@ export interface GQLFullUserInformationFullCvTypeResolver<
   countrySv?: FullUserInformationFullCvToCountrySvResolver<TParent>;
   countryEn?: FullUserInformationFullCvToCountryEnResolver<TParent>;
   profileImage?: FullUserInformationFullCvToProfileImageResolver<TParent>;
-  workTitle?: FullUserInformationFullCvToWorkTitleResolver<TParent>;
+  workTitleSv?: FullUserInformationFullCvToWorkTitleSvResolver<TParent>;
+  workTitleEn?: FullUserInformationFullCvToWorkTitleEnResolver<TParent>;
 }
 
 export interface FullUserInformationFullCvToIdResolver<
@@ -2547,7 +2565,19 @@ export interface FullUserInformationFullCvToProfileImageResolver<
   ): Promise<TResult>;
 }
 
-export interface FullUserInformationFullCvToWorkTitleResolver<
+export interface FullUserInformationFullCvToWorkTitleSvResolver<
+  TParent = GQLFullUserInformationFullCv,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface FullUserInformationFullCvToWorkTitleEnResolver<
   TParent = GQLFullUserInformationFullCv,
   TResult = string
 > {
@@ -3308,7 +3338,8 @@ export interface GQLUserUpdateResponseTypeResolver<
   countryEn?: UserUpdateResponseToCountryEnResolver<TParent>;
   profileImage?: UserUpdateResponseToProfileImageResolver<TParent>;
   profileImagePublicId?: UserUpdateResponseToProfileImagePublicIdResolver<TParent>;
-  workTitle?: UserUpdateResponseToWorkTitleResolver<TParent>;
+  workTitleSv?: UserUpdateResponseToWorkTitleSvResolver<TParent>;
+  workTitleEn?: UserUpdateResponseToWorkTitleEnResolver<TParent>;
   createdAt?: UserUpdateResponseToCreatedAtResolver<TParent>;
   updatedAt?: UserUpdateResponseToUpdatedAtResolver<TParent>;
   statusCode?: UserUpdateResponseToStatusCodeResolver<TParent>;
@@ -3458,7 +3489,19 @@ export interface UserUpdateResponseToProfileImagePublicIdResolver<
   ): Promise<TResult>;
 }
 
-export interface UserUpdateResponseToWorkTitleResolver<
+export interface UserUpdateResponseToWorkTitleSvResolver<
+  TParent = GQLUserUpdateResponse,
+  TResult = string | null
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface UserUpdateResponseToWorkTitleEnResolver<
   TParent = GQLUserUpdateResponse,
   TResult = string | null
 > {
