@@ -22,7 +22,7 @@ export interface UserInformationResponse {
         cityEn?: string;
         countrySv?: string;
         countryEn?: string;
-        zipCode?: string;
+        adressZipCode?: string;
         profileImage?: string;
         profileImagePublicId?: string;
         workTitleSv?: string;
