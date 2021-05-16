@@ -31,7 +31,7 @@ export const userDataTypeDefs = gql`
     cityEn: String
     countrySv: String
     countryEn: String
-    adressZipCode: String
+    addressZipCode: String
     workTitleSv: String
     workTitleEn: String
   }
@@ -57,7 +57,7 @@ export const userDataTypeDefs = gql`
     cityEn: String
     countrySv: String
     countryEn: String
-    adressZipCode: String
+    addressZipCode: String
     profileImage: String
     profileImagePublicId: String
     workTitleSv: String
@@ -76,7 +76,7 @@ export const userDataTypeDefs = gql`
     cityEn: String
     countrySv: String
     countryEn: String
-    adressZipCode: String
+    addressZipCode: String
     profileImage: String
     profileImagePublicId: String
     workTitleSv: String

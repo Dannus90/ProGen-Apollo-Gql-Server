@@ -24,7 +24,7 @@ export const fullCvInformationTypeDefs = gql`
     cityEn: String!
     countrySv: String!
     countryEn: String!
-    adressZipCode: String!
+    addressZipCode: String!
     profileImage: String!
     workTitleSv: String!
     workTitleEn: String!

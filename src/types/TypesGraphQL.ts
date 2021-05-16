@@ -52,7 +52,7 @@ export interface GQLUserData {
   cityEn?: string;
   countrySv?: string;
   countryEn?: string;
-  adressZipCode?: string;
+  addressZipCode?: string;
   profileImage?: string;
   profileImagePublicId?: string;
   workTitleSv?: string;
@@ -244,7 +244,7 @@ export interface GQLFullUserInformationFullCv {
   cityEn: string;
   countrySv: string;
   countryEn: string;
-  adressZipCode: string;
+  addressZipCode: string;
   profileImage: string;
   workTitleSv: string;
   workTitleEn: string;
@@ -368,7 +368,7 @@ export interface GQLUserDataInput {
   cityEn?: string;
   countrySv?: string;
   countryEn?: string;
-  adressZipCode?: string;
+  addressZipCode?: string;
   workTitleSv?: string;
   workTitleEn?: string;
 }
@@ -384,7 +384,7 @@ export interface GQLUserUpdateResponse {
   cityEn?: string;
   countrySv?: string;
   countryEn?: string;
-  adressZipCode?: string;
+  addressZipCode?: string;
   profileImage?: string;
   profileImagePublicId?: string;
   workTitleSv?: string;
@@ -880,7 +880,7 @@ export interface GQLUserDataTypeResolver<TParent = GQLUserData> {
   cityEn?: UserDataToCityEnResolver<TParent>;
   countrySv?: UserDataToCountrySvResolver<TParent>;
   countryEn?: UserDataToCountryEnResolver<TParent>;
-  adressZipCode?: UserDataToAdressZipCodeResolver<TParent>;
+  addressZipCode?: UserDataToAddressZipCodeResolver<TParent>;
   profileImage?: UserDataToProfileImageResolver<TParent>;
   profileImagePublicId?: UserDataToProfileImagePublicIdResolver<TParent>;
   workTitleSv?: UserDataToWorkTitleSvResolver<TParent>;
@@ -982,7 +982,7 @@ export interface UserDataToCountryEnResolver<
   ): Promise<TResult>;
 }
 
-export interface UserDataToAdressZipCodeResolver<
+export interface UserDataToAddressZipCodeResolver<
   TParent = GQLUserData,
   TResult = string | null
 > {
@@ -2457,7 +2457,7 @@ export interface GQLFullUserInformationFullCvTypeResolver<
   cityEn?: FullUserInformationFullCvToCityEnResolver<TParent>;
   countrySv?: FullUserInformationFullCvToCountrySvResolver<TParent>;
   countryEn?: FullUserInformationFullCvToCountryEnResolver<TParent>;
-  adressZipCode?: FullUserInformationFullCvToAdressZipCodeResolver<TParent>;
+  addressZipCode?: FullUserInformationFullCvToAddressZipCodeResolver<TParent>;
   profileImage?: FullUserInformationFullCvToProfileImageResolver<TParent>;
   workTitleSv?: FullUserInformationFullCvToWorkTitleSvResolver<TParent>;
   workTitleEn?: FullUserInformationFullCvToWorkTitleEnResolver<TParent>;
@@ -2571,7 +2571,7 @@ export interface FullUserInformationFullCvToCountryEnResolver<
   ): Promise<TResult>;
 }
 
-export interface FullUserInformationFullCvToAdressZipCodeResolver<
+export interface FullUserInformationFullCvToAddressZipCodeResolver<
   TParent = GQLFullUserInformationFullCv,
   TResult = string
 > {
@@ -3366,7 +3366,7 @@ export interface GQLUserUpdateResponseTypeResolver<
   cityEn?: UserUpdateResponseToCityEnResolver<TParent>;
   countrySv?: UserUpdateResponseToCountrySvResolver<TParent>;
   countryEn?: UserUpdateResponseToCountryEnResolver<TParent>;
-  adressZipCode?: UserUpdateResponseToAdressZipCodeResolver<TParent>;
+  addressZipCode?: UserUpdateResponseToAddressZipCodeResolver<TParent>;
   profileImage?: UserUpdateResponseToProfileImageResolver<TParent>;
   profileImagePublicId?: UserUpdateResponseToProfileImagePublicIdResolver<TParent>;
   workTitleSv?: UserUpdateResponseToWorkTitleSvResolver<TParent>;
@@ -3496,7 +3496,7 @@ export interface UserUpdateResponseToCountryEnResolver<
   ): Promise<TResult>;
 }
 
-export interface UserUpdateResponseToAdressZipCodeResolver<
+export interface UserUpdateResponseToAddressZipCodeResolver<
   TParent = GQLUserUpdateResponse,
   TResult = string | null
 > {

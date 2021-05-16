@@ -42,7 +42,7 @@ export const fullCvInformationResolversResolvers = {
           citySv: fullUserInformationDto.userData.citySv ?? "",
           countryEn: fullUserInformationDto.userData.countryEn ?? "",
           countrySv: fullUserInformationDto.userData.countrySv ?? "",
-          adressZipCode: fullUserInformationDto.userData.adressZipCode ?? "",
+          addressZipCode: fullUserInformationDto.userData.addressZipCode ?? "",
           emailCv: fullUserInformationDto.userData.emailCv ?? "",
           firstName: fullUserInformationDto.user.firstName,
           lastName: fullUserInformationDto.user.lastName,
