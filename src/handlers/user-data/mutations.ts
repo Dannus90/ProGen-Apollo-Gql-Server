@@ -41,6 +41,7 @@ export const userDataMutations: UserDataMutations = {
         cityEn,
         countrySv,
         countryEn,
+        zipCode,
         profileImage,
         profileImagePublicId,
         workTitleSv,
@@ -50,8 +51,8 @@ export const userDataMutations: UserDataMutations = {
       } = userData.userDataDto;
 
       const gqlResponse = {
-        id: id,
-        userId: userId,
+        id,
+        userId,
         firstName,
         lastName,
         phoneNumber,
@@ -60,6 +61,7 @@ export const userDataMutations: UserDataMutations = {
         cityEn,
         countrySv,
         countryEn,
+        zipCode,
         profileImage,
         profileImagePublicId,
         workTitleSv,

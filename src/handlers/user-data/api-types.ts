@@ -18,6 +18,7 @@ export interface UserInformationResponse {
       cityEn?: string;
       countrySv?: string;
       countryEn?: string;
+      zipCode?: string;
       profileImage?: string;
       profileImagePublicId?: string;
       workTitle?: string;

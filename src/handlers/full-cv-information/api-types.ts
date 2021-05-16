@@ -33,6 +33,7 @@ type Education = {
   cityEn: string;
   countrySv: string;
   countryEn: string;
+  zipCode: string;
   dateStarted: Date;
   dateEnded: Date;
   createdAt: Date;
@@ -52,6 +53,7 @@ type WorkExperience = {
   cityEn: string;
   countrySv: string;
   countryEn: string;
+  zipCode: string;
   dateStarted: Date;
   dateEnded: Date;
   createdAt: Date;
@@ -98,6 +100,7 @@ type UserData = {
   cityEn?: string;
   countrySv?: string;
   countryEn?: string;
+  zipCode?: string;
   profileImage?: string;
   profileImagePublicId?: string;
   workTitleSv?: string;

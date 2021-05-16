@@ -52,6 +52,7 @@ export interface GQLUserData {
   cityEn?: string;
   countrySv?: string;
   countryEn?: string;
+  zipCode?: string;
   profileImage?: string;
   profileImagePublicId?: string;
   workTitleSv?: string;
@@ -243,6 +244,7 @@ export interface GQLFullUserInformationFullCv {
   cityEn: string;
   countrySv: string;
   countryEn: string;
+  zipCode: string;
   profileImage: string;
   workTitleSv: string;
   workTitleEn: string;
@@ -366,6 +368,7 @@ export interface GQLUserDataInput {
   cityEn?: string;
   countrySv?: string;
   countryEn?: string;
+  zipCode?: string;
   workTitleSv?: string;
   workTitleEn?: string;
 }
@@ -381,6 +384,7 @@ export interface GQLUserUpdateResponse {
   cityEn?: string;
   countrySv?: string;
   countryEn?: string;
+  zipCode?: string;
   profileImage?: string;
   profileImagePublicId?: string;
   workTitleSv?: string;
@@ -876,6 +880,7 @@ export interface GQLUserDataTypeResolver<TParent = GQLUserData> {
   cityEn?: UserDataToCityEnResolver<TParent>;
   countrySv?: UserDataToCountrySvResolver<TParent>;
   countryEn?: UserDataToCountryEnResolver<TParent>;
+  zipCode?: UserDataToZipCodeResolver<TParent>;
   profileImage?: UserDataToProfileImageResolver<TParent>;
   profileImagePublicId?: UserDataToProfileImagePublicIdResolver<TParent>;
   workTitleSv?: UserDataToWorkTitleSvResolver<TParent>;
@@ -966,6 +971,18 @@ export interface UserDataToCountrySvResolver<
 }
 
 export interface UserDataToCountryEnResolver<
+  TParent = GQLUserData,
+  TResult = string | null
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface UserDataToZipCodeResolver<
   TParent = GQLUserData,
   TResult = string | null
 > {
@@ -2440,6 +2457,7 @@ export interface GQLFullUserInformationFullCvTypeResolver<
   cityEn?: FullUserInformationFullCvToCityEnResolver<TParent>;
   countrySv?: FullUserInformationFullCvToCountrySvResolver<TParent>;
   countryEn?: FullUserInformationFullCvToCountryEnResolver<TParent>;
+  zipCode?: FullUserInformationFullCvToZipCodeResolver<TParent>;
   profileImage?: FullUserInformationFullCvToProfileImageResolver<TParent>;
   workTitleSv?: FullUserInformationFullCvToWorkTitleSvResolver<TParent>;
   workTitleEn?: FullUserInformationFullCvToWorkTitleEnResolver<TParent>;
@@ -2542,6 +2560,18 @@ export interface FullUserInformationFullCvToCountrySvResolver<
 }
 
 export interface FullUserInformationFullCvToCountryEnResolver<
+  TParent = GQLFullUserInformationFullCv,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface FullUserInformationFullCvToZipCodeResolver<
   TParent = GQLFullUserInformationFullCv,
   TResult = string
 > {
@@ -3336,6 +3366,7 @@ export interface GQLUserUpdateResponseTypeResolver<
   cityEn?: UserUpdateResponseToCityEnResolver<TParent>;
   countrySv?: UserUpdateResponseToCountrySvResolver<TParent>;
   countryEn?: UserUpdateResponseToCountryEnResolver<TParent>;
+  zipCode?: UserUpdateResponseToZipCodeResolver<TParent>;
   profileImage?: UserUpdateResponseToProfileImageResolver<TParent>;
   profileImagePublicId?: UserUpdateResponseToProfileImagePublicIdResolver<TParent>;
   workTitleSv?: UserUpdateResponseToWorkTitleSvResolver<TParent>;
@@ -3454,6 +3485,18 @@ export interface UserUpdateResponseToCountrySvResolver<
 }
 
 export interface UserUpdateResponseToCountryEnResolver<
+  TParent = GQLUserUpdateResponse,
+  TResult = string | null
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface UserUpdateResponseToZipCodeResolver<
   TParent = GQLUserUpdateResponse,
   TResult = string | null
 > {
