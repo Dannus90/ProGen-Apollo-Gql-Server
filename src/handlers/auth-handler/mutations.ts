@@ -13,6 +13,7 @@ import { Context } from "../../context";
 import {
   AuthenticationMutationRootToChangeEmailResolver,
   AuthenticationMutationRootToChangePasswordResolver,
+  AuthenticationMutationRootToDeleteAccountResolver,
   AuthenticationMutationRootToLoginUserResolver,
   AuthenticationMutationRootToLogoutUserResolver,
   AuthenticationMutationRootToRefreshTokenResolver,
@@ -27,6 +28,7 @@ export interface AuthenticationMutations {
     refreshToken: AuthenticationMutationRootToRefreshTokenResolver;
     changeEmail: AuthenticationMutationRootToChangeEmailResolver;
     changePassword: AuthenticationMutationRootToChangePasswordResolver;
+    deleteAccount: AuthenticationMutationRootToDeleteAccountResolver;
   };
 }
 
@@ -134,6 +136,21 @@ export const authMutations: AuthenticationMutations = {
       const gqlResponse: GQLGeneralResponse = {
         statusCode: response.status,
         message: "Password updated"
+      };
+
+      return gqlResponse;
+    },
+    deleteAccount: async (_, body, { api, authorization }: Context) => {
+      const response = await api.deleteAccount(authorization, body.input);
+
+      if (!statusCodeChecker(response.status)) {
+        const { statusCode, message, type } = await response.json();
+        throw new HttpResponseError(type, statusCode ?? response.status, message);
+      }
+
+      const gqlResponse: GQLGeneralResponse = {
+        statusCode: response.status,
+        message: "User deleted successfully"
       };
 
       return gqlResponse;
