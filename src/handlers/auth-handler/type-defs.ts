@@ -29,6 +29,7 @@ export const authenticationTypeDefs = gql`
     changeEmail(input: ChangeEmailInput): GeneralResponse!
     changePassword(input: ChangePasswordInput): GeneralResponse!
     deleteAccount(input: DeleteAccountInput): GeneralResponse!
+    resetPasswordByEmail(input: ResetPasswordByEmailInput): GeneralResponse!
   }
 
   input RegisterInput {
@@ -36,6 +37,10 @@ export const authenticationTypeDefs = gql`
     lastName: String!
     email: String!
     password: String!
+  }
+
+  input ResetPasswordByEmailInput {
+    email: String!
   }
 
   input LoginInput {

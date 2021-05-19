@@ -5,7 +5,8 @@ import {
   refreshToken,
   changeEmail,
   changePassword,
-  deleteAccount
+  deleteAccount,
+  resetPasswordByEmail
 } from "./handlers/auth-handler/api-calls";
 import { getFullUserInformation, updateUserData } from "./handlers/user-data/api-calls";
 import {
@@ -31,6 +32,7 @@ import {
   GQLOtherInformationInput,
   GQLRefreshTokenInput,
   GQLRegisterInput,
+  GQLResetPasswordByEmailInput,
   GQLUpdateEducationInput,
   GQLUpdateLanguageInput,
   GQLUpdateWorkExperienceInput,
@@ -94,6 +96,7 @@ export interface GetApiMethods {
   ) => Promise<any>;
   deleteLanguage: (authorization: string, languageId: string) => Promise<any>;
   deleteAccount: (authorization: string, input: GQLDeleteAccountInput | undefined) => Promise<any>;
+  resetPasswordByEmail: (input: GQLResetPasswordByEmailInput | undefined) => Promise<any>;
 }
 
 export const getApiMethods = (): GetApiMethods => {
@@ -119,6 +122,7 @@ export const getApiMethods = (): GetApiMethods => {
     createLanguage,
     updateLanguage,
     deleteLanguage,
-    deleteAccount
+    deleteAccount,
+    resetPasswordByEmail
   };
 };

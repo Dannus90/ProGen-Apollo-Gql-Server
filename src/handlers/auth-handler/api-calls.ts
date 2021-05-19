@@ -4,7 +4,8 @@ import {
   GQLDeleteAccountInput,
   GQLLoginInput,
   GQLRefreshTokenInput,
-  GQLRegisterInput
+  GQLRegisterInput,
+  GQLResetPasswordByEmailInput
 } from "../../types/TypesGraphQL";
 import { PROGEN_BASE_URL } from "../../config/api/base";
 import {
@@ -77,6 +78,16 @@ export const changePassword = async (
     `${PROGEN_BASE_URL}/user/auth/change-password`,
     "POST",
     authorization,
+    input
+  );
+};
+
+export const resetPasswordByEmail = async (
+  input: GQLResetPasswordByEmailInput | undefined
+): Promise<any> => {
+  return await fetchPostNoAuth(
+    `${PROGEN_BASE_URL}/user/auth/request-password-reset`,
+    "POST",
     input
   );
 };

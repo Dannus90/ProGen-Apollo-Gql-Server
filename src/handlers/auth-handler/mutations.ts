@@ -17,7 +17,8 @@ import {
   AuthenticationMutationRootToLoginUserResolver,
   AuthenticationMutationRootToLogoutUserResolver,
   AuthenticationMutationRootToRefreshTokenResolver,
-  AuthenticationMutationRootToRegisterUserResolver
+  AuthenticationMutationRootToRegisterUserResolver,
+  AuthenticationMutationRootToResetPasswordByEmailResolver
 } from "../../types/TypesGraphQL";
 
 export interface AuthenticationMutations {
@@ -29,6 +30,7 @@ export interface AuthenticationMutations {
     changeEmail: AuthenticationMutationRootToChangeEmailResolver;
     changePassword: AuthenticationMutationRootToChangePasswordResolver;
     deleteAccount: AuthenticationMutationRootToDeleteAccountResolver;
+    resetPasswordByEmail: AuthenticationMutationRootToResetPasswordByEmailResolver;
   };
 }
 
@@ -154,6 +156,21 @@ export const authMutations: AuthenticationMutations = {
       };
 
       return gqlResponse;
-    }
+    },
+    resetPasswordByEmail: async (_, body, { api }: Context) => {
+      const response = await api.resetPasswordByEmail({ email: body.input?.email ?? ""});
+
+      if (!statusCodeChecker(response.status)) {
+        const { statusCode, message, type } = await response.json();
+        throw new HttpResponseError(type, statusCode ?? response.status, message);
+      }
+
+      const gqlResponse: GQLGeneralResponse = {
+        statusCode: response.status,
+        message: "Check your email for your reset password link"
+      };
+
+      return gqlResponse;
+    },
   }
 };
