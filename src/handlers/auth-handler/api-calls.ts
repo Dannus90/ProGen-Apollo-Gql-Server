@@ -5,7 +5,8 @@ import {
   GQLLoginInput,
   GQLRefreshTokenInput,
   GQLRegisterInput,
-  GQLResetPasswordByEmailInput
+  GQLRequestPasswordResetByEmailInput,
+  GQLResetPasswordByTokenInput
 } from "../../types/TypesGraphQL";
 import { PROGEN_BASE_URL } from "../../config/api/base";
 import {
@@ -82,12 +83,26 @@ export const changePassword = async (
   );
 };
 
-export const resetPasswordByEmail = async (
-  input: GQLResetPasswordByEmailInput | undefined
+export const requestPasswordResetByEmail = async (
+  input: GQLRequestPasswordResetByEmailInput | undefined
 ): Promise<any> => {
   return await fetchPostNoAuth(
     `${PROGEN_BASE_URL}/user/auth/request-password-reset`,
     "POST",
     input
+  );
+};
+
+export const resetPasswordByTokenInParams = async (
+  input: GQLResetPasswordByTokenInput | undefined
+): Promise<any> => {
+  const data = {
+    newPassword: input?.password
+  };
+
+  return await fetchPostNoAuth(
+    `${PROGEN_BASE_URL}/user/auth/reset-password-with-token/?token=${input?.token}`,
+    "POST",
+    data
   );
 };
