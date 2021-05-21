@@ -177,7 +177,7 @@ export const authMutations: AuthenticationMutations = {
 
       const gqlResponse: GQLGeneralResponse = {
         statusCode: response.status,
-        message: "Check your email for your reset password link"
+        message: "Your password has successfully been updated"
       };
 
       return gqlResponse;
