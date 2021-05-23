@@ -1,6 +1,7 @@
 import { merge } from "lodash";
 import {
   MutationToAuthenticationResolver,
+  MutationToCertificateResolver,
   MutationToEducationResolver,
   MutationToLanguageResolver,
   MutationToOtherInformationResolver,
@@ -15,6 +16,7 @@ import { workExperienceMutations } from "./handlers/work-experience/mutations";
 import { educationMutations } from "./handlers/education/mutations";
 import { otherInformationMutations } from "./handlers/other-information/mutations";
 import { languageMutations } from "./handlers/language-handler/mutations";
+import { certificateMutations } from "./handlers/certificate/mutations";
 
 interface MutationResolvers {
   Mutation: {
@@ -25,6 +27,7 @@ interface MutationResolvers {
     education: MutationToEducationResolver<unknown, unknown>;
     otherInformation: MutationToOtherInformationResolver<unknown, unknown>;
     language: MutationToLanguageResolver<unknown, unknown>;
+    certificate: MutationToCertificateResolver<unknown, unknown>;
   };
 }
 
@@ -36,7 +39,8 @@ const mutationResolver: MutationResolvers = {
     workExperience: async () => true,
     education: async () => true,
     otherInformation: async () => true,
-    language: async () => true
+    language: async () => true,
+    certificate: async () => true
   }
 };
 
@@ -48,5 +52,6 @@ export const rootMutation = merge(
   workExperienceMutations,
   educationMutations,
   otherInformationMutations,
-  languageMutations
+  languageMutations,
+  certificateMutations
 );

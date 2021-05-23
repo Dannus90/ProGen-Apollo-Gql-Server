@@ -306,6 +306,7 @@ export interface GQLMutation {
   education: GQLEducationMutationRoot;
   otherInformation: GQLOtherInformationMutationRoot;
   language: GQLLanguageMutationRoot;
+  certificate: GQLCertificateMutationRoot;
 }
 
 export interface GQLAuthenticationMutationRoot {
@@ -588,6 +589,24 @@ export interface GQLDeleteLanguageInput {
   languageId: string;
 }
 
+export interface GQLCertificateMutationRoot {
+  createCertificate: GQLCreateUpdateCertificateResponse;
+}
+
+export interface GQLCreateCertificateInput {
+  certificateNameSv: string;
+  certificateNameEn: string;
+  organisation: string;
+  identificationId: string;
+  referenceAddress: string;
+  dateIssued?: GQLDate;
+}
+
+export interface GQLCreateUpdateCertificateResponse {
+  certificateId: string;
+  statusCode: number;
+}
+
 export type GQLVoid = any;
 
 /*********************************
@@ -652,6 +671,8 @@ export interface GQLResolver {
   OtherInformationMutationRoot?: GQLOtherInformationMutationRootTypeResolver;
   LanguageMutationRoot?: GQLLanguageMutationRootTypeResolver;
   LanguageIdResponse?: GQLLanguageIdResponseTypeResolver;
+  CertificateMutationRoot?: GQLCertificateMutationRootTypeResolver;
+  CreateUpdateCertificateResponse?: GQLCreateUpdateCertificateResponseTypeResolver;
   Void?: GraphQLScalarType;
 }
 export interface GQLQueryTypeResolver<TParent = undefined> {
@@ -2099,6 +2120,7 @@ export interface GQLMutationTypeResolver<TParent = undefined> {
   education?: MutationToEducationResolver<TParent>;
   otherInformation?: MutationToOtherInformationResolver<TParent>;
   language?: MutationToLanguageResolver<TParent>;
+  certificate?: MutationToCertificateResolver<TParent>;
 }
 
 export interface MutationToAuthenticationResolver<
@@ -2146,6 +2168,13 @@ export interface MutationToOtherInformationResolver<
 export interface MutationToLanguageResolver<
   TParent = undefined,
   TResult = GQLLanguageMutationRoot
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface MutationToCertificateResolver<
+  TParent = undefined,
+  TResult = GQLCertificateMutationRoot
 > {
   (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
 }
@@ -2934,6 +2963,46 @@ export interface LanguageIdResponseToLanguageIdResolver<
 
 export interface LanguageIdResponseToStatusCodeResolver<
   TParent = GQLLanguageIdResponse,
+  TResult = number
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface GQLCertificateMutationRootTypeResolver<TParent = GQLCertificateMutationRoot> {
+  createCertificate?: CertificateMutationRootToCreateCertificateResolver<TParent>;
+}
+
+export interface CertificateMutationRootToCreateCertificateArgs {
+  input: GQLCreateCertificateInput;
+}
+export interface CertificateMutationRootToCreateCertificateResolver<
+  TParent = GQLCertificateMutationRoot,
+  TResult = GQLCreateUpdateCertificateResponse
+> {
+  (
+    parent: TParent,
+    args: CertificateMutationRootToCreateCertificateArgs,
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLCreateUpdateCertificateResponseTypeResolver<
+  TParent = GQLCreateUpdateCertificateResponse
+> {
+  certificateId?: CreateUpdateCertificateResponseToCertificateIdResolver<TParent>;
+  statusCode?: CreateUpdateCertificateResponseToStatusCodeResolver<TParent>;
+}
+
+export interface CreateUpdateCertificateResponseToCertificateIdResolver<
+  TParent = GQLCreateUpdateCertificateResponse,
+  TResult = string
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface CreateUpdateCertificateResponseToStatusCodeResolver<
+  TParent = GQLCreateUpdateCertificateResponse,
   TResult = number
 > {
   (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
