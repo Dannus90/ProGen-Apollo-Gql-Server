@@ -2,9 +2,18 @@
 This is the middle layer of the ProGen application. This part of the application 
 handles the communication between the backend **ProGen API** and the frontend **ProGen Frontend**.
 
+## Testing the service
+You can use a lot of programs to test the api. Suggestions are insomnia, postman or Apollo Studio. I suggest
+Apollo studio for the simplicity and visual layout. Navigation to 
+[Apollo Studio](https://studio.apollographql.com/org/decp-development/graphs) and create a new graph. This will 
+recognize your running instance on port 4000 if you have your apollo server running. Also make sure to have your C# backend
+up and running otherwise no data processing will work. 
+
 ### Code Quality
 To fix the code quality run the command `yarn formatlint:fix`. Then you might have to fix some issues. 
 The project is using a combination of prettier and eslint for code quality. 
+
+Editing code quality rules are done in **.eslintrc.js** and **.prettierrc**
 
 ### Scripts
 The command `yarn types` generates typescript based on the type defs. Therefor always run this command
