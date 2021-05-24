@@ -1,6 +1,6 @@
 import { PROGEN_BASE_URL } from "../../config/api/base";
-import { fetchGetAuth, fetchPostAuth } from "../../config/api/httpClient";
-import { GQLCreateCertificateInput } from "../../types/TypesGraphQL";
+import { fetchDeleteAuth, fetchGetAuth, fetchPostAuth } from "../../config/api/httpClient";
+import { GQLCreateCertificateInput, GQLDeleteCertificateInput } from "../../types/TypesGraphQL";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createCertificate = async (
@@ -24,4 +24,13 @@ export const getCertificate = async (
 
 export const getCertificates = async (authorization: string): Promise<any> => {
   return await fetchGetAuth(`${PROGEN_BASE_URL}/user/certificate`, "GET", authorization);
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const deleteCertificate = async (authorization: string, input: GQLDeleteCertificateInput): Promise<any> => {
+  return await fetchDeleteAuth(
+    `${PROGEN_BASE_URL}/user/certificate/${input.certificateId}`,
+    "DELETE",
+    authorization
+  );
 };

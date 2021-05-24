@@ -1,8 +1,10 @@
 import { gql } from "apollo-server";
 
+
 export const certificateTypeDefs = gql`
   extend type CertificateMutationRoot {
     createCertificate(input: CreateCertificateInput!): CreateUpdateCertificateResponse!
+    deleteCertificate(input: DeleteCertificateInput!): DeleteCertificateResponse!
   }
 
   extend type CertificateRoot {
@@ -11,6 +13,10 @@ export const certificateTypeDefs = gql`
   }
 
   input GetCertificateInput {
+    certificateId: String!
+  }
+
+  input DeleteCertificateInput {
     certificateId: String!
   }
 
@@ -57,6 +63,11 @@ export const certificateTypeDefs = gql`
 
   type CreateUpdateCertificateResponse {
     certificateId: String!
+    statusCode: Int!
+  }
+
+  type DeleteCertificateResponse {
+    message: String!
     statusCode: Int!
   }
 `;

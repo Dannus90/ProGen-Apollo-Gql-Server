@@ -23,13 +23,14 @@ import {
   getEducation,
   updateEducation
 } from "./handlers/education/api-calls";
-import { createCertificate } from "./handlers/certificate/api-calls";
+import { createCertificate, deleteCertificate } from "./handlers/certificate/api-calls";
 import {
   GQLChangeEmailInput,
   GQLChangePasswordInput,
   GQLCreateCertificateInput,
   GQLCreateEducationInput,
   GQLDeleteAccountInput,
+  GQLDeleteCertificateInput,
   GQLLanguageInput,
   GQLLoginInput,
   GQLOtherInformationInput,
@@ -108,6 +109,7 @@ export interface GetApiMethods {
     authorization: string,
     input: GQLCreateCertificateInput | undefined
   ) => Promise<any>;
+  deleteCertificate: (authorization: string, input: GQLDeleteCertificateInput) => Promise<any>;
 }
 
 export const getApiMethods = (): GetApiMethods => {
@@ -136,6 +138,7 @@ export const getApiMethods = (): GetApiMethods => {
     deleteAccount,
     requestPasswordResetByEmail,
     resetPasswordByTokenInParams,
-    createCertificate
+    createCertificate,
+    deleteCertificate
   };
 };
