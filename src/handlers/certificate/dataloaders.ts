@@ -3,11 +3,12 @@ import {
   HttpResponseError,
   statusCodeChecker
 } from "../../config/api/error-management/http-response-error";
-import { getCertificate } from "./api-calls";
-import { GetSingleCertificateResponse } from "./api-types";
+import { getCertificate, getCertificates } from "./api-calls";
+import { CertificatesResponse, GetSingleCertificateResponse } from "./api-types";
 
 export interface CertificateDataLoaders {
   byCertificateId: DataLoader<string, GetSingleCertificateResponse>;
+  certificatesByUserIdInClaims: DataLoader<string, CertificatesResponse>;
 }
 
 export const createCertificateDataLoaders = (authorization: string): CertificateDataLoaders => {
@@ -43,7 +44,40 @@ export const createCertificateDataLoaders = (authorization: string): Certificate
     });
   });
 
+  const certificatesByUserIdInClaims = new DataLoader<"All", CertificatesResponse>(async (ids) => {
+    const certificates = await Promise.all(
+      ids.map(async () => {
+        const response = await getCertificates(authorization);
+        if (response.status === 401) {
+          const { status, statusText } = response;
+          throw new HttpResponseError(statusText, status, statusText);
+        } else if (!statusCodeChecker(response.status)) {
+          const { type, statusCode, message, errors } = await response.json();
+
+          let errorOutput = [""];
+
+          if (errors) {
+            errorOutput = Object.keys(errors).map((err) => {
+              return errors[err];
+            });
+          }
+
+          throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
+        }
+
+        const certificatesResponse = await response.json();
+        certificatesResponse.statusCode = response.status;
+        return certificatesResponse;
+      })
+    );
+
+    return ids.map(() => {
+      return certificates[0];
+    });
+  });
+
   return {
-    byCertificateId
+    byCertificateId,
+    certificatesByUserIdInClaims
   };
 };

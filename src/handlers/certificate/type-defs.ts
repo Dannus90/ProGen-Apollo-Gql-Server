@@ -7,6 +7,7 @@ export const certificateTypeDefs = gql`
 
   extend type CertificateRoot {
     getCertificate(input: GetCertificateInput!): CertificateResponse!
+    getCertificates: CertificatesResponse!
   }
 
   input GetCertificateInput {
@@ -33,6 +34,24 @@ export const certificateTypeDefs = gql`
     dateIssued: Date!
     updatedAt: Date!
     createdAt: Date!
+    statusCode: Int!
+  }
+
+  type Certificate {
+    id: String!
+    userId: String!
+    certificateNameSv: String!
+    certificateNameEn: String!
+    organisation: String!
+    identificationId: String!
+    referenceAddress: String!
+    dateIssued: Date!
+    updatedAt: Date!
+    createdAt: Date!
+  }
+
+  type CertificatesResponse {
+    certificate: [Certificate]!
     statusCode: Int!
   }
 

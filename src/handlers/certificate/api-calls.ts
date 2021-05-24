@@ -21,3 +21,7 @@ export const getCertificate = async (
     authorization
   );
 };
+
+export const getCertificates = async (authorization: string): Promise<any> => {
+  return await fetchGetAuth(`${PROGEN_BASE_URL}/user/certificate`, "GET", authorization);
+};

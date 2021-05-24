@@ -1,4 +1,4 @@
-import { GQLCertificateResponse } from "../../types/TypesGraphQL";
+import { GQLCertificateResponse, GQLCertificatesResponse } from "../../types/TypesGraphQL";
 import { Context } from "./../../context";
 
 export const CertificateResolvers = {
@@ -35,6 +35,16 @@ export const CertificateResolvers = {
         organisation,
         updatedAt,
         userId
+      };
+    },
+    getCertificates: async (_, __, { loaders }: Context): Promise<GQLCertificatesResponse> => {
+      const certificates = await loaders.certificate.certificatesByUserIdInClaims.load("All");
+
+      console.log(certificates);
+
+      return {
+        statusCode: certificates.statusCode,
+        certificate: certificates.certificatesDto
       };
     }
   }
