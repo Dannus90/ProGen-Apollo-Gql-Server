@@ -22,7 +22,7 @@ export const createCertificateDataLoaders = (authorization: string): Certificate
         } else if (!statusCodeChecker(response.status)) {
           const { type, statusCode, message, errors } = await response.json();
 
-          let errorOutput = [""];
+          let errorOutput = ["Unspecified error"];
 
           if (errors) {
             errorOutput = Object.keys(errors).map((err) => {
@@ -54,7 +54,7 @@ export const createCertificateDataLoaders = (authorization: string): Certificate
         } else if (!statusCodeChecker(response.status)) {
           const { type, statusCode, message, errors } = await response.json();
 
-          let errorOutput = [""];
+          let errorOutput = ["Unspecified error"];
 
           if (errors) {
             errorOutput = Object.keys(errors).map((err) => {

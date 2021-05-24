@@ -5,12 +5,16 @@ import {
 import {
   CertificateMutationRootToCreateCertificateResolver,
   CertificateMutationRootToDeleteCertificateResolver,
-  GQLCreateUpdateCertificateResponse
+  CertificateMutationRootToUpdateCertificateResolver,
+  GQLCertificateResponse,
+  GQLDeleteCertificateResponse,
+  GQLCreateCertificateResponse
 } from "./../../types/TypesGraphQL";
 import { Context } from "../../context";
 export interface CertificateMutation {
   CertificateMutationRoot: {
     createCertificate: CertificateMutationRootToCreateCertificateResolver;
+    updateCertificate: CertificateMutationRootToUpdateCertificateResolver;
     deleteCertificate: CertificateMutationRootToDeleteCertificateResolver;
   };
 }
@@ -21,7 +25,7 @@ export const certificateMutations: CertificateMutation = {
       _,
       body,
       { api, authorization }: Context
-    ): Promise<GQLCreateUpdateCertificateResponse> => {
+    ): Promise<GQLCreateCertificateResponse> => {
       const response = await api.createCertificate(authorization, body.input);
 
       if (!statusCodeChecker(response.status)) {
@@ -49,7 +53,50 @@ export const certificateMutations: CertificateMutation = {
 
       return gqlResponse;
     },
-    deleteCertificate: async (_, body, { api, authorization }: Context) => {
+    updateCertificate: async (
+      _,
+      body,
+      { api, authorization }: Context
+    ): Promise<GQLCertificateResponse> => {
+      const response = await api.updateCertificate(
+        authorization,
+        body.input.certificateId,
+        body.input
+      );
+
+      if (!statusCodeChecker(response.status)) {
+        const { type, statusCode, message, errors } = await response.json();
+
+        const errorOutput = Object.keys(errors).map((err) => {
+          return errors[err];
+        });
+
+        throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
+      }
+
+      const data = await response.json();
+
+      const certificateData = data.certificateDto
+
+      return  {
+        id: certificateData.id,
+        certificateNameEn: certificateData.certificateNameEn,
+        certificateNameSv: certificateData.certificateNameSv,
+        identificationId: certificateData.identificationId,
+        referenceAddress: certificateData.referenceAddress,
+        organisation: certificateData.organisation,
+        userId: certificateData.userId,
+        createdAt: certificateData.createdAt,
+        updatedAt: certificateData.updatedAt,
+        dateIssued: certificateData.dateIssued,
+        statusCode: response.status
+      };
+    },
+    deleteCertificate: async (
+      _,
+      body,
+      { api, authorization }: Context
+    ): Promise<GQLDeleteCertificateResponse> => {
       const response = await api.deleteCertificate(authorization, body.input);
 
       if (!statusCodeChecker(response.status)) {
@@ -67,7 +114,7 @@ export const certificateMutations: CertificateMutation = {
       }
 
       return {
-        message: "If certificate existed it was deleted successfully",
+        message: "Certificate deleted successfully.",
         statusCode: response.status
       };
     }

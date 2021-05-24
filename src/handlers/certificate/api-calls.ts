@@ -1,6 +1,15 @@
 import { PROGEN_BASE_URL } from "../../config/api/base";
-import { fetchDeleteAuth, fetchGetAuth, fetchPostAuth } from "../../config/api/httpClient";
-import { GQLCreateCertificateInput, GQLDeleteCertificateInput } from "../../types/TypesGraphQL";
+import {
+  fetchDeleteAuth,
+  fetchGetAuth,
+  fetchPostAuth,
+  fetchPutAuth
+} from "../../config/api/httpClient";
+import {
+  GQLCreateCertificateInput,
+  GQLDeleteCertificateInput,
+  GQLUpdateCertificateInput
+} from "../../types/TypesGraphQL";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createCertificate = async (
@@ -8,6 +17,20 @@ export const createCertificate = async (
   input: GQLCreateCertificateInput | undefined
 ) => {
   return await fetchPostAuth(`${PROGEN_BASE_URL}/user/certificate`, "POST", authorization, input);
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const updateCertificate = async (
+  authorization: string,
+  certificateId: string | undefined,
+  input: GQLUpdateCertificateInput
+) => {
+  return await fetchPutAuth(
+    `${PROGEN_BASE_URL}/user/certificate/${certificateId}`,
+    "PUT",
+    authorization,
+    input
+  );
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -27,7 +50,10 @@ export const getCertificates = async (authorization: string): Promise<any> => {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const deleteCertificate = async (authorization: string, input: GQLDeleteCertificateInput): Promise<any> => {
+export const deleteCertificate = async (
+  authorization: string,
+  input: GQLDeleteCertificateInput
+): Promise<any> => {
   return await fetchDeleteAuth(
     `${PROGEN_BASE_URL}/user/certificate/${input.certificateId}`,
     "DELETE",

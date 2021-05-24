@@ -40,8 +40,6 @@ export const CertificateResolvers = {
     getCertificates: async (_, __, { loaders }: Context): Promise<GQLCertificatesResponse> => {
       const certificates = await loaders.certificate.certificatesByUserIdInClaims.load("All");
 
-      console.log(certificates);
-
       return {
         statusCode: certificates.statusCode,
         certificate: certificates.certificatesDto
