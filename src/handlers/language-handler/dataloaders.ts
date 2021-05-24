@@ -22,9 +22,13 @@ export const createLanguageDataLoaders = (authorization: string): LanguageDataLo
         } else if (!statusCodeChecker(response.status)) {
           const { type, statusCode, message, errors } = await response.json();
 
-          const errorOutput = Object.keys(errors).map((err) => {
-            return errors[err];
-          });
+          let errorOutput = [""];
+
+          if (errors) {
+            errorOutput = Object.keys(errors).map((err) => {
+              return errors[err];
+            });
+          }
 
           throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
         }
@@ -51,9 +55,13 @@ export const createLanguageDataLoaders = (authorization: string): LanguageDataLo
           } else if (!statusCodeChecker(response.status)) {
             const { type, statusCode, message, errors } = await response.json();
 
-            const errorOutput = Object.keys(errors).map((err) => {
-              return errors[err];
-            });
+            let errorOutput = [""];
+
+            if (errors) {
+              errorOutput = Object.keys(errors).map((err) => {
+                return errors[err];
+              });
+            }
 
             throw new HttpResponseError(
               type,

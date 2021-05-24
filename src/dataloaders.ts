@@ -20,6 +20,10 @@ import {
   FullCvInformationDataLoaders,
   createFullCvInformationDataLoaders
 } from "./handlers/full-cv-information/dataloaders";
+import {
+  CertificateDataLoaders,
+  createCertificateDataLoaders
+} from "./handlers/certificate/dataloaders";
 
 export interface ContextDataLoaders {
   userData: UserDataLoaders;
@@ -29,6 +33,7 @@ export interface ContextDataLoaders {
   otherInformation: OtherInformationDataLoaders;
   language: LanguageDataLoaders;
   fullCvInformation: FullCvInformationDataLoaders;
+  certificate: CertificateDataLoaders;
 }
 
 export const createDataLoaders = (authorization: string): ContextDataLoaders => {
@@ -39,6 +44,7 @@ export const createDataLoaders = (authorization: string): ContextDataLoaders => 
     education: createEducationDataLoaders(authorization),
     otherInformation: createOtherInformationDataLoaders(authorization),
     language: createLanguageDataLoaders(authorization),
-    fullCvInformation: createFullCvInformationDataLoaders(authorization)
+    fullCvInformation: createFullCvInformationDataLoaders(authorization),
+    certificate: createCertificateDataLoaders(authorization)
   };
 };

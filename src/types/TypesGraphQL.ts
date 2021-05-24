@@ -19,6 +19,7 @@ export interface GQLQuery {
   otherInformation: GQLOtherInformationRoot;
   language: GQLLanguageRoot;
   fullCvInformation: GQLFullCvInformationRoot;
+  certificate: GQLCertificateRoot;
 }
 
 export interface GQLUserDataRoot {
@@ -296,6 +297,28 @@ export interface GQLLanguageFullCv {
 export interface GQLUserPresentationFullCv {
   presentationSv: string;
   presentationEn: string;
+}
+
+export interface GQLCertificateRoot {
+  getCertificate: GQLCertificateResponse;
+}
+
+export interface GQLGetCertificateInput {
+  certificateId: string;
+}
+
+export interface GQLCertificateResponse {
+  id: string;
+  userId: string;
+  certificateNameSv: string;
+  certificateNameEn: string;
+  organisation: string;
+  identificationId: string;
+  referenceAddress: string;
+  dateIssued: GQLDate;
+  updatedAt: GQLDate;
+  createdAt: GQLDate;
+  statusCode: number;
 }
 
 export interface GQLMutation {
@@ -653,6 +676,8 @@ export interface GQLResolver {
   WorkExperienceFullCv?: GQLWorkExperienceFullCvTypeResolver;
   LanguageFullCv?: GQLLanguageFullCvTypeResolver;
   UserPresentationFullCv?: GQLUserPresentationFullCvTypeResolver;
+  CertificateRoot?: GQLCertificateRootTypeResolver;
+  CertificateResponse?: GQLCertificateResponseTypeResolver;
   Mutation?: GQLMutationTypeResolver;
   AuthenticationMutationRoot?: GQLAuthenticationMutationRootTypeResolver;
   TokenResponse?: GQLTokenResponseTypeResolver;
@@ -683,6 +708,7 @@ export interface GQLQueryTypeResolver<TParent = undefined> {
   otherInformation?: QueryToOtherInformationResolver<TParent>;
   language?: QueryToLanguageResolver<TParent>;
   fullCvInformation?: QueryToFullCvInformationResolver<TParent>;
+  certificate?: QueryToCertificateResolver<TParent>;
 }
 
 export interface QueryToUserDataResolver<TParent = undefined, TResult = GQLUserDataRoot> {
@@ -722,6 +748,10 @@ export interface QueryToFullCvInformationResolver<
   TParent = undefined,
   TResult = GQLFullCvInformationRoot
 > {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface QueryToCertificateResolver<TParent = undefined, TResult = GQLCertificateRoot> {
   (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
 }
 
@@ -2108,6 +2138,116 @@ export interface UserPresentationFullCvToPresentationSvResolver<
 export interface UserPresentationFullCvToPresentationEnResolver<
   TParent = GQLUserPresentationFullCv,
   TResult = string
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface GQLCertificateRootTypeResolver<TParent = GQLCertificateRoot> {
+  getCertificate?: CertificateRootToGetCertificateResolver<TParent>;
+}
+
+export interface CertificateRootToGetCertificateArgs {
+  input: GQLGetCertificateInput;
+}
+export interface CertificateRootToGetCertificateResolver<
+  TParent = GQLCertificateRoot,
+  TResult = GQLCertificateResponse
+> {
+  (
+    parent: TParent,
+    args: CertificateRootToGetCertificateArgs,
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLCertificateResponseTypeResolver<TParent = GQLCertificateResponse> {
+  id?: CertificateResponseToIdResolver<TParent>;
+  userId?: CertificateResponseToUserIdResolver<TParent>;
+  certificateNameSv?: CertificateResponseToCertificateNameSvResolver<TParent>;
+  certificateNameEn?: CertificateResponseToCertificateNameEnResolver<TParent>;
+  organisation?: CertificateResponseToOrganisationResolver<TParent>;
+  identificationId?: CertificateResponseToIdentificationIdResolver<TParent>;
+  referenceAddress?: CertificateResponseToReferenceAddressResolver<TParent>;
+  dateIssued?: CertificateResponseToDateIssuedResolver<TParent>;
+  updatedAt?: CertificateResponseToUpdatedAtResolver<TParent>;
+  createdAt?: CertificateResponseToCreatedAtResolver<TParent>;
+  statusCode?: CertificateResponseToStatusCodeResolver<TParent>;
+}
+
+export interface CertificateResponseToIdResolver<
+  TParent = GQLCertificateResponse,
+  TResult = string
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface CertificateResponseToUserIdResolver<
+  TParent = GQLCertificateResponse,
+  TResult = string
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface CertificateResponseToCertificateNameSvResolver<
+  TParent = GQLCertificateResponse,
+  TResult = string
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface CertificateResponseToCertificateNameEnResolver<
+  TParent = GQLCertificateResponse,
+  TResult = string
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface CertificateResponseToOrganisationResolver<
+  TParent = GQLCertificateResponse,
+  TResult = string
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface CertificateResponseToIdentificationIdResolver<
+  TParent = GQLCertificateResponse,
+  TResult = string
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface CertificateResponseToReferenceAddressResolver<
+  TParent = GQLCertificateResponse,
+  TResult = string
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface CertificateResponseToDateIssuedResolver<
+  TParent = GQLCertificateResponse,
+  TResult = GQLDate
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface CertificateResponseToUpdatedAtResolver<
+  TParent = GQLCertificateResponse,
+  TResult = GQLDate
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface CertificateResponseToCreatedAtResolver<
+  TParent = GQLCertificateResponse,
+  TResult = GQLDate
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface CertificateResponseToStatusCodeResolver<
+  TParent = GQLCertificateResponse,
+  TResult = number
 > {
   (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
 }

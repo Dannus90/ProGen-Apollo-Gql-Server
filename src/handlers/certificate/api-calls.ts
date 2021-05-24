@@ -1,5 +1,5 @@
 import { PROGEN_BASE_URL } from "../../config/api/base";
-import { fetchPostAuth } from "../../config/api/httpClient";
+import { fetchGetAuth, fetchPostAuth } from "../../config/api/httpClient";
 import { GQLCreateCertificateInput } from "../../types/TypesGraphQL";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -8,4 +8,16 @@ export const createCertificate = async (
   input: GQLCreateCertificateInput | undefined
 ) => {
   return await fetchPostAuth(`${PROGEN_BASE_URL}/user/certificate`, "POST", authorization, input);
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getCertificate = async (
+  authorization: string,
+  certificateId: string | undefined
+): Promise<any> => {
+  return await fetchGetAuth(
+    `${PROGEN_BASE_URL}/user/certificate/${certificateId}`,
+    "GET",
+    authorization
+  );
 };

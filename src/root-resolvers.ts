@@ -3,6 +3,7 @@ import { userDataResolvers } from "./handlers/user-data/resolvers";
 import { workExperienceResolvers } from "./handlers/work-experience/resolvers";
 import { userPresentationResolvers } from "./handlers/user-presentation/resolvers";
 import {
+  QueryToCertificateResolver,
   QueryToEducationResolver,
   QueryToFullCvInformationResolver,
   QueryToLanguageResolver,
@@ -15,6 +16,7 @@ import { EducationResolvers } from "./handlers/education/resolvers";
 import { otherInformationResolvers } from "./handlers/other-information/resolvers";
 import { languageResolvers } from "./handlers/language-handler/resolvers";
 import { fullCvInformationResolversResolvers } from "./handlers/full-cv-information/resolvers";
+import { CertificateResolvers } from "./handlers/certificate/resolvers";
 
 interface QueryResolvers {
   Query: {
@@ -25,6 +27,7 @@ interface QueryResolvers {
     otherInformation: QueryToOtherInformationResolver<unknown, unknown>;
     language: QueryToLanguageResolver<unknown, unknown>;
     fullCvInformation: QueryToFullCvInformationResolver<unknown, unknown>;
+    certificate: QueryToCertificateResolver<unknown, unknown>;
   };
 }
 
@@ -36,7 +39,8 @@ const queryResolver: QueryResolvers = {
     education: async () => true,
     otherInformation: async () => true,
     language: async () => true,
-    fullCvInformation: async () => true
+    fullCvInformation: async () => true,
+    certificate: async () => true
   }
 };
 
@@ -48,5 +52,6 @@ export const rootResolver = merge(
   EducationResolvers,
   otherInformationResolvers,
   languageResolvers,
-  fullCvInformationResolversResolvers
+  fullCvInformationResolversResolvers,
+  CertificateResolvers
 );
