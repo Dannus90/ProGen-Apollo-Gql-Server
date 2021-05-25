@@ -2,6 +2,7 @@ import {
   HttpResponseError,
   statusCodeChecker
 } from "../../config/api/error-management/http-response-error";
+import { parseJson } from "../../config/api/helpers/parse-helper";
 import { Context } from "../../context";
 import {
   AuthenticationMutationRootToChangeEmailResolver,
@@ -46,8 +47,13 @@ export const authMutations: AuthenticationMutations = {
       const response = await api.registerUser(body.input);
 
       if (!statusCodeChecker(response.status)) {
-        const { type, statusCode, message } = await response.json();
-        throw new HttpResponseError(type, statusCode, message);
+        const res = await parseJson(response);
+
+        if(res) {
+          throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
+        } else {
+          throw new HttpResponseError(response.type, response.status, response.message ?? response.statusText ?? "Unspecified Error");
+        }        
       }
 
       const gqlResponse: GQLGeneralResponse = {
@@ -61,8 +67,13 @@ export const authMutations: AuthenticationMutations = {
       const response = await api.loginUser(body.input);
 
       if (!statusCodeChecker(response.status)) {
-        const { type, statusCode, message } = await response.json();
-        throw new HttpResponseError(type, statusCode ?? response.status, message);
+        const res = await parseJson(response);
+
+        if(res) {
+          throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
+        } else {
+          throw new HttpResponseError(response.type, response.status, response.message ?? response.statusText ?? "Unspecified Error");
+        }        
       }
 
       const { tokenResponse } = await response.json();
@@ -77,9 +88,14 @@ export const authMutations: AuthenticationMutations = {
     },
     logoutUser: async (_, __, { api, authorization }: Context) => {
       const response = await api.logoutUser(authorization);
-
       if (!statusCodeChecker(response.status)) {
-        throw new HttpResponseError(response.statusText, response.status, response.statusText);
+        const res = await parseJson(response);
+
+        if(res) {
+          throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
+        } else {
+          throw new HttpResponseError(response.type, response.status, response.message ?? response.statusText ?? "Unspecified Error");
+        }        
       }
 
       const gqlResponse: GQLGeneralResponse = {
@@ -93,8 +109,13 @@ export const authMutations: AuthenticationMutations = {
       const response = await api.refreshToken(authorization, body.input);
 
       if (!statusCodeChecker(response.status)) {
-        const { statusCode, message, type } = await response.json();
-        throw new HttpResponseError(type, statusCode ?? response.status, message);
+        const res = await parseJson(response);
+
+        if(res) {
+          throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
+        } else {
+          throw new HttpResponseError(response.type, response.status, response.message ?? response.statusText ?? "Unspecified Error");
+        }        
       }
 
       const { tokenResponse } = await response.json();
@@ -111,8 +132,13 @@ export const authMutations: AuthenticationMutations = {
       const response = await api.changeEmail(authorization, body.input);
 
       if (!statusCodeChecker(response.status)) {
-        const { statusCode, message, type } = await response.json();
-        throw new HttpResponseError(type, statusCode ?? response.status, message);
+        const res = await parseJson(response);
+
+        if(res) {
+          throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
+        } else {
+          throw new HttpResponseError(response.type, response.status, response.message ?? response.statusText ?? "Unspecified Error");
+        }        
       }
 
       const gqlResponse: GQLGeneralResponse = {
@@ -126,8 +152,13 @@ export const authMutations: AuthenticationMutations = {
       const response = await api.changePassword(authorization, body.input);
 
       if (!statusCodeChecker(response.status)) {
-        const { statusCode, message, type } = await response.json();
-        throw new HttpResponseError(type, statusCode ?? response.status, message);
+        const res = await parseJson(response);
+
+        if(res) {
+          throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
+        } else {
+          throw new HttpResponseError(response.type, response.status, response.message ?? response.statusText ?? "Unspecified Error");
+        }        
       }
 
       const gqlResponse: GQLGeneralResponse = {
@@ -141,8 +172,13 @@ export const authMutations: AuthenticationMutations = {
       const response = await api.deleteAccount(authorization, body.input);
 
       if (!statusCodeChecker(response.status)) {
-        const { statusCode, message, type } = await response.json();
-        throw new HttpResponseError(type, statusCode ?? response.status, message);
+        const res = await parseJson(response);
+
+        if(res) {
+          throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
+        } else {
+          throw new HttpResponseError(response.type, response.status, response.message ?? response.statusText ?? "Unspecified Error");
+        }        
       }
 
       const gqlResponse: GQLGeneralResponse = {
@@ -156,8 +192,13 @@ export const authMutations: AuthenticationMutations = {
       const response = await api.requestPasswordResetByEmail({ email: body.input?.email ?? "" });
 
       if (!statusCodeChecker(response.status)) {
-        const { statusCode, message, type } = await response.json();
-        throw new HttpResponseError(type, statusCode ?? response.status, message);
+        const res = await parseJson(response);
+
+        if(res) {
+          throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
+        } else {
+          throw new HttpResponseError(response.type, response.status, response.message ?? response.statusText ?? "Unspecified Error");
+        }        
       }
 
       const gqlResponse: GQLGeneralResponse = {

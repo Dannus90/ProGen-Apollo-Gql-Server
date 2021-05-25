@@ -5,6 +5,7 @@ import {
   MutationToEducationResolver,
   MutationToLanguageResolver,
   MutationToOtherInformationResolver,
+  MutationToSkillResolver,
   MutationToUserDataResolver,
   MutationToUserPresentationResolver,
   MutationToWorkExperienceResolver
@@ -17,6 +18,7 @@ import { educationMutations } from "./handlers/education/mutations";
 import { otherInformationMutations } from "./handlers/other-information/mutations";
 import { languageMutations } from "./handlers/language-handler/mutations";
 import { certificateMutations } from "./handlers/certificate/mutations";
+import { skillMutations } from "./handlers/skill/mutations";
 
 interface MutationResolvers {
   Mutation: {
@@ -28,6 +30,7 @@ interface MutationResolvers {
     otherInformation: MutationToOtherInformationResolver<unknown, unknown>;
     language: MutationToLanguageResolver<unknown, unknown>;
     certificate: MutationToCertificateResolver<unknown, unknown>;
+    skill: MutationToSkillResolver<unknown, unknown>;
   };
 }
 
@@ -40,7 +43,8 @@ const mutationResolver: MutationResolvers = {
     education: async () => true,
     otherInformation: async () => true,
     language: async () => true,
-    certificate: async () => true
+    certificate: async () => true,
+    skill: async () => true
   }
 };
 
@@ -53,5 +57,6 @@ export const rootMutation = merge(
   educationMutations,
   otherInformationMutations,
   languageMutations,
-  certificateMutations
+  certificateMutations,
+  skillMutations
 );

@@ -3,6 +3,7 @@ import {
   HttpResponseError,
   statusCodeChecker
 } from "../../config/api/error-management/http-response-error";
+import { parseJson } from "../../config/api/helpers/parse-helper";
 import { getWorkExperience, getWorkExperiences } from "./api-calls";
 import { GetWorkExperienceAnswer, GetWorkExperiencesAnswer } from "./api-types";
 
@@ -18,21 +19,14 @@ export const createWorkExperienceDataLoaders = (
     const workExperiences = await Promise.all(
       ids.map(async (id) => {
         const response = await getWorkExperience(authorization, id);
-        if (response.status === 401) {
-          const { status, statusText } = response;
-          throw new HttpResponseError(statusText, status, statusText);
-        } else if (!statusCodeChecker(response.status)) {
-          const { type, statusCode, message, errors } = await response.json();
-
-          let errorOutput = [""];
-
-          if (errors) {
-            errorOutput = Object.keys(errors).map((err) => {
-              return errors[err];
-            });
-          }
-
-          throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
+        if (!statusCodeChecker(response.status)) {
+          const res = await parseJson(response);
+  
+          if(res) {
+            throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
+          } else {
+            throw new HttpResponseError(response.type, response.status, response.message ?? response.statusText ?? "Unspecified Error");
+          }        
         }
 
         const workExperience = await response.json();
@@ -51,25 +45,14 @@ export const createWorkExperienceDataLoaders = (
       const workExperiences = await Promise.all(
         ids.map(async () => {
           const response = await getWorkExperiences(authorization);
-          if (response.status === 401) {
-            const { status, statusText } = response;
-            throw new HttpResponseError(statusText, status, statusText);
-          } else if (!statusCodeChecker(response.status)) {
-            const { type, statusCode, message, errors } = await response.json();
-
-            let errorOutput = [""];
-
-            if (errors) {
-              errorOutput = Object.keys(errors).map((err) => {
-                return errors[err];
-              });
-            }
-
-            throw new HttpResponseError(
-              type,
-              statusCode ?? response.status,
-              message ?? errorOutput
-            );
+          if (!statusCodeChecker(response.status)) {
+            const res = await parseJson(response);
+    
+            if(res) {
+              throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
+            } else {
+              throw new HttpResponseError(response.type, response.status, response.message ?? response.statusText ?? "Unspecified Error");
+            }        
           }
 
           const workExperiencesResponse = await response.json();

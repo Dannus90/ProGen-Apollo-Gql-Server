@@ -1,10 +1,3 @@
-/**
- * Root-type-defs.
- *
- * @author Daniel Persson
- * @version 1.0.0
- */
-
 import { gql } from "apollo-server";
 import { authenticationTypeDefs } from "./handlers/auth-handler/type-defs";
 import { userDataTypeDefs } from "./handlers/user-data/type-defs";
@@ -15,6 +8,7 @@ import { otherInformationTypeDefs } from "./handlers/other-information/type-defs
 import { languageTypeDefs } from "./handlers/language-handler/type-defs";
 import { fullCvInformationTypeDefs } from "./handlers/full-cv-information/type-defs";
 import { certificateTypeDefs } from "./handlers/certificate/type-defs";
+import { skillTypeDefs } from "./handlers/skill/type-defs";
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
@@ -42,9 +36,11 @@ const entryTypeDefs = gql`
     otherInformation: OtherInformationMutationRoot!
     language: LanguageMutationRoot!
     certificate: CertificateMutationRoot!
+    skill: SkillMutationRoot!
   }
 
   # Query Roots
+  type SkillMutationRoot
   type CertificateRoot
   type UserPresentationRoot
   type UserDataRoot
@@ -75,5 +71,6 @@ export const rootTypeDefs = [
   otherInformationTypeDefs,
   languageTypeDefs,
   fullCvInformationTypeDefs,
-  certificateTypeDefs
+  certificateTypeDefs,
+  skillTypeDefs
 ];

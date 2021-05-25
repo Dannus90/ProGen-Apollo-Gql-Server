@@ -8,6 +8,7 @@ import {
   WorkExperienceMutationRootToUpdateWorkExperienceResolver
 } from "./../../types/TypesGraphQL";
 import { Context } from "../../context";
+import { parseJson } from "../../config/api/helpers/parse-helper";
 
 export interface WorkExperienceMutation {
   WorkExperienceMutationRoot: {
@@ -75,13 +76,13 @@ export const workExperienceMutations: WorkExperienceMutation = {
       const response = await api.deleteWorkExperience(authorization, body.input.workExperienceId);
 
       if (!statusCodeChecker(response.status)) {
-        const { type, statusCode, message, errors } = await response.json();
+        const res = await parseJson(response);
 
-        const errorOutput = Object.keys(errors).map((err) => {
-          return errors[err];
-        });
-
-        throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
+        if(res) {
+          throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
+        } else {
+          throw new HttpResponseError(response.type, response.status, response.message ?? response.statusText ?? "Unspecified Error");
+        }        
       }
 
       return {

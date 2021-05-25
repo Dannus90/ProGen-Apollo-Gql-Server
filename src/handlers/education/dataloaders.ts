@@ -3,6 +3,7 @@ import {
   HttpResponseError,
   statusCodeChecker
 } from "../../config/api/error-management/http-response-error";
+import { parseJson } from "../../config/api/helpers/parse-helper";
 import { getEducation, getEducations } from "./api-calls";
 import { EducationResponse, EducationsResponse } from "./api-types";
 
@@ -16,21 +17,14 @@ export const createEducationDataLoaders = (authorization: string): EducationData
     const educations = await Promise.all(
       ids.map(async (id) => {
         const response = await getEducation(authorization, id);
-        if (response.status === 401) {
-          const { status, statusText } = response;
-          throw new HttpResponseError(statusText, status, statusText);
-        } else if (!statusCodeChecker(response.status)) {
-          const { type, statusCode, message, errors } = await response.json();
-
-          let errorOutput = [""];
-
-          if (errors) {
-            errorOutput = Object.keys(errors).map((err) => {
-              return errors[err];
-            });
-          }
-
-          throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
+        if (!statusCodeChecker(response.status)) {
+          const res = await parseJson(response);
+  
+          if(res) {
+            throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
+          } else {
+            throw new HttpResponseError(response.type, response.status, response.message ?? response.statusText ?? "Unspecified Error");
+          }        
         }
 
         const education = await response.json();
@@ -48,21 +42,14 @@ export const createEducationDataLoaders = (authorization: string): EducationData
     const educations = await Promise.all(
       ids.map(async () => {
         const response = await getEducations(authorization);
-        if (response.status === 401) {
-          const { status, statusText } = response;
-          throw new HttpResponseError(statusText, status, statusText);
-        } else if (!statusCodeChecker(response.status)) {
-          const { type, statusCode, message, errors } = await response.json();
-
-          let errorOutput = [""];
-
-          if (errors) {
-            errorOutput = Object.keys(errors).map((err) => {
-              return errors[err];
-            });
-          }
-
-          throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
+        if (!statusCodeChecker(response.status)) {
+          const res = await parseJson(response);
+  
+          if(res) {
+            throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
+          } else {
+            throw new HttpResponseError(response.type, response.status, response.message ?? response.statusText ?? "Unspecified Error");
+          }        
         }
 
         const educationsResponse = await response.json();

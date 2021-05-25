@@ -3,6 +3,7 @@ import {
   HttpResponseError,
   statusCodeChecker
 } from "../../config/api/error-management/http-response-error";
+import { parseJson } from "../../config/api/helpers/parse-helper";
 import { getOtherInformation } from "./api-calls";
 import { OtherInformationAnswer } from "./api-types";
 
@@ -18,25 +19,14 @@ export const createOtherInformationDataLoaders = (
       const otherInformations = await Promise.all(
         ids.map(async () => {
           const response = await getOtherInformation(authorization);
-          if (response.status === 401) {
-            const { status, statusText } = response;
-            throw new HttpResponseError(statusText, status, statusText);
-          } else if (!statusCodeChecker(response.status)) {
-            const { type, statusCode, message, errors } = await response.json();
-
-            let errorOutput = [""];
-
-            if (errors) {
-              errorOutput = Object.keys(errors).map((err) => {
-                return errors[err];
-              });
-            }
-
-            throw new HttpResponseError(
-              type,
-              statusCode ?? response.status,
-              message ?? errorOutput
-            );
+          if (!statusCodeChecker(response.status)) {
+            const res = await parseJson(response);
+    
+            if(res) {
+              throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
+            } else {
+              throw new HttpResponseError(response.type, response.status, response.message ?? response.statusText ?? "Unspecified Error");
+            }        
           }
 
           const otherInformation: OtherInformationAnswer = await response.json();

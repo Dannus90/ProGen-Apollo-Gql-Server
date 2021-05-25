@@ -11,6 +11,7 @@ import {
   GQLCreateCertificateResponse
 } from "./../../types/TypesGraphQL";
 import { Context } from "../../context";
+import { parseJson } from "../../config/api/helpers/parse-helper";
 export interface CertificateMutation {
   CertificateMutationRoot: {
     createCertificate: CertificateMutationRootToCreateCertificateResolver;
@@ -29,17 +30,13 @@ export const certificateMutations: CertificateMutation = {
       const response = await api.createCertificate(authorization, body.input);
 
       if (!statusCodeChecker(response.status)) {
-        const { type, statusCode, message, errors } = await response.json();
+        const res = await parseJson(response);
 
-        let errorOutput = ["Unspecified error"];
-
-        if (errors) {
-          errorOutput = Object.keys(errors).map((err) => {
-            return errors[err];
-          });
-        }
-
-        throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
+        if(res) {
+          throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
+        } else {
+          throw new HttpResponseError(response.type, response.status, response.message ?? response.statusText ?? "Unspecified Error");
+        }        
       }
 
       const data = await response.json();
@@ -65,20 +62,20 @@ export const certificateMutations: CertificateMutation = {
       );
 
       if (!statusCodeChecker(response.status)) {
-        const { type, statusCode, message, errors } = await response.json();
+        const res = await parseJson(response);
 
-        const errorOutput = Object.keys(errors).map((err) => {
-          return errors[err];
-        });
-
-        throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
+        if(res) {
+          throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
+        } else {
+          throw new HttpResponseError(response.type, response.status, response.message ?? response.statusText ?? "Unspecified Error");
+        }        
       }
 
       const data = await response.json();
 
-      const certificateData = data.certificateDto
+      const certificateData = data.certificateDto;
 
-      return  {
+      return {
         id: certificateData.id,
         certificateNameEn: certificateData.certificateNameEn,
         certificateNameSv: certificateData.certificateNameSv,
@@ -100,17 +97,13 @@ export const certificateMutations: CertificateMutation = {
       const response = await api.deleteCertificate(authorization, body.input);
 
       if (!statusCodeChecker(response.status)) {
-        const { type, statusCode, message, errors } = await response.json();
+        const res = await parseJson(response);
 
-        let errorOutput = ["Unspecified error"];
-
-        if (errors) {
-          errorOutput = Object.keys(errors).map((err) => {
-            return errors[err];
-          });
-        }
-
-        throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
+        if(res) {
+          throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
+        } else {
+          throw new HttpResponseError(response.type, response.status, response.message ?? response.statusText ?? "Unspecified Error");
+        }        
       }
 
       return {

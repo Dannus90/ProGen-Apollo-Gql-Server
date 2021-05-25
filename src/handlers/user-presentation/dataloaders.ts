@@ -3,6 +3,7 @@ import {
   HttpResponseError,
   statusCodeChecker
 } from "../../config/api/error-management/http-response-error";
+import { parseJson } from "../../config/api/helpers/parse-helper";
 import { getUserPresentation } from "./api-calls";
 import { UserPresentationResponse } from "./api-types";
 
@@ -18,12 +19,14 @@ export const createUserPresentationDataLoaders = (
       ids.map(async () => {
         const response = await getUserPresentation(authorization);
 
-        if (response.status === 401) {
-          const { status, statusText } = response;
-          throw new HttpResponseError(statusText, status, statusText);
-        } else if (!statusCodeChecker(response.status)) {
-          const { type, statusCode, message } = await response.json();
-          throw new HttpResponseError(type, statusCode, message);
+        if (!statusCodeChecker(response.status)) {
+          const res = await parseJson(response);
+  
+          if(res) {
+            throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
+          } else {
+            throw new HttpResponseError(response.type, response.status, response.message ?? response.statusText ?? "Unspecified Error");
+          }        
         }
 
         const userPresentation = await response.json();

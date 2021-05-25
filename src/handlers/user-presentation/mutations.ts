@@ -4,6 +4,7 @@ import {
 } from "../../config/api/error-management/http-response-error";
 import { UserPresentationMutationRootToUpdateUserPresentationResolver } from "./../../types/TypesGraphQL";
 import { Context } from "../../context";
+import { parseJson } from "../../config/api/helpers/parse-helper";
 
 export interface UserPresentationMutations {
   UserPresentationMutationRoot: {
@@ -17,8 +18,13 @@ export const userPresentationMutations: UserPresentationMutations = {
       const response = await api.updateUserPresentationData(authorization, body.input);
 
       if (!statusCodeChecker(response.status)) {
-        const { type, statusCode, message } = await response.json();
-        throw new HttpResponseError(type, statusCode ?? response.status, message);
+        const res = await parseJson(response);
+
+        if(res) {
+          throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
+        } else {
+          throw new HttpResponseError(response.type, response.status, response.message ?? response.statusText ?? "Unspecified Error");
+        }        
       }
 
       const data = await response.json();
