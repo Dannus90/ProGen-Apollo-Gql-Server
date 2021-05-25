@@ -21,6 +21,7 @@ export interface GQLQuery {
   fullCvInformation: GQLFullCvInformationRoot;
   certificate: GQLCertificateRoot;
   skill: GQLSkillRoot;
+  userSkill: GQLUserSkillRoot;
 }
 
 export interface GQLUserDataRoot {
@@ -355,6 +356,32 @@ export interface GQLSkill {
   skillName: string;
 }
 
+export interface GQLUserSkillRoot {
+  getUserSkills: GQLGetUserSkillsResponse;
+}
+
+export interface GQLGetUserSkillsResponse {
+  statusCode: number;
+  userSkills: Array<GQLUserSkill | null>;
+}
+
+export interface GQLUserSkill {
+  skill: GQLSkillModel;
+  userSkill: GQLUserSkillModel;
+}
+
+export interface GQLSkillModel {
+  id: string;
+  skillName: string;
+}
+
+export interface GQLUserSkillModel {
+  id: string;
+  userId: string;
+  skillId: string;
+  skillLevel: number;
+}
+
 export interface GQLMutation {
   authentication: GQLAuthenticationMutationRoot;
   userData: GQLUserDataMutationRoot;
@@ -365,6 +392,7 @@ export interface GQLMutation {
   language: GQLLanguageMutationRoot;
   certificate: GQLCertificateMutationRoot;
   skill: GQLSkillMutationRoot;
+  userSkill: GQLUserSkillMutationRoot;
 }
 
 export interface GQLAuthenticationMutationRoot {
@@ -709,6 +737,20 @@ export interface GQLDeleteSkillResponse {
   statusCode: number;
 }
 
+export interface GQLUserSkillMutationRoot {
+  createUserSkill: GQLCreateUserSkillResponse;
+}
+
+export interface GQLCreateUserSkillInput {
+  skillId: string;
+  skillLevel: number;
+}
+
+export interface GQLCreateUserSkillResponse {
+  userSkillId: string;
+  statusCode: number;
+}
+
 export type GQLVoid = any;
 
 /*********************************
@@ -762,6 +804,11 @@ export interface GQLResolver {
   SkillRoot?: GQLSkillRootTypeResolver;
   GetSkillsResponse?: GQLGetSkillsResponseTypeResolver;
   Skill?: GQLSkillTypeResolver;
+  UserSkillRoot?: GQLUserSkillRootTypeResolver;
+  GetUserSkillsResponse?: GQLGetUserSkillsResponseTypeResolver;
+  UserSkill?: GQLUserSkillTypeResolver;
+  SkillModel?: GQLSkillModelTypeResolver;
+  UserSkillModel?: GQLUserSkillModelTypeResolver;
   Mutation?: GQLMutationTypeResolver;
   AuthenticationMutationRoot?: GQLAuthenticationMutationRootTypeResolver;
   TokenResponse?: GQLTokenResponseTypeResolver;
@@ -786,6 +833,8 @@ export interface GQLResolver {
   SkillMutationRoot?: GQLSkillMutationRootTypeResolver;
   CreateSkillResponse?: GQLCreateSkillResponseTypeResolver;
   DeleteSkillResponse?: GQLDeleteSkillResponseTypeResolver;
+  UserSkillMutationRoot?: GQLUserSkillMutationRootTypeResolver;
+  CreateUserSkillResponse?: GQLCreateUserSkillResponseTypeResolver;
   Void?: GraphQLScalarType;
 }
 export interface GQLQueryTypeResolver<TParent = undefined> {
@@ -798,6 +847,7 @@ export interface GQLQueryTypeResolver<TParent = undefined> {
   fullCvInformation?: QueryToFullCvInformationResolver<TParent>;
   certificate?: QueryToCertificateResolver<TParent>;
   skill?: QueryToSkillResolver<TParent>;
+  userSkill?: QueryToUserSkillResolver<TParent>;
 }
 
 export interface QueryToUserDataResolver<
@@ -899,6 +949,18 @@ export interface QueryToCertificateResolver<
 export interface QueryToSkillResolver<
   TParent = undefined,
   TResult = GQLSkillRoot
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface QueryToUserSkillResolver<
+  TParent = undefined,
+  TResult = GQLUserSkillRoot
 > {
   (
     parent: TParent,
@@ -3662,6 +3724,166 @@ export interface SkillToSkillNameResolver<
   ): Promise<TResult>;
 }
 
+export interface GQLUserSkillRootTypeResolver<TParent = GQLUserSkillRoot> {
+  getUserSkills?: UserSkillRootToGetUserSkillsResolver<TParent>;
+}
+
+export interface UserSkillRootToGetUserSkillsResolver<
+  TParent = GQLUserSkillRoot,
+  TResult = GQLGetUserSkillsResponse
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLGetUserSkillsResponseTypeResolver<
+  TParent = GQLGetUserSkillsResponse
+> {
+  statusCode?: GetUserSkillsResponseToStatusCodeResolver<TParent>;
+  userSkills?: GetUserSkillsResponseToUserSkillsResolver<TParent>;
+}
+
+export interface GetUserSkillsResponseToStatusCodeResolver<
+  TParent = GQLGetUserSkillsResponse,
+  TResult = number
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GetUserSkillsResponseToUserSkillsResolver<
+  TParent = GQLGetUserSkillsResponse,
+  TResult = Array<GQLUserSkill | null>
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLUserSkillTypeResolver<TParent = GQLUserSkill> {
+  skill?: UserSkillToSkillResolver<TParent>;
+  userSkill?: UserSkillToUserSkillResolver<TParent>;
+}
+
+export interface UserSkillToSkillResolver<
+  TParent = GQLUserSkill,
+  TResult = GQLSkillModel
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface UserSkillToUserSkillResolver<
+  TParent = GQLUserSkill,
+  TResult = GQLUserSkillModel
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLSkillModelTypeResolver<TParent = GQLSkillModel> {
+  id?: SkillModelToIdResolver<TParent>;
+  skillName?: SkillModelToSkillNameResolver<TParent>;
+}
+
+export interface SkillModelToIdResolver<
+  TParent = GQLSkillModel,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface SkillModelToSkillNameResolver<
+  TParent = GQLSkillModel,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLUserSkillModelTypeResolver<TParent = GQLUserSkillModel> {
+  id?: UserSkillModelToIdResolver<TParent>;
+  userId?: UserSkillModelToUserIdResolver<TParent>;
+  skillId?: UserSkillModelToSkillIdResolver<TParent>;
+  skillLevel?: UserSkillModelToSkillLevelResolver<TParent>;
+}
+
+export interface UserSkillModelToIdResolver<
+  TParent = GQLUserSkillModel,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface UserSkillModelToUserIdResolver<
+  TParent = GQLUserSkillModel,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface UserSkillModelToSkillIdResolver<
+  TParent = GQLUserSkillModel,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface UserSkillModelToSkillLevelResolver<
+  TParent = GQLUserSkillModel,
+  TResult = number
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
 export interface GQLMutationTypeResolver<TParent = undefined> {
   authentication?: MutationToAuthenticationResolver<TParent>;
   userData?: MutationToUserDataResolver<TParent>;
@@ -3672,6 +3894,7 @@ export interface GQLMutationTypeResolver<TParent = undefined> {
   language?: MutationToLanguageResolver<TParent>;
   certificate?: MutationToCertificateResolver<TParent>;
   skill?: MutationToSkillResolver<TParent>;
+  userSkill?: MutationToUserSkillResolver<TParent>;
 }
 
 export interface MutationToAuthenticationResolver<
@@ -3773,6 +3996,18 @@ export interface MutationToCertificateResolver<
 export interface MutationToSkillResolver<
   TParent = undefined,
   TResult = GQLSkillMutationRoot
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface MutationToUserSkillResolver<
+  TParent = undefined,
+  TResult = GQLUserSkillMutationRoot
 > {
   (
     parent: TParent,
@@ -5076,6 +5311,58 @@ export interface DeleteSkillResponseToMessageResolver<
 
 export interface DeleteSkillResponseToStatusCodeResolver<
   TParent = GQLDeleteSkillResponse,
+  TResult = number
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLUserSkillMutationRootTypeResolver<
+  TParent = GQLUserSkillMutationRoot
+> {
+  createUserSkill?: UserSkillMutationRootToCreateUserSkillResolver<TParent>;
+}
+
+export interface UserSkillMutationRootToCreateUserSkillArgs {
+  input: GQLCreateUserSkillInput;
+}
+export interface UserSkillMutationRootToCreateUserSkillResolver<
+  TParent = GQLUserSkillMutationRoot,
+  TResult = GQLCreateUserSkillResponse
+> {
+  (
+    parent: TParent,
+    args: UserSkillMutationRootToCreateUserSkillArgs,
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLCreateUserSkillResponseTypeResolver<
+  TParent = GQLCreateUserSkillResponse
+> {
+  userSkillId?: CreateUserSkillResponseToUserSkillIdResolver<TParent>;
+  statusCode?: CreateUserSkillResponseToStatusCodeResolver<TParent>;
+}
+
+export interface CreateUserSkillResponseToUserSkillIdResolver<
+  TParent = GQLCreateUserSkillResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface CreateUserSkillResponseToStatusCodeResolver<
+  TParent = GQLCreateUserSkillResponse,
   TResult = number
 > {
   (

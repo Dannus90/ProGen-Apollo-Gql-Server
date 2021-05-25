@@ -8,6 +8,7 @@ import {
   MutationToSkillResolver,
   MutationToUserDataResolver,
   MutationToUserPresentationResolver,
+  MutationToUserSkillResolver,
   MutationToWorkExperienceResolver
 } from "./types/TypesGraphQL";
 import { authMutations } from "./handlers/auth-handler/mutations";
@@ -19,6 +20,7 @@ import { otherInformationMutations } from "./handlers/other-information/mutation
 import { languageMutations } from "./handlers/language-handler/mutations";
 import { certificateMutations } from "./handlers/certificate/mutations";
 import { skillMutations } from "./handlers/skill/mutations";
+import { userSkillMutations } from "./handlers/user-skill/mutations";
 
 interface MutationResolvers {
   Mutation: {
@@ -31,6 +33,7 @@ interface MutationResolvers {
     language: MutationToLanguageResolver<unknown, unknown>;
     certificate: MutationToCertificateResolver<unknown, unknown>;
     skill: MutationToSkillResolver<unknown, unknown>;
+    userSkill: MutationToUserSkillResolver<unknown, unknown>;
   };
 }
 
@@ -44,7 +47,8 @@ const mutationResolver: MutationResolvers = {
     otherInformation: async () => true,
     language: async () => true,
     certificate: async () => true,
-    skill: async () => true
+    skill: async () => true,
+    userSkill: async () => true
   }
 };
 
@@ -58,5 +62,6 @@ export const rootMutation = merge(
   otherInformationMutations,
   languageMutations,
   certificateMutations,
-  skillMutations
+  skillMutations,
+  userSkillMutations
 );

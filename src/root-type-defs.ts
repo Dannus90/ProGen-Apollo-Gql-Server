@@ -9,6 +9,7 @@ import { languageTypeDefs } from "./handlers/language-handler/type-defs";
 import { fullCvInformationTypeDefs } from "./handlers/full-cv-information/type-defs";
 import { certificateTypeDefs } from "./handlers/certificate/type-defs";
 import { skillTypeDefs } from "./handlers/skill/type-defs";
+import { userSkillTypeDefs } from "./handlers/user-skill/type-defs";
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
@@ -26,6 +27,7 @@ const entryTypeDefs = gql`
     fullCvInformation: FullCvInformationRoot!
     certificate: CertificateRoot!
     skill: SkillRoot!
+    userSkill: UserSkillRoot!
   }
 
   type Mutation {
@@ -38,9 +40,11 @@ const entryTypeDefs = gql`
     language: LanguageMutationRoot!
     certificate: CertificateMutationRoot!
     skill: SkillMutationRoot!
+    userSkill: UserSkillMutationRoot!
   }
 
   # Query Roots
+  type UserSkillRoot
   type SkillRoot
   type CertificateRoot
   type UserPresentationRoot
@@ -52,6 +56,7 @@ const entryTypeDefs = gql`
   type FullCvInformationRoot
 
   # Mutation Roots
+  type UserSkillMutationRoot
   type SkillMutationRoot
   type CertificateMutationRoot
   type UserDataMutationRoot
@@ -74,5 +79,6 @@ export const rootTypeDefs = [
   languageTypeDefs,
   fullCvInformationTypeDefs,
   certificateTypeDefs,
-  skillTypeDefs
+  skillTypeDefs,
+  userSkillTypeDefs
 ];
