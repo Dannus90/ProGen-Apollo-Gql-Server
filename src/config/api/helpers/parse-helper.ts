@@ -1,4 +1,4 @@
-import { Response, FetchError } from "node-fetch";
+import { Response } from "node-fetch";
 
 export interface ErrorResponse {
   statusCode: number;
@@ -8,6 +8,6 @@ export interface ErrorResponse {
 
 export const parseJson = (response: Response): Promise<ErrorResponse | undefined> => {
   return response.text().then((res) => {
-    return res ? JSON.parse(res) : undefined
-  })
-}
+    return res ? JSON.parse(res) : undefined;
+  });
+};

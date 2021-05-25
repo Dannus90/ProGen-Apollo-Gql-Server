@@ -1,5 +1,4 @@
 import fetch from "node-fetch";
-import { GeneralResponse } from "./error-management/http-response-error";
 
 type HttpMethods = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 

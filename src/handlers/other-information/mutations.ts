@@ -20,11 +20,15 @@ export const otherInformationMutations: OtherInformationMutations = {
       if (!statusCodeChecker(response.status)) {
         const res = await parseJson(response);
 
-        if(res) {
+        if (res) {
           throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
         } else {
-          throw new HttpResponseError(response.type, response.status, response.message ?? response.statusText ?? "Unspecified Error");
-        }        
+          throw new HttpResponseError(
+            response.type,
+            response.status,
+            response.message ?? response.statusText ?? "Unspecified Error"
+          );
+        }
       }
 
       const data = await response.json();

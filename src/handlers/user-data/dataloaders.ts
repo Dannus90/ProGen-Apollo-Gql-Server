@@ -20,12 +20,16 @@ export const createUserDataLoaders = (authorization: string): UserDataLoaders =>
 
           if (!statusCodeChecker(response.status)) {
             const res = await parseJson(response);
-    
-            if(res) {
+
+            if (res) {
               throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
             } else {
-              throw new HttpResponseError(response.type, response.status, response.message ?? response.statusText ?? "Unspecified Error");
-            }        
+              throw new HttpResponseError(
+                response.type,
+                response.status,
+                response.message ?? response.statusText ?? "Unspecified Error"
+              );
+            }
           }
 
           const userInformation = await response.json();

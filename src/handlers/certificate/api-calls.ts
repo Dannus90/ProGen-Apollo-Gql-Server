@@ -11,7 +11,6 @@ import {
   GQLUpdateCertificateInput
 } from "../../types/TypesGraphQL";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createCertificate = async (
   authorization: string,
   input: GQLCreateCertificateInput | undefined
@@ -19,7 +18,6 @@ export const createCertificate = async (
   return await fetchPostAuth(`${PROGEN_BASE_URL}/user/certificate`, "POST", authorization, input);
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const updateCertificate = async (
   authorization: string,
   certificateId: string | undefined,
@@ -33,7 +31,6 @@ export const updateCertificate = async (
   );
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getCertificate = async (
   authorization: string,
   certificateId: string | undefined
@@ -49,7 +46,6 @@ export const getCertificates = async (authorization: string): Promise<any> => {
   return await fetchGetAuth(`${PROGEN_BASE_URL}/user/certificate`, "GET", authorization);
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const deleteCertificate = async (
   authorization: string,
   input: GQLDeleteCertificateInput

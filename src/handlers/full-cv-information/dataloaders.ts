@@ -21,12 +21,16 @@ export const createFullCvInformationDataLoaders = (
           const response = await getFullCvInformation(authorization);
           if (!statusCodeChecker(response.status)) {
             const res = await parseJson(response);
-    
-            if(res) {
+
+            if (res) {
               throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
             } else {
-              throw new HttpResponseError(response.type, response.status, response.message ?? response.statusText ?? "Unspecified Error");
-            }        
+              throw new HttpResponseError(
+                response.type,
+                response.status,
+                response.message ?? response.statusText ?? "Unspecified Error"
+              );
+            }
           }
 
           const otherInformation: FullCvInformationResponse = await response.json();
