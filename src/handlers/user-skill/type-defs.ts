@@ -3,6 +3,7 @@ import { gql } from "apollo-server";
 export const userSkillTypeDefs = gql`
   extend type UserSkillMutationRoot {
     createUserSkill(input: CreateUserSkillInput!): CreateUserSkillResponse!
+    deleteUserSkill(input: DeleteUserSkillInput!): DeleteUserSkillResponse!
   }
 
   extend type UserSkillRoot {
@@ -24,9 +25,18 @@ export const userSkillTypeDefs = gql`
     statusCode: Int!
   }
 
+  input DeleteUserSkillInput {
+    userSkillId: String!
+  }
+
   type GetUserSkillResponse {
     statusCode: Int!
     userSkill: UserSkill
+  }
+
+  type DeleteUserSkillResponse {
+    message: String!
+    statusCode: Int!
   }
 
   type GetUserSkillsResponse {

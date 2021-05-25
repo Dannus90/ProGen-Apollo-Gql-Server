@@ -749,6 +749,7 @@ export interface GQLDeleteSkillResponse {
 
 export interface GQLUserSkillMutationRoot {
   createUserSkill: GQLCreateUserSkillResponse;
+  deleteUserSkill: GQLDeleteUserSkillResponse;
 }
 
 export interface GQLCreateUserSkillInput {
@@ -758,6 +759,15 @@ export interface GQLCreateUserSkillInput {
 
 export interface GQLCreateUserSkillResponse {
   userSkillId: string;
+  statusCode: number;
+}
+
+export interface GQLDeleteUserSkillInput {
+  userSkillId: string;
+}
+
+export interface GQLDeleteUserSkillResponse {
+  message: string;
   statusCode: number;
 }
 
@@ -846,6 +856,7 @@ export interface GQLResolver {
   DeleteSkillResponse?: GQLDeleteSkillResponseTypeResolver;
   UserSkillMutationRoot?: GQLUserSkillMutationRootTypeResolver;
   CreateUserSkillResponse?: GQLCreateUserSkillResponseTypeResolver;
+  DeleteUserSkillResponse?: GQLDeleteUserSkillResponseTypeResolver;
   Void?: GraphQLScalarType;
 }
 export interface GQLQueryTypeResolver<TParent = undefined> {
@@ -5383,6 +5394,7 @@ export interface GQLUserSkillMutationRootTypeResolver<
   TParent = GQLUserSkillMutationRoot
 > {
   createUserSkill?: UserSkillMutationRootToCreateUserSkillResolver<TParent>;
+  deleteUserSkill?: UserSkillMutationRootToDeleteUserSkillResolver<TParent>;
 }
 
 export interface UserSkillMutationRootToCreateUserSkillArgs {
@@ -5395,6 +5407,21 @@ export interface UserSkillMutationRootToCreateUserSkillResolver<
   (
     parent: TParent,
     args: UserSkillMutationRootToCreateUserSkillArgs,
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface UserSkillMutationRootToDeleteUserSkillArgs {
+  input: GQLDeleteUserSkillInput;
+}
+export interface UserSkillMutationRootToDeleteUserSkillResolver<
+  TParent = GQLUserSkillMutationRoot,
+  TResult = GQLDeleteUserSkillResponse
+> {
+  (
+    parent: TParent,
+    args: UserSkillMutationRootToDeleteUserSkillArgs,
     context: any,
     info: GraphQLResolveInfo
   ): Promise<TResult>;
@@ -5421,6 +5448,37 @@ export interface CreateUserSkillResponseToUserSkillIdResolver<
 
 export interface CreateUserSkillResponseToStatusCodeResolver<
   TParent = GQLCreateUserSkillResponse,
+  TResult = number
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLDeleteUserSkillResponseTypeResolver<
+  TParent = GQLDeleteUserSkillResponse
+> {
+  message?: DeleteUserSkillResponseToMessageResolver<TParent>;
+  statusCode?: DeleteUserSkillResponseToStatusCodeResolver<TParent>;
+}
+
+export interface DeleteUserSkillResponseToMessageResolver<
+  TParent = GQLDeleteUserSkillResponse,
+  TResult = string
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface DeleteUserSkillResponseToStatusCodeResolver<
+  TParent = GQLDeleteUserSkillResponse,
   TResult = number
 > {
   (
