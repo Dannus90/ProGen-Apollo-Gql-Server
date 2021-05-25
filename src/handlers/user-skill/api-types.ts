@@ -1,5 +1,5 @@
 export interface GetUserSkillResponse {
-  skillDto: UserSkillDto;
+  userSkillAndSkillDto: UserSkillDto;
   statusCode: number;
 }
 

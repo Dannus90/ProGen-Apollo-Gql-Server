@@ -358,6 +358,7 @@ export interface GQLSkill {
 
 export interface GQLUserSkillRoot {
   getUserSkills: GQLGetUserSkillsResponse;
+  getUserSkill: GQLGetUserSkillResponse;
 }
 
 export interface GQLGetUserSkillsResponse {
@@ -380,6 +381,15 @@ export interface GQLUserSkillModel {
   userId: string;
   skillId: string;
   skillLevel: number;
+}
+
+export interface GQLGetUserSkillInput {
+  userSkillId: string;
+}
+
+export interface GQLGetUserSkillResponse {
+  statusCode: number;
+  userSkill?: GQLUserSkill;
 }
 
 export interface GQLMutation {
@@ -809,6 +819,7 @@ export interface GQLResolver {
   UserSkill?: GQLUserSkillTypeResolver;
   SkillModel?: GQLSkillModelTypeResolver;
   UserSkillModel?: GQLUserSkillModelTypeResolver;
+  GetUserSkillResponse?: GQLGetUserSkillResponseTypeResolver;
   Mutation?: GQLMutationTypeResolver;
   AuthenticationMutationRoot?: GQLAuthenticationMutationRootTypeResolver;
   TokenResponse?: GQLTokenResponseTypeResolver;
@@ -3726,6 +3737,7 @@ export interface SkillToSkillNameResolver<
 
 export interface GQLUserSkillRootTypeResolver<TParent = GQLUserSkillRoot> {
   getUserSkills?: UserSkillRootToGetUserSkillsResolver<TParent>;
+  getUserSkill?: UserSkillRootToGetUserSkillResolver<TParent>;
 }
 
 export interface UserSkillRootToGetUserSkillsResolver<
@@ -3735,6 +3747,21 @@ export interface UserSkillRootToGetUserSkillsResolver<
   (
     parent: TParent,
     args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface UserSkillRootToGetUserSkillArgs {
+  input?: GQLGetUserSkillInput;
+}
+export interface UserSkillRootToGetUserSkillResolver<
+  TParent = GQLUserSkillRoot,
+  TResult = GQLGetUserSkillResponse
+> {
+  (
+    parent: TParent,
+    args: UserSkillRootToGetUserSkillArgs,
     context: any,
     info: GraphQLResolveInfo
   ): Promise<TResult>;
@@ -3875,6 +3902,37 @@ export interface UserSkillModelToSkillIdResolver<
 export interface UserSkillModelToSkillLevelResolver<
   TParent = GQLUserSkillModel,
   TResult = number
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GQLGetUserSkillResponseTypeResolver<
+  TParent = GQLGetUserSkillResponse
+> {
+  statusCode?: GetUserSkillResponseToStatusCodeResolver<TParent>;
+  userSkill?: GetUserSkillResponseToUserSkillResolver<TParent>;
+}
+
+export interface GetUserSkillResponseToStatusCodeResolver<
+  TParent = GQLGetUserSkillResponse,
+  TResult = number
+> {
+  (
+    parent: TParent,
+    args: {},
+    context: any,
+    info: GraphQLResolveInfo
+  ): Promise<TResult>;
+}
+
+export interface GetUserSkillResponseToUserSkillResolver<
+  TParent = GQLGetUserSkillResponse,
+  TResult = GQLUserSkill | null
 > {
   (
     parent: TParent,

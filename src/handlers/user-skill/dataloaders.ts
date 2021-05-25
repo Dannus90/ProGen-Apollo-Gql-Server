@@ -4,10 +4,11 @@ import {
   statusCodeChecker
 } from "../../config/api/error-management/http-response-error";
 import { parseJson } from "../../config/api/helpers/parse-helper";
-import { getUserSkills } from "./api-calls";
-import { UserSkillsResponse } from "./api-types";
+import { getUserSkill, getUserSkills } from "./api-calls";
+import { GetUserSkillResponse, UserSkillsResponse } from "./api-types";
 export interface UserSkillDataLoaders {
   userSkillsByUserIdInClaims: DataLoader<string, UserSkillsResponse>;
+  byUserSkillId: DataLoader<string, GetUserSkillResponse>;
 }
 
 export const createUserSkillsDataLoaders = (authorization: string): UserSkillDataLoaders => {
@@ -40,7 +41,37 @@ export const createUserSkillsDataLoaders = (authorization: string): UserSkillDat
     });
   });
 
+  const byUserSkillId = new DataLoader<string, GetUserSkillResponse>(async (ids) => {
+    const userSkills = await Promise.all(
+      ids.map(async (id) => {
+        const response = await getUserSkill(authorization, id);
+        if (!statusCodeChecker(response.status)) {
+          const res = await parseJson(response);
+
+          if (res) {
+            throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
+          } else {
+            throw new HttpResponseError(
+              response.type,
+              response.status,
+              response.message ?? response.statusText ?? "Unspecified Error"
+            );
+          }
+        }
+
+        const userSkill = await response.json();
+        userSkill.statusCode = response.status;
+        return userSkill;
+      })
+    );
+
+    return ids.map((id) => {
+      return userSkills.find((us) => us.userSkillAndSkillDto.userSkillModel.id === id);
+    });
+  });
+
   return {
-    userSkillsByUserIdInClaims
+    userSkillsByUserIdInClaims,
+    byUserSkillId
   };
 };

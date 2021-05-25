@@ -1,4 +1,4 @@
-import { GQLGetUserSkillsResponse } from "../../types/TypesGraphQL";
+import { GQLGetUserSkillResponse, GQLGetUserSkillsResponse } from "../../types/TypesGraphQL";
 import { Context } from "./../../context";
 
 export const UserSkillResolvers = {
@@ -15,6 +15,17 @@ export const UserSkillResolvers = {
           }
         })
       };
+    },
+    getUserSkill: async (_, { input: { userSkillId } }, { loaders }: Context): Promise<GQLGetUserSkillResponse> => {
+      const userSkill = await loaders.userSkill.byUserSkillId.load(userSkillId)
+
+      return {
+        statusCode: userSkill.statusCode,
+        userSkill: {
+          skill: userSkill.userSkillAndSkillDto.skillModel,
+          userSkill: userSkill.userSkillAndSkillDto.userSkillModel
+        }
+      }
     }
   }
 };
