@@ -9,18 +9,18 @@ export interface UserSkillsResponse {
 }
 
 type UserSkillDto = {
-  skillModel: SkillModel
+  skillModel: SkillModel;
   userSkillModel: UserSkillModel;
 };
 
 type SkillModel = {
   id: string;
   skillName: string;
-}
+};
 
 type UserSkillModel = {
   id: string;
   userId: string;
   skillId: string;
   skillLevel: number;
-}
+};

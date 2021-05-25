@@ -5,8 +5,10 @@ import {
 import {
   GQLCreateUserSkillResponse,
   GQLDeleteUserSkillResponse,
+  GQLUpdateUserSkillResponse,
   UserSkillMutationRootToCreateUserSkillResolver,
-  UserSkillMutationRootToDeleteUserSkillResolver
+  UserSkillMutationRootToDeleteUserSkillResolver,
+  UserSkillMutationRootToUpdateUserSkillResolver
 } from "./../../types/TypesGraphQL";
 import { parseJson } from "../../config/api/helpers/parse-helper";
 import { Context } from "../../context";
@@ -14,6 +16,7 @@ export interface UserSkillMutations {
   UserSkillMutationRoot: {
     createUserSkill: UserSkillMutationRootToCreateUserSkillResolver;
     deleteUserSkill: UserSkillMutationRootToDeleteUserSkillResolver;
+    updateUserSkill: UserSkillMutationRootToUpdateUserSkillResolver;
   };
 }
 
@@ -79,5 +82,33 @@ export const userSkillMutations: UserSkillMutations = {
 
       return gqlResponse;
     },
+    updateUserSkill: async (
+      _,
+      body,
+      { api, authorization }: Context
+    ): Promise<GQLUpdateUserSkillResponse> => {
+      const response = await api.updateUserSkill(authorization, body.input);
+
+      if (!statusCodeChecker(response.status)) {
+        const res = await parseJson(response);
+
+        if (res) {
+          throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
+        } else {
+          throw new HttpResponseError(
+            response.type,
+            response.status,
+            response.message ?? response.statusText ?? "Unspecified Error"
+          );
+        }
+      }
+
+      const data = await response.json();
+
+      return {
+        statusCode: response.status,
+        userSkillId: data?.userSkillId ?? ""
+      };
+    }
   }
 };

@@ -2,7 +2,7 @@ import { GQLCreateSkillInput, GQLDeleteSkillInput } from "../../types/TypesGraph
 import { PROGEN_BASE_URL } from "./../../config/api/base";
 import { fetchDeleteAuth, fetchGetAuth, fetchPostAuth } from "./../../config/api/httpClient";
 
-export const createSkill = async(
+export const createSkill = async (
   authorization: string,
   input: GQLCreateSkillInput | undefined
 ): Promise<any> => {
@@ -23,4 +23,3 @@ export const deleteSkill = async (
     authorization
   );
 };
-

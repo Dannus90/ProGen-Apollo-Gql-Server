@@ -25,7 +25,10 @@ import {
   createCertificateDataLoaders
 } from "./handlers/certificate/dataloaders";
 import { createSkillsDataLoaders, SkillDataLoaders } from "./handlers/skill/dataloaders";
-import { createUserSkillsDataLoaders, UserSkillDataLoaders } from "./handlers/user-skill/dataloaders";
+import {
+  createUserSkillsDataLoaders,
+  UserSkillDataLoaders
+} from "./handlers/user-skill/dataloaders";
 
 export interface ContextDataLoaders {
   userData: UserDataLoaders;

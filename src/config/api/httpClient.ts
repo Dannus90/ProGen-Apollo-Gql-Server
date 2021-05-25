@@ -123,3 +123,19 @@ export const fetchPutAuth = async <TPayload>(
 
   return response;
 };
+
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const fetchPatchAuth = async <TPayload>(
+  url: string,
+  method: HttpMethods = "PATCH",
+  authorization: string,
+  body: TPayload
+) => {
+  const response = await fetch(url, {
+    method,
+    ...headerOptionsAuth(authorization),
+    body: JSON.stringify(body)
+  });
+
+  return response;
+};

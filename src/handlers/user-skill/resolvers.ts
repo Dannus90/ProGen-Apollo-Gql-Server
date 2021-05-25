@@ -4,7 +4,7 @@ import { Context } from "./../../context";
 export const UserSkillResolvers = {
   UserSkillRoot: {
     getUserSkills: async (_, __, { loaders }: Context): Promise<GQLGetUserSkillsResponse> => {
-      const userSkills = await loaders.userSkill.userSkillsByUserIdInClaims.load("All")
+      const userSkills = await loaders.userSkill.userSkillsByUserIdInClaims.load("All");
 
       return {
         statusCode: userSkills.statusCode,
@@ -12,12 +12,16 @@ export const UserSkillResolvers = {
           return {
             skill: usasd.skillModel,
             userSkill: usasd.userSkillModel
-          }
+          };
         })
       };
     },
-    getUserSkill: async (_, { input: { userSkillId } }, { loaders }: Context): Promise<GQLGetUserSkillResponse> => {
-      const userSkill = await loaders.userSkill.byUserSkillId.load(userSkillId)
+    getUserSkill: async (
+      _,
+      { input: { userSkillId } },
+      { loaders }: Context
+    ): Promise<GQLGetUserSkillResponse> => {
+      const userSkill = await loaders.userSkill.byUserSkillId.load(userSkillId);
 
       return {
         statusCode: userSkill.statusCode,
@@ -25,7 +29,7 @@ export const UserSkillResolvers = {
           skill: userSkill.userSkillAndSkillDto.skillModel,
           userSkill: userSkill.userSkillAndSkillDto.userSkillModel
         }
-      }
+      };
     }
   }
 };

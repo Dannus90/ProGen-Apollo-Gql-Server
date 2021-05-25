@@ -52,13 +52,17 @@ export const workExperienceMutations: WorkExperienceMutation = {
       );
 
       if (!statusCodeChecker(response.status)) {
-        const { type, statusCode, message, errors } = await response.json();
+        const res = await parseJson(response);
 
-        const errorOutput = Object.keys(errors).map((err) => {
-          return errors[err];
-        });
-
-        throw new HttpResponseError(type, statusCode ?? response.status, message ?? errorOutput);
+        if (res) {
+          throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
+        } else {
+          throw new HttpResponseError(
+            response.type,
+            response.status,
+            response.message ?? response.statusText ?? "Unspecified Error"
+          );
+        }
       }
 
       const data = await response.json();

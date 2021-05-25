@@ -7,7 +7,6 @@ import {
 } from "../../config/api/httpClient";
 import { GQLUpdateWorkExperienceInput, GQLWorkExperienceInput } from "../../types/TypesGraphQL";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createWorkExperience = async (
   authorization: string,
   input: GQLWorkExperienceInput | undefined
@@ -20,7 +19,6 @@ export const createWorkExperience = async (
   );
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const updateWorkExperience = async (
   authorization: string,
   workExperienceId: string | undefined,
@@ -37,7 +35,6 @@ export const updateWorkExperience = async (
   );
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const deleteWorkExperience = async (authorization: string, workExperienceId: string) => {
   return await fetchDeleteAuth(
     `${PROGEN_BASE_URL}/user/workexperience/${workExperienceId}`,
@@ -46,7 +43,6 @@ export const deleteWorkExperience = async (authorization: string, workExperience
   );
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getWorkExperience = async (
   authorization: string,
   workExperienceId: string | undefined

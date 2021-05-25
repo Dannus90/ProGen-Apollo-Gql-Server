@@ -78,6 +78,6 @@ export const skillMutations: SkillMutation = {
       };
 
       return gqlResponse;
-    },
+    }
   }
 };

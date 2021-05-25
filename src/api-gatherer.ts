@@ -49,6 +49,7 @@ import {
   GQLUpdateCertificateInput,
   GQLUpdateEducationInput,
   GQLUpdateLanguageInput,
+  GQLUpdateUserSkillInput,
   GQLUpdateWorkExperienceInput,
   GQLUserDataInput,
   GQLUserPresentationInput,
@@ -61,7 +62,7 @@ import {
   deleteLanguage
 } from "./handlers/language-handler/api-calls";
 import { createSkill, deleteSkill } from "./handlers/skill/api-calls";
-import { createUserSkill, deleteUserSkill } from "./handlers/user-skill/api-calls";
+import { createUserSkill, deleteUserSkill, updateUserSkill } from "./handlers/user-skill/api-calls";
 
 export interface GetApiMethods {
   registerUser: (input: GQLRegisterInput | undefined) => Promise<any>;
@@ -128,8 +129,12 @@ export interface GetApiMethods {
   ) => Promise<any>;
   createSkill: (authorization: string, input: GQLCreateSkillInput | undefined) => Promise<any>;
   deleteSkill: (authorization: string, input: GQLDeleteSkillInput) => Promise<any>;
-  createUserSkill: (authorization: string, input: GQLCreateUserSkillInput | undefined) => Promise<any>;
+  createUserSkill: (
+    authorization: string,
+    input: GQLCreateUserSkillInput | undefined
+  ) => Promise<any>;
   deleteUserSkill: (authorization: string, input: GQLDeleteUserSkillInput) => Promise<any>;
+  updateUserSkill: (authorization: string, input: GQLUpdateUserSkillInput) => Promise<any>;
 }
 
 export const getApiMethods = (): GetApiMethods => {
@@ -164,6 +169,7 @@ export const getApiMethods = (): GetApiMethods => {
     createSkill,
     deleteSkill,
     createUserSkill,
-    deleteUserSkill
+    deleteUserSkill,
+    updateUserSkill
   };
 };

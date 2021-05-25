@@ -4,6 +4,7 @@ export const userSkillTypeDefs = gql`
   extend type UserSkillMutationRoot {
     createUserSkill(input: CreateUserSkillInput!): CreateUserSkillResponse!
     deleteUserSkill(input: DeleteUserSkillInput!): DeleteUserSkillResponse!
+    updateUserSkill(input: UpdateUserSkillInput!): UpdateUserSkillResponse!
   }
 
   extend type UserSkillRoot {
@@ -16,11 +17,21 @@ export const userSkillTypeDefs = gql`
     skillLevel: Int!
   }
 
+  input UpdateUserSkillInput {
+    userSkillId: String!
+    skillLevel: Int!
+  }
+
   input GetUserSkillInput {
     userSkillId: String!
   }
 
   type CreateUserSkillResponse {
+    userSkillId: String!
+    statusCode: Int!
+  }
+
+  type UpdateUserSkillResponse {
     userSkillId: String!
     statusCode: Int!
   }
