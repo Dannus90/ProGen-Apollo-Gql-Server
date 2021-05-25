@@ -1,4 +1,5 @@
 import {
+  GeneralResponse,
   HttpResponseError,
   statusCodeChecker
 } from "../../config/api/error-management/http-response-error";

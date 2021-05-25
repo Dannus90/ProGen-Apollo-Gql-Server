@@ -24,6 +24,7 @@ import {
   CertificateDataLoaders,
   createCertificateDataLoaders
 } from "./handlers/certificate/dataloaders";
+import { createSkillsDataLoaders, SkillDataLoaders } from "./handlers/skill/dataloaders";
 
 export interface ContextDataLoaders {
   userData: UserDataLoaders;
@@ -34,6 +35,7 @@ export interface ContextDataLoaders {
   language: LanguageDataLoaders;
   fullCvInformation: FullCvInformationDataLoaders;
   certificate: CertificateDataLoaders;
+  skill: SkillDataLoaders;
 }
 
 export const createDataLoaders = (authorization: string): ContextDataLoaders => {
@@ -45,6 +47,7 @@ export const createDataLoaders = (authorization: string): ContextDataLoaders => 
     otherInformation: createOtherInformationDataLoaders(authorization),
     language: createLanguageDataLoaders(authorization),
     fullCvInformation: createFullCvInformationDataLoaders(authorization),
-    certificate: createCertificateDataLoaders(authorization)
+    certificate: createCertificateDataLoaders(authorization),
+    skill: createSkillsDataLoaders(authorization)
   };
 };

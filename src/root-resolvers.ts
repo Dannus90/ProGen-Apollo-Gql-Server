@@ -10,13 +10,15 @@ import {
   QueryToOtherInformationResolver,
   QueryToUserDataResolver,
   QueryToUserPresentationResolver,
-  QueryToWorkExperienceResolver
+  QueryToWorkExperienceResolver,
+  QueryToSkillResolver
 } from "./types/TypesGraphQL";
 import { EducationResolvers } from "./handlers/education/resolvers";
 import { otherInformationResolvers } from "./handlers/other-information/resolvers";
 import { languageResolvers } from "./handlers/language-handler/resolvers";
 import { fullCvInformationResolversResolvers } from "./handlers/full-cv-information/resolvers";
 import { CertificateResolvers } from "./handlers/certificate/resolvers";
+import { SkillResolvers } from "./handlers/skill/resolvers";
 
 interface QueryResolvers {
   Query: {
@@ -28,6 +30,7 @@ interface QueryResolvers {
     language: QueryToLanguageResolver<unknown, unknown>;
     fullCvInformation: QueryToFullCvInformationResolver<unknown, unknown>;
     certificate: QueryToCertificateResolver<unknown, unknown>;
+    skill: QueryToSkillResolver<unknown, unknown>;
   };
 }
 
@@ -40,7 +43,8 @@ const queryResolver: QueryResolvers = {
     otherInformation: async () => true,
     language: async () => true,
     fullCvInformation: async () => true,
-    certificate: async () => true
+    certificate: async () => true,
+    skill: async () => true
   }
 };
 
@@ -53,5 +57,6 @@ export const rootResolver = merge(
   otherInformationResolvers,
   languageResolvers,
   fullCvInformationResolversResolvers,
-  CertificateResolvers
+  CertificateResolvers,
+  SkillResolvers
 );

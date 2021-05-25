@@ -58,6 +58,7 @@ import {
   deleteLanguage
 } from "./handlers/language-handler/api-calls";
 import { createSkill } from "./handlers/skill/api-calls";
+import { Response } from "node-fetch";
 
 export interface GetApiMethods {
   registerUser: (input: GQLRegisterInput | undefined) => Promise<any>;

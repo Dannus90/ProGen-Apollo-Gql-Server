@@ -25,6 +25,7 @@ const entryTypeDefs = gql`
     language: LanguageRoot!
     fullCvInformation: FullCvInformationRoot!
     certificate: CertificateRoot!
+    skill: SkillRoot!
   }
 
   type Mutation {
@@ -40,7 +41,7 @@ const entryTypeDefs = gql`
   }
 
   # Query Roots
-  type SkillMutationRoot
+  type SkillRoot
   type CertificateRoot
   type UserPresentationRoot
   type UserDataRoot
@@ -51,6 +52,7 @@ const entryTypeDefs = gql`
   type FullCvInformationRoot
 
   # Mutation Roots
+  type SkillMutationRoot
   type CertificateMutationRoot
   type UserDataMutationRoot
   type AuthenticationMutationRoot

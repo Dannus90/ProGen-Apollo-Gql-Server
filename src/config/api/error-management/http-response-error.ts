@@ -1,9 +1,4 @@
-/**
- * Custom http-response-error.
- *
- * @author Daniel Persson
- * @version 1.0.0
- */
+import { Response } from "node-fetch";
 
 export class HttpResponseError extends Error {
   __proto__ = Error;
@@ -23,3 +18,7 @@ export class HttpResponseError extends Error {
 export const statusCodeChecker = (statusCode: number) => {
   return statusCode >= 200 && statusCode <= 250;
 };
+
+export interface GeneralResponse extends Response {
+  message: string;
+}

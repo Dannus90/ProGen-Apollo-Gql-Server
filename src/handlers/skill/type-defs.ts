@@ -5,6 +5,15 @@ export const skillTypeDefs = gql`
     createSkill(input: CreateSkillInput!): CreateSkillResponse!
   }
 
+  extend type SkillRoot {
+    getSkills: GetSkillsResponse!
+  }
+
+  type GetSkillsResponse {
+    statusCode: Int!
+    skills: [Skill]!
+  }
+
   input CreateSkillInput {
     skillName: String!
   }
@@ -12,5 +21,10 @@ export const skillTypeDefs = gql`
   type CreateSkillResponse {
     skillId: String!
     statusCode: Int!
+  }
+
+  type Skill {
+    id: String!
+    skillName: String!
   }
 `;
