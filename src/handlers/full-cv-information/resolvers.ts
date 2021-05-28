@@ -31,7 +31,9 @@ export const fullCvInformationResolversResolvers = {
         statusCode,
         otherInformationDto,
         userPresentationDto,
-        workExperienceDtos
+        workExperienceDtos,
+        certificateDtos,
+        userSkillAndSkillDtos
       } = fullCvInformationResponse;
 
       return {
@@ -91,6 +93,26 @@ export const fullCvInformationResolversResolvers = {
             roleSv: wed?.roleSv ?? "",
             dateEnded: wed?.dateEnded,
             dateStarted: wed?.dateStarted
+          };
+        }),
+        certificates: certificateDtos.map((cd) => {
+          return {
+            certificateNameEn: cd?.certificateNameEn ?? "",
+            certificateNameSv: cd?.certificateNameSv ?? "",
+            organisation: cd?.organisation ?? "",
+            identificationId: cd?.identificationId ?? "",
+            referenceAddress: cd?.referenceAddress ?? "",
+            id: cd?.id ?? "",
+            userId: cd?.userId ?? "",
+            createdAt: cd?.createdAt,
+            dateIssued: cd?.dateIssued,
+            updatedAt: cd?.updatedAt
+          };
+        }),
+        userSkillsAndSkills: userSkillAndSkillDtos.map((ssd) => {
+          return {
+            skill: ssd.skillModel,
+            userSkill: ssd.userSkillModel
           };
         }),
         statusCode

@@ -12,6 +12,8 @@ export const fullCvInformationTypeDefs = gql`
     workExperiences: [WorkExperienceFullCv]!
     languages: [LanguageFullCv]!
     userPresentation: UserPresentationFullCv!
+    userSkillsAndSkills: [UserSkillFullCv]!
+    certificates: [CertificateFullCv]!
   }
 
   type FullUserInformationFullCv {
@@ -76,5 +78,35 @@ export const fullCvInformationTypeDefs = gql`
   type UserPresentationFullCv {
     presentationSv: String!
     presentationEn: String!
+  }
+
+  type UserSkillFullCv {
+    skill: SkillModelFullCv!
+    userSkill: UserSkillModelFullCv!
+  }
+
+  type SkillModelFullCv {
+    id: String!
+    skillName: String!
+  }
+
+  type UserSkillModelFullCv {
+    id: String!
+    userId: String!
+    skillId: String!
+    skillLevel: Int!
+  }
+
+  type CertificateFullCv {
+    id: String!
+    userId: String!
+    certificateNameSv: String!
+    certificateNameEn: String!
+    organisation: String!
+    identificationId: String!
+    referenceAddress: String!
+    dateIssued: Date!
+    updatedAt: Date!
+    createdAt: Date!
   }
 `;

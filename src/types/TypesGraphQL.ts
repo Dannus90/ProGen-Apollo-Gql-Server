@@ -235,6 +235,8 @@ export interface GQLGetFullCvInformationResponse {
   workExperiences: Array<GQLWorkExperienceFullCv | null>;
   languages: Array<GQLLanguageFullCv | null>;
   userPresentation: GQLUserPresentationFullCv;
+  userSkillsAndSkills: Array<GQLUserSkillFullCv>;
+  certificates: Array<GQLCertificateFullCv | null>;
 }
 
 export interface GQLFullUserInformationFullCv {
@@ -299,6 +301,36 @@ export interface GQLLanguageFullCv {
 export interface GQLUserPresentationFullCv {
   presentationSv: string;
   presentationEn: string;
+}
+
+export interface GQLUserSkillFullCv {
+  skill: GQLSkillModelFullCv;
+  userSkill: GQLUserSkillModelFullCv;
+}
+
+export interface GQLSkillModelFullCv {
+  id: string;
+  skillName: string;
+}
+
+export interface GQLUserSkillModelFullCv {
+  id: string;
+  userId: string;
+  skillId: string;
+  skillLevel: number;
+}
+
+export interface GQLCertificateFullCv {
+  id: string;
+  userId: string;
+  certificateNameSv: string;
+  certificateNameEn: string;
+  organisation: string;
+  identificationId: string;
+  referenceAddress: string;
+  dateIssued: GQLDate;
+  updatedAt: GQLDate;
+  createdAt: GQLDate;
 }
 
 export interface GQLCertificateRoot {
@@ -828,6 +860,10 @@ export interface GQLResolver {
   WorkExperienceFullCv?: GQLWorkExperienceFullCvTypeResolver;
   LanguageFullCv?: GQLLanguageFullCvTypeResolver;
   UserPresentationFullCv?: GQLUserPresentationFullCvTypeResolver;
+  UserSkillFullCv?: GQLUserSkillFullCvTypeResolver;
+  SkillModelFullCv?: GQLSkillModelFullCvTypeResolver;
+  UserSkillModelFullCv?: GQLUserSkillModelFullCvTypeResolver;
+  CertificateFullCv?: GQLCertificateFullCvTypeResolver;
   CertificateRoot?: GQLCertificateRootTypeResolver;
   CertificateResponse?: GQLCertificateResponseTypeResolver;
   CertificatesResponse?: GQLCertificatesResponseTypeResolver;
@@ -1908,6 +1944,8 @@ export interface GQLGetFullCvInformationResponseTypeResolver<
   workExperiences?: GetFullCvInformationResponseToWorkExperiencesResolver<TParent>;
   languages?: GetFullCvInformationResponseToLanguagesResolver<TParent>;
   userPresentation?: GetFullCvInformationResponseToUserPresentationResolver<TParent>;
+  userSkillsAndSkills?: GetFullCvInformationResponseToUserSkillsAndSkillsResolver<TParent>;
+  certificates?: GetFullCvInformationResponseToCertificatesResolver<TParent>;
 }
 
 export interface GetFullCvInformationResponseToFullUserInformationResolver<
@@ -1948,6 +1986,20 @@ export interface GetFullCvInformationResponseToLanguagesResolver<
 export interface GetFullCvInformationResponseToUserPresentationResolver<
   TParent = GQLGetFullCvInformationResponse,
   TResult = GQLUserPresentationFullCv
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface GetFullCvInformationResponseToUserSkillsAndSkillsResolver<
+  TParent = GQLGetFullCvInformationResponse,
+  TResult = Array<GQLUserSkillFullCv>
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface GetFullCvInformationResponseToCertificatesResolver<
+  TParent = GQLGetFullCvInformationResponse,
+  TResult = Array<GQLCertificateFullCv | null>
 > {
   (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
 }
@@ -2319,6 +2371,156 @@ export interface UserPresentationFullCvToPresentationSvResolver<
 export interface UserPresentationFullCvToPresentationEnResolver<
   TParent = GQLUserPresentationFullCv,
   TResult = string
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface GQLUserSkillFullCvTypeResolver<TParent = GQLUserSkillFullCv> {
+  skill?: UserSkillFullCvToSkillResolver<TParent>;
+  userSkill?: UserSkillFullCvToUserSkillResolver<TParent>;
+}
+
+export interface UserSkillFullCvToSkillResolver<
+  TParent = GQLUserSkillFullCv,
+  TResult = GQLSkillModelFullCv
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface UserSkillFullCvToUserSkillResolver<
+  TParent = GQLUserSkillFullCv,
+  TResult = GQLUserSkillModelFullCv
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface GQLSkillModelFullCvTypeResolver<TParent = GQLSkillModelFullCv> {
+  id?: SkillModelFullCvToIdResolver<TParent>;
+  skillName?: SkillModelFullCvToSkillNameResolver<TParent>;
+}
+
+export interface SkillModelFullCvToIdResolver<TParent = GQLSkillModelFullCv, TResult = string> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface SkillModelFullCvToSkillNameResolver<
+  TParent = GQLSkillModelFullCv,
+  TResult = string
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface GQLUserSkillModelFullCvTypeResolver<TParent = GQLUserSkillModelFullCv> {
+  id?: UserSkillModelFullCvToIdResolver<TParent>;
+  userId?: UserSkillModelFullCvToUserIdResolver<TParent>;
+  skillId?: UserSkillModelFullCvToSkillIdResolver<TParent>;
+  skillLevel?: UserSkillModelFullCvToSkillLevelResolver<TParent>;
+}
+
+export interface UserSkillModelFullCvToIdResolver<
+  TParent = GQLUserSkillModelFullCv,
+  TResult = string
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface UserSkillModelFullCvToUserIdResolver<
+  TParent = GQLUserSkillModelFullCv,
+  TResult = string
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface UserSkillModelFullCvToSkillIdResolver<
+  TParent = GQLUserSkillModelFullCv,
+  TResult = string
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface UserSkillModelFullCvToSkillLevelResolver<
+  TParent = GQLUserSkillModelFullCv,
+  TResult = number
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface GQLCertificateFullCvTypeResolver<TParent = GQLCertificateFullCv> {
+  id?: CertificateFullCvToIdResolver<TParent>;
+  userId?: CertificateFullCvToUserIdResolver<TParent>;
+  certificateNameSv?: CertificateFullCvToCertificateNameSvResolver<TParent>;
+  certificateNameEn?: CertificateFullCvToCertificateNameEnResolver<TParent>;
+  organisation?: CertificateFullCvToOrganisationResolver<TParent>;
+  identificationId?: CertificateFullCvToIdentificationIdResolver<TParent>;
+  referenceAddress?: CertificateFullCvToReferenceAddressResolver<TParent>;
+  dateIssued?: CertificateFullCvToDateIssuedResolver<TParent>;
+  updatedAt?: CertificateFullCvToUpdatedAtResolver<TParent>;
+  createdAt?: CertificateFullCvToCreatedAtResolver<TParent>;
+}
+
+export interface CertificateFullCvToIdResolver<TParent = GQLCertificateFullCv, TResult = string> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface CertificateFullCvToUserIdResolver<
+  TParent = GQLCertificateFullCv,
+  TResult = string
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface CertificateFullCvToCertificateNameSvResolver<
+  TParent = GQLCertificateFullCv,
+  TResult = string
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface CertificateFullCvToCertificateNameEnResolver<
+  TParent = GQLCertificateFullCv,
+  TResult = string
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface CertificateFullCvToOrganisationResolver<
+  TParent = GQLCertificateFullCv,
+  TResult = string
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface CertificateFullCvToIdentificationIdResolver<
+  TParent = GQLCertificateFullCv,
+  TResult = string
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface CertificateFullCvToReferenceAddressResolver<
+  TParent = GQLCertificateFullCv,
+  TResult = string
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface CertificateFullCvToDateIssuedResolver<
+  TParent = GQLCertificateFullCv,
+  TResult = GQLDate
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface CertificateFullCvToUpdatedAtResolver<
+  TParent = GQLCertificateFullCv,
+  TResult = GQLDate
+> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
+}
+
+export interface CertificateFullCvToCreatedAtResolver<
+  TParent = GQLCertificateFullCv,
+  TResult = GQLDate
 > {
   (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): Promise<TResult>;
 }

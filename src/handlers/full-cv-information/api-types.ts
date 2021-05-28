@@ -6,6 +6,8 @@ export interface FullCvInformationResponse {
   workExperienceDtos: Array<WorkExperience | undefined>;
   languageDtos: Array<Language | undefined>;
   userPresentationDto: UserPresentation;
+  userSkillAndSkillDtos: Array<UserSkillDto>;
+  certificateDtos: Array<CertificateDto | undefined>;
 }
 
 type OtherInformation = {
@@ -105,4 +107,34 @@ type UserData = {
   workTitleEn?: string;
   updatedAt: Date;
   createdAt: Date;
+};
+
+type UserSkillDto = {
+  skillModel: SkillModel;
+  userSkillModel: UserSkillModel;
+};
+
+type SkillModel = {
+  id: string;
+  skillName: string;
+};
+
+type UserSkillModel = {
+  id: string;
+  userId: string;
+  skillId: string;
+  skillLevel: number;
+};
+
+type CertificateDto = {
+  id: string;
+  userId: string;
+  certificateNameSv: string;
+  certificateNameEn: string;
+  organisation: string;
+  identificationId: string;
+  referenceAddress: string;
+  dateIssued: Date;
+  createdAt: Date;
+  updatedAt: Date;
 };
