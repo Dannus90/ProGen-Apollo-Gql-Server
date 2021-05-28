@@ -32,8 +32,24 @@ export const userSkillMutations: UserSkillMutations = {
       if (!statusCodeChecker(response.status)) {
         const res = await parseJson(response);
 
+        let errors = "";
+        if (res?.errors) {
+          const keys = Object.keys(res.errors);
+          keys.forEach((k) => {
+            errors += (res.errors?.[k] as string) ?? "";
+          });
+        }
+
+        if (errors.includes("skillId")) {
+          errors = "Please choose a skill to add as userskill";
+        }
+
         if (res) {
-          throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
+          throw new HttpResponseError(
+            res.type,
+            res.statusCode ?? response.status,
+            res.message ?? errors
+          );
         } else {
           throw new HttpResponseError(
             response.type,

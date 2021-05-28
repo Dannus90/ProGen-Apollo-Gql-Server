@@ -4,6 +4,7 @@ export interface ErrorResponse {
   statusCode: number;
   message: string;
   type: string;
+  errors?: Record<string, unknown>;
 }
 
 export const parseJson = (response: Response): Promise<ErrorResponse | undefined> => {
