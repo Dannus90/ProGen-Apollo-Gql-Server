@@ -30,6 +30,10 @@ export const skillMutations: SkillMutation = {
         const res = await parseJson(response);
 
         if (res) {
+          if(res.statusCode === 409) {
+            throw new HttpResponseError(res.type, res.statusCode ?? response.status, "Skill already exist.");
+          }
+          
           throw new HttpResponseError(res.type, res.statusCode ?? response.status, res.message);
         } else {
           throw new HttpResponseError(
