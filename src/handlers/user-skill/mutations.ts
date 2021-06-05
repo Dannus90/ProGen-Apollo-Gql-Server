@@ -45,12 +45,12 @@ export const userSkillMutations: UserSkillMutations = {
         }
 
         if (res) {
-          if(res.statusCode === 409) {
+          if (res.statusCode === 409) {
             throw new HttpResponseError(
               res.type,
               res.statusCode ?? response.status,
               "User skill already exist"
-            );            
+            );
           }
 
           throw new HttpResponseError(

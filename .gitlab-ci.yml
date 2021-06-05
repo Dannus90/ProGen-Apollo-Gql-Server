@@ -9,13 +9,7 @@ before_script:
   - CI=false yarn install # install required packages
 
 stages:
-  - audit
   - lint
-
-audit:
-  stage: audit
-  script:
-    - yarn audit
 
 lint:
   stage: lint
